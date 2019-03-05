@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.customer.TestDriveApplyMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.TestDriveApply">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="apply_num" property="applyNum" jdbcType="INTEGER"/>
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER"/>
+        <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP"/>
+        <result column="use_time" property="useTime" jdbcType="TIMESTAMP"/>
+        <result column="purpose" property="purpose" jdbcType="VARCHAR"/>
+        <result column="begin_mileage" property="beginMileage" jdbcType="INTEGER"/>
+        <result column="approval_status" property="approvalStatus" jdbcType="TINYINT"/>
+        <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP"/>
+        <result column="approveCus_id" property="approvecusId" jdbcType="INTEGER"/>
+        <result column="data_status" property="dataStatus" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, apply_num, employee_id, apply_time, use_time, purpose, begin_mileage, approval_status, 
+    approval_time, approveCus_id, data_status, create_time
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.unicdata.entity.customer.TestDriveApplyExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from test_drive_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from test_drive_apply
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_drive_apply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.unicdata.entity.customer.TestDriveApplyExample">
+        delete from test_drive_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.customer.TestDriveApply">
+    insert into test_drive_apply (id, apply_num, employee_id, 
+      apply_time, use_time, purpose, 
+      begin_mileage, approval_status, approval_time, 
+      approveCus_id, data_status, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{applyNum,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, 
+      #{applyTime,jdbcType=TIMESTAMP}, #{useTime,jdbcType=TIMESTAMP}, #{purpose,jdbcType=VARCHAR}, 
+      #{beginMileage,jdbcType=INTEGER}, #{approvalStatus,jdbcType=TINYINT}, #{approvalTime,jdbcType=TIMESTAMP}, 
+      #{approvecusId,jdbcType=INTEGER}, #{dataStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.unicdata.entity.customer.TestDriveApply">
+        insert into test_drive_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="applyNum != null">
+                apply_num,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="applyTime != null">
+                apply_time,
+            </if>
+            <if test="useTime != null">
+                use_time,
+            </if>
+            <if test="purpose != null">
+                purpose,
+            </if>
+            <if test="beginMileage != null">
+                begin_mileage,
+            </if>
+            <if test="approvalStatus != null">
+                approval_status,
+            </if>
+            <if test="approvalTime != null">
+                approval_time,
+            </if>
+            <if test="approvecusId != null">
+                approveCus_id,
+            </if>
+            <if test="dataStatus != null">
+                data_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="applyNum != null">
+                #{applyNum,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="useTime != null">
+                #{useTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="purpose != null">
+                #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="beginMileage != null">
+                #{beginMileage,jdbcType=INTEGER},
+            </if>
+            <if test="approvalStatus != null">
+                #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalTime != null">
+                #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvecusId != null">
+                #{approvecusId,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.unicdata.entity.customer.TestDriveApplyExample"
+            resultType="java.lang.Integer">
+        select count(*) from test_drive_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update test_drive_apply
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.applyNum != null">
+                apply_num = #{record.applyNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.employeeId != null">
+                employee_id = #{record.employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.applyTime != null">
+                apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.useTime != null">
+                use_time = #{record.useTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.purpose != null">
+                purpose = #{record.purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="record.beginMileage != null">
+                begin_mileage = #{record.beginMileage,jdbcType=INTEGER},
+            </if>
+            <if test="record.approvalStatus != null">
+                approval_status = #{record.approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.approvalTime != null">
+                approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.approvecusId != null">
+                approveCus_id = #{record.approvecusId,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataStatus != null">
+                data_status = #{record.dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update test_drive_apply
+        set id = #{record.id,jdbcType=INTEGER},
+        apply_num = #{record.applyNum,jdbcType=INTEGER},
+        employee_id = #{record.employeeId,jdbcType=INTEGER},
+        apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
+        use_time = #{record.useTime,jdbcType=TIMESTAMP},
+        purpose = #{record.purpose,jdbcType=VARCHAR},
+        begin_mileage = #{record.beginMileage,jdbcType=INTEGER},
+        approval_status = #{record.approvalStatus,jdbcType=TINYINT},
+        approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+        approveCus_id = #{record.approvecusId,jdbcType=INTEGER},
+        data_status = #{record.dataStatus,jdbcType=TINYINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.TestDriveApply">
+        update test_drive_apply
+        <set>
+            <if test="applyNum != null">
+                apply_num = #{applyNum,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="applyTime != null">
+                apply_time = #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="useTime != null">
+                use_time = #{useTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="purpose != null">
+                purpose = #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="beginMileage != null">
+                begin_mileage = #{beginMileage,jdbcType=INTEGER},
+            </if>
+            <if test="approvalStatus != null">
+                approval_status = #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalTime != null">
+                approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvecusId != null">
+                approveCus_id = #{approvecusId,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                data_status = #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.TestDriveApply">
+    update test_drive_apply
+    set apply_num = #{applyNum,jdbcType=INTEGER},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      use_time = #{useTime,jdbcType=TIMESTAMP},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      begin_mileage = #{beginMileage,jdbcType=INTEGER},
+      approval_status = #{approvalStatus,jdbcType=TINYINT},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      approveCus_id = #{approvecusId,jdbcType=INTEGER},
+      data_status = #{dataStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="testDriveApplyList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        t.id,
+        t.apply_num,
+        t.purpose,
+        t.approval_status,
+        t.apply_time,
+        t.use_time,
+        COUNT(1) AS carSum
+        FROM
+        test_drive_apply t
+        LEFT JOIN test_drive_apply_car tc ON t.id = tc.apply_id
+        LEFT JOIN car_test_info i ON i.id = tc.car_good_id
+        WHERE t.data_status=1
+        AND tc.`status`=1
+        <if test="storeId != null">
+            AND tc.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="employeeId != null">
+            AND t.employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="applyTime != null">
+            AND DATE_FORMAT(t.apply_time,'%Y-%m-%d') =DATE_FORMAT(#{applyTime}, '%Y-%m-%d')
+        </if>
+        <if test="applyTimeMouth != null">
+            AND DATE_FORMAT(t.apply_time,'%Y-%m') =DATE_FORMAT(#{applyTimeMouth}, '%Y-%m')
+        </if>
+        GROUP BY t.id
+        ORDER BY t.apply_time DESC,t.use_time DESC
+    </select>
+    <select id="testCarApprovalList" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+        a.id approvalId,
+        a.apply_num applyNum,
+        DATE_FORMAT(a.apply_time,'%Y-%m-%d %H:%i:%s') applyTime,
+        DATE_FORMAT(a.use_time,'%Y-%m-%d %H:%i:%s') useTime,
+        a.purpose,
+        a.approval_status approvalStatus,
+        (
+        SELECT
+        COUNT(1)
+        FROM
+        test_drive_apply_car
+        WHERE
+        apply_id = a.id
+        ) carCount
+        FROM
+        test_drive_apply a
+        LEFT JOIN test_drive_apply_car c ON a.id = c.apply_id
+        LEFT JOIN employee e ON a.employee_id = e.id
+        WHERE
+        e.store_id = #{storeId}
+        <if test="createTime != null">
+            AND DATE_FORMAT(a.create_time,'%y-%m-%d') = #{createTime}
+        </if>
+        GROUP BY
+        a.id
+        ORDER BY
+        a.create_time DESC
+    </select>
+
+    <select id="testCarApprovalCars" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+            t.license_num licenseNum,
+            t.vin,
+            t.decorations_out_name decorationsOutName,
+            t.decorations_in_name decorationsInName,
+            f.`name` familyName,
+            v.`name` vehicleName,
+            t.engine_num engineNum,
+            t.miles,
+            t.test_car_status testCarStatus
+        FROM
+            test_drive_apply_car c
+        LEFT JOIN car_test_info t ON c.car_good_id = t.id
+        LEFT JOIN car_family f ON t.family_id = f.id
+        LEFT JOIN car_vehicle_conf v ON t.vehicle_id = v.id
+        WHERE
+            c.apply_id = #{applyId}
+    </select>
+    <select id="listByCreateId" resultType="java.util.Map" parameterType="java.lang.Integer">
+         SELECT
+            a.id approvalId,
+            a.apply_num applyNum,
+            DATE_FORMAT(a.apply_time,'%Y-%m-%d %H:%i:%s') applyTime,
+            DATE_FORMAT(a.use_time,'%Y-%m-%d %H:%i:%s') useTime,
+            a.purpose,
+            a.approval_status approvalStatus,
+            (
+                SELECT
+                    COUNT(1)
+                FROM
+                    test_drive_apply_car
+                WHERE
+                    apply_id = a.id
+            ) carCount
+        FROM
+            test_drive_apply a
+        LEFT JOIN test_drive_apply_car c ON a.id = c.apply_id
+        LEFT JOIN employee e ON a.employee_id = e.id
+        WHERE
+            e.employee_id = #{createId}
+        GROUP BY
+            a.id
+        ORDER BY
+            a.create_time DESC
+    </select>
+</mapper>

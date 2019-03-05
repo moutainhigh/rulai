@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarStorageMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarStorage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="distributor_store_id" jdbcType="INTEGER" property="distributorStoreId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distributor_store_id, name, warehouse_id, picture, operator_id, create_date, 
+    update_date, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_storage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarStorage">
+    insert into car_storage (id, distributor_store_id, name, 
+      warehouse_id, picture, operator_id, 
+      create_date, update_date, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{warehouseId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{operatorId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarStorage">
+    insert into car_storage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distributorStoreId != null">
+        distributor_store_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributorStoreId != null">
+        #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarStorage">
+    update car_storage
+    <set>
+      <if test="distributorStoreId != null">
+        distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarStorage">
+    update car_storage
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByWareHouse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_storage
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+    and status = 1
+	order by create_date desc
+  </select>
+  <select id="selectListExceptOut" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_storage
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+		AND id not in (
+			SELECT
+				storage_id
+			FROM
+				car_good_info
+			WHERE
+				car_good_info.storage_status in (1,4,5,6)
+				and car_good_info.status = 1
+		)
+    and status = 1
+	order by create_date desc
+  </select>
+  <!-- 仓库下的库位(过滤掉被占用的库位) wp -->
+  <select id="selectListByWareHouseS" parameterType="java.lang.Integer" resultType="java.util.Map">
+	SELECT * FROM(
+	SELECT 
+	cs.id, 
+	cs.distributor_store_id distributorStoreId, 
+	cs.name, 
+	cs.warehouse_id warehouseId, 
+	cs.picture, 
+	cs.operator_id  operatorId, 
+	cs.create_date createDate, 
+	cs.update_date updateDate, 
+	cs.status,
+	c.storage_status,
+	c.storage_id
+	FROM
+	car_warehouse cw
+	RIGHT JOIN car_storage cs
+	ON cs.warehouse_id=cw.id
+	LEFT JOIN car_good_info c
+	ON c.storage_id=cs.id
+	WHERE cw.id=#{warehouseId}) AS n
+	WHERE n.storage_id IS NULL
+	OR n.storage_status =4  
+  </select>
+</mapper>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarRefuelRecordMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarRefuelRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="test_car_id" jdbcType="INTEGER" property="testCarId" />
+    <result column="fuel_capacity" jdbcType="DOUBLE" property="fuelCapacity" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="gasoline_coupon" jdbcType="VARCHAR" property="gasolineCoupon" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="oil_card" jdbcType="VARCHAR" property="oilCard" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, test_car_id, fuel_capacity, price, gasoline_coupon, remark, operator_id, create_date, 
+    update_date,oil_card, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_refuel_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_refuel_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarRefuelRecord">
+    insert into car_refuel_record (id, test_car_id, fuel_capacity, 
+      price, gasoline_coupon, remark, 
+      operator_id, create_date, update_date,oil_card 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{testCarId,jdbcType=INTEGER}, #{fuelCapacity,jdbcType=DOUBLE}, 
+      #{price,jdbcType=DECIMAL}, #{gasolineCoupon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{operatorId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{oilCard,jdbcType=VARCHAR}#{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarRefuelRecord">
+    insert into car_refuel_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testCarId != null">
+        test_car_id,
+      </if>
+      <if test="fuelCapacity != null">
+        fuel_capacity,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="gasolineCoupon != null">
+        gasoline_coupon,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="oilCard != null">
+         oil_card,
+       </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testCarId != null">
+        #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="fuelCapacity != null">
+        #{fuelCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineCoupon != null">
+        #{gasolineCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oilCard != null">
+       #{oilCard,jdbcType=VARCHAR},
+       </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarRefuelRecord">
+    update car_refuel_record
+    <set>
+      <if test="testCarId != null">
+        test_car_id = #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="fuelCapacity != null">
+        fuel_capacity = #{fuelCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineCoupon != null">
+        gasoline_coupon = #{gasolineCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oilCard != null">
+       oil_card = #{oilCard,jdbcType=VARCHAR}
+       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarRefuelRecord">
+    update car_refuel_record
+    set test_car_id = #{testCarId,jdbcType=INTEGER},
+      fuel_capacity = #{fuelCapacity,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DECIMAL},
+      gasoline_coupon = #{gasolineCoupon,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      oil_card = #{oilCard,jdbcType=VARCHAR}
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByTestCar" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_refuel_record
+    where test_car_id = #{testCarId,jdbcType=INTEGER}
+    and status = 1 
+    order by create_date desc
+  </select>
+  <!-- 查库管的加油记录 wp -->
+  <select id="selectRefuleListByOperator" parameterType="java.util.Map" resultMap="BaseResultMap"> 
+    SELECT * FROM
+	car_refuel_record
+	WHERE  `status`=1 
+	AND operator_id=#{operatorId}
+	order by create_date desc
+  </select>
+</mapper>

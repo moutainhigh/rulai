@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueInstallMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueInstall">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="retail_id" jdbcType="INTEGER" property="retailId" />
+    <result column="expected_delivery" jdbcType="TIMESTAMP" property="expectedDelivery" />
+    <result column="follow_up" jdbcType="TIMESTAMP" property="followUp" />
+    <result column="expected_complete" jdbcType="TIMESTAMP" property="expectedComplete" />
+    <result column="begin" jdbcType="TIMESTAMP" property="begin" />
+    <result column="actual_delivery" jdbcType="TIMESTAMP" property="actualDelivery" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="vin" jdbcType="VARCHAR" property="vin" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="source" jdbcType="INTEGER" property="source" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+    <result column="construction_node" jdbcType="INTEGER" property="constructionNode" />
+    <result column="construction_type" jdbcType="INTEGER" property="constructionType" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, retail_id, expected_delivery, follow_up, expected_complete, begin, 
+    actual_delivery, status, code, employee_id, customer_name, vin, license_plate, model, 
+    source, store_id, type_live, construction_node, construction_type, update_time, timestamp
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueInstallExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_install
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_install
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_install
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueInstall">
+    insert into boutique_install (id, order_id, retail_id, 
+      expected_delivery, follow_up, expected_complete, 
+      begin, actual_delivery, status, 
+      code, employee_id, customer_name, 
+      vin, license_plate, model, 
+      source, store_id, type_live, 
+      construction_node, construction_type, update_time, 
+      timestamp)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{retailId,jdbcType=INTEGER}, 
+      #{expectedDelivery,jdbcType=TIMESTAMP}, #{followUp,jdbcType=TIMESTAMP}, #{expectedComplete,jdbcType=TIMESTAMP}, 
+      #{begin,jdbcType=TIMESTAMP}, #{actualDelivery,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{code,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
+      #{vin,jdbcType=VARCHAR}, #{licensePlate,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{source,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}, 
+      #{constructionNode,jdbcType=INTEGER}, #{constructionType,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueInstall">
+    insert into boutique_install
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="retailId != null">
+        retail_id,
+      </if>
+      <if test="expectedDelivery != null">
+        expected_delivery,
+      </if>
+      <if test="followUp != null">
+        follow_up,
+      </if>
+      <if test="expectedComplete != null">
+        expected_complete,
+      </if>
+      <if test="begin != null">
+        begin,
+      </if>
+      <if test="actualDelivery != null">
+        actual_delivery,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="vin != null">
+        vin,
+      </if>
+      <if test="licensePlate != null">
+        license_plate,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+      <if test="constructionNode != null">
+        construction_node,
+      </if>
+      <if test="constructionType != null">
+        construction_type,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="retailId != null">
+        #{retailId,jdbcType=INTEGER},
+      </if>
+      <if test="expectedDelivery != null">
+        #{expectedDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followUp != null">
+        #{followUp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectedComplete != null">
+        #{expectedComplete,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begin != null">
+        #{begin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualDelivery != null">
+        #{actualDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlate != null">
+        #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="constructionNode != null">
+        #{constructionNode,jdbcType=INTEGER},
+      </if>
+      <if test="constructionType != null">
+        #{constructionType,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueInstall">
+    update boutique_install
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="retailId != null">
+        retail_id = #{retailId,jdbcType=INTEGER},
+      </if>
+      <if test="expectedDelivery != null">
+        expected_delivery = #{expectedDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followUp != null">
+        follow_up = #{followUp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectedComplete != null">
+        expected_complete = #{expectedComplete,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begin != null">
+        begin = #{begin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualDelivery != null">
+        actual_delivery = #{actualDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null">
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlate != null">
+        license_plate = #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="constructionNode != null">
+        construction_node = #{constructionNode,jdbcType=INTEGER},
+      </if>
+      <if test="constructionType != null">
+        construction_type = #{constructionType,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueInstall">
+    update boutique_install
+    set order_id = #{orderId,jdbcType=INTEGER},
+      retail_id = #{retailId,jdbcType=INTEGER},
+      expected_delivery = #{expectedDelivery,jdbcType=TIMESTAMP},
+      follow_up = #{followUp,jdbcType=TIMESTAMP},
+      expected_complete = #{expectedComplete,jdbcType=TIMESTAMP},
+      begin = #{begin,jdbcType=TIMESTAMP},
+      actual_delivery = #{actualDelivery,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      license_plate = #{licensePlate,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      construction_node = #{constructionNode,jdbcType=INTEGER},
+      construction_type = #{constructionType,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id" parameterType="com.unicdata.entity.boutique.BoutiqueInstall">
+    insert into boutique_install (id, order_id, retail_id, 
+      expected_delivery, follow_up, expected_complete, 
+      begin, actual_delivery, status, 
+      code, employee_id, customer_name, 
+      vin, license_plate, model, 
+      source, store_id, type_live, 
+      construction_node, construction_type, update_time, 
+      timestamp)
+    values (null, #{orderId,jdbcType=INTEGER}, #{retailId,jdbcType=INTEGER}, 
+      #{expectedDelivery,jdbcType=TIMESTAMP}, #{followUp,jdbcType=TIMESTAMP}, #{expectedComplete,jdbcType=TIMESTAMP}, 
+      #{begin,jdbcType=TIMESTAMP}, #{actualDelivery,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{code,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
+      #{vin,jdbcType=VARCHAR}, #{licensePlate,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{source,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}, 
+      #{constructionNode,jdbcType=INTEGER}, #{constructionType,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <resultMap type="com.unicdata.entity.boutique.BoutiqueInstall" id="SelectDetailResultMap" extends="BaseResultMap">
+      <result column="fullName" jdbcType="VARCHAR" property="fullName" />
+      <result column="groupName" jdbcType="VARCHAR" property="groupName" />
+  </resultMap>
+  
+  <select id="selectInstallByCondition" parameterType="com.unicdata.condition.BoutiqueInstallCondition" resultMap="SelectDetailResultMap">
+  	SELECT 
+	a.id AS id, a.order_id AS order_id, a.retail_id AS retail_id, date_format(a.expected_delivery, '%Y-%m-%d') AS expected_delivery,a.follow_up AS follow_up , 
+	date_format(a.expected_complete, '%Y-%m-%d')  AS expected_complete,
+	a.begin AS begin, a.actual_delivery AS actual_delivery,
+	a.status AS status, a.code AS code, a.employee_id AS employee_id, a.customer_name AS customer_name, a.vin AS vin, a.license_plate AS license_plate,
+	a.model AS model, a.source AS source, a.store_id AS store_id, a.type_live AS type_live,a.construction_node AS construction_node,
+	a.construction_type AS construction_type, a.update_time AS update_time,  a.timestamp AS timestamp,
+    b.full_name AS fullName,
+	c.group_name AS groupName
+  	FROM boutique_install a 
+  	LEFT JOIN employee b ON a.employee_id = b.id
+  	LEFT JOIN employee_group c ON b.department_id = c.id
+
+  	WHERE a.type_live = 1 AND a.status &gt;= 1 AND a.store_id = #{storeId,jdbcType=INTEGER}
+  	<if test="name != null and name != ''">
+  		AND b.full_name = #{name,jdbcType=VARCHAR}
+  	</if>
+  	<if test="code != null and code != ''">
+  		AND a.code = #{code,jdbcType=VARCHAR}
+  	</if>
+  	<if test="departmentId != null">
+  		AND c.id = #{departmentId,jdbcType=INTEGER}
+  	</if>
+  	<if test="status != null">
+  		AND a.status = #{status,jdbcType=INTEGER}
+  	</if>
+  	<if test="actualDelivery != null and actualDelivery != ''">
+  		AND a.actual_delivery &gt;= #{actualBeginTime,jdbcType=TIMESTAMP} AND a.actual_delivery &lt;= #{actualEndTime,jdbcType=TIMESTAMP}
+  	</if>
+  	<if test="expectedComplete != null and expectedComplete != ''">
+  		AND a.expected_complete &gt;= #{expectedBeginTime,jdbcType=TIMESTAMP} AND a.expected_complete &lt;= #{expectedEndTime,jdbcType=TIMESTAMP}
+		AND a.construction_type = 1 
+<!-- 			<if test="status == null">
+	  			AND a.status &lt;= 2  
+	  		</if> -->
+  	</if>
+  	<if test="expectedComplete == null">
+  		AND a.expected_complete IS NOT NULL
+  		AND a.construction_type = 1
+  		<if test="status == null">
+  			AND a.status &lt;= 2  
+  		</if>
+  	</if>
+  	ORDER BY a.expected_complete DESC
+  </select>
+  
+  <update id="updateStatusById">
+  	UPDATE boutique_install
+  	SET status = #{status,jdbcType=INTEGER}
+ 	<if test="startTime != null">
+		, begin = #{startTime,jdbcType=TIMESTAMP}
+	</if>
+	<if test="endTime != null">
+		, actual_delivery = #{endTime,jdbcType=TIMESTAMP}
+	</if>
+  	WHERE id = #{id,jdbcType=INTEGER} 
+  </update>
+  
+  <select id="selectByOrderId" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_install
+ 	WHERE order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectListByParams2" resultType="java.util.Map" parameterType="java.util.List">
+        SELECT
+        bi. NAME infomationName,
+        bri.information_id informationId,
+        sum(
+        bri.information_num * bi.tax_price
+        ) cost
+        FROM
+        boutique_retail br
+        INNER JOIN boutique_retail_include bri ON br.id = bri.retail_id
+        LEFT JOIN boutique_information bi ON bri.information_id = bi.id
+        WHERE 1=1
+        <if test="retailIds != null">
+            AND br.id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="retailIds == null">
+            AND br.id = 0
+        </if>
+        GROUP BY
+        bri.information_id
+    </select>
+
+    <select id="getSaleQuantityByboutiqueIds" resultType="java.util.Map" parameterType="java.util.List">
+        SELECT
+        bi.id informationId,
+        sum(bri.information_num) quantity,
+        sum(bri.division_value) saleAmount
+        FROM
+        boutique_retail br
+        INNER JOIN boutique_retail_include bri ON (
+        br.id = bri.retail_id
+        AND bri.is_gift = #{isGift}
+        )
+        INNER JOIN boutique_information bi ON bri.information_id = bi.id
+        WHERE 1=1
+        <if test="retailIds != null">
+            AND br.id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="boutiqueIds != null">
+            AND bri.information_id in
+            <foreach collection="boutiqueIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        GROUP BY
+        bi.id
+    </select>
+
+    <select id="getSumSaleAmount2" resultType="bigDecimal" parameterType="java.util.Map">
+        SELECT
+        IFNULL(sum(apply_count),0) saleSumAmount
+        FROM
+        boutique_retail
+        WHERE 1 = 1
+        <if test="retailIds != null">
+            AND id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getSumCost2" resultType="bigDecimal" parameterType="java.util.Map">
+        SELECT
+        sum(
+        bri.information_num * bi.tax_price
+        ) cost
+        FROM
+        boutique_retail br
+        INNER JOIN boutique_retail_include bri ON br.id = bri.retail_id
+        LEFT JOIN boutique_information bi ON bri.information_id = bi.id
+        WHERE 1 = 1
+        <if test="retailIds != null">
+            AND br.id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getDecorationsByIds2" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        bip.boutique_id informationId,
+        count(DISTINCT bi.order_id) count
+        FROM
+        boutique_retail br
+        INNER JOIN boutique_install bi ON bi.retail_id = br.id
+        INNER JOIN boutique_install_project bip ON bi.id = bip.install_id
+        WHERE 1=1 AND bip.status = 3
+        <if test="retailIds != null">
+            AND br.id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="boutiqueIds != null">
+            AND bip.boutique_id in
+            <foreach collection="boutiqueIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND bip.end_time >= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND bip.end_time &lt; #{endTime}
+        </if>
+        GROUP BY
+        bip.boutique_id
+    </select>
+
+    <select id="getSumOrderByBoutiqueIds2" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        bri.information_id informationId,
+        count(DISTINCT br.order_id) count
+        FROM
+        boutique_retail br
+        INNER JOIN boutique_retail_include bri ON br.id = bri.retail_id
+        WHERE 1=1
+        <if test="retailIds != null">
+            AND br.id in
+            <foreach collection="retailIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="boutiqueIds != null">
+            AND bri.information_id in
+            <foreach collection="boutiqueIds" item="id" separator=","
+                     open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+        GROUP BY
+        bri.information_id
+    </select>
+
+</mapper>

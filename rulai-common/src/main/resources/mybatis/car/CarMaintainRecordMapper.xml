@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.car.CarMaintainRecordMapper" >
+   <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarMaintainRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="test_car_id" property="testCarId" jdbcType="INTEGER" />
+    <result column="work_order_num" property="workOrderNum" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="maintain_page" property="maintainPage" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, test_car_id, work_order_num, remark, operator_id, create_date, update_date, status, 
+    start_time, end_time, maintain_page, vin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_maintain_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_maintain_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarMaintainRecord" >
+    insert into car_maintain_record (id, test_car_id, work_order_num, 
+      remark, operator_id, create_date, 
+      update_date, status, start_time, 
+      end_time, maintain_page, vin
+      )
+    values (#{id,jdbcType=INTEGER}, #{testCarId,jdbcType=INTEGER}, #{workOrderNum,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operatorId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{maintainPage,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarMaintainRecord" >
+    insert into car_maintain_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="testCarId != null" >
+        test_car_id,
+      </if>
+      <if test="workOrderNum != null" >
+        work_order_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="maintainPage != null" >
+        maintain_page,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testCarId != null" >
+        #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrderNum != null" >
+        #{workOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainPage != null" >
+        #{maintainPage,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarMaintainRecord" >
+    update car_maintain_record
+    <set >
+      <if test="testCarId != null" >
+        test_car_id = #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrderNum != null" >
+        work_order_num = #{workOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainPage != null" >
+        maintain_page = #{maintainPage,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarMaintainRecord" >
+    update car_maintain_record
+    set test_car_id = #{testCarId,jdbcType=INTEGER},
+      work_order_num = #{workOrderNum,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      maintain_page = #{maintainPage,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 试驾车维修历史记录 wp -->
+  <select id="selectListByTestCar" parameterType="integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_maintain_record
+    where test_car_id = #{testCarId,jdbcType=INTEGER}
+    and status = 1 
+    order by create_date desc
+  </select>
+  <!-- 库管我的维修历史记录 wp-->
+  <select id="selectMaintainListByOperator" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM
+	car_maintain_record
+	WHERE status=1
+	AND operator_id=#{operatorId}
+  </select>
+</mapper>

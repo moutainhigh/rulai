@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.customer.TaskFollowUpMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.TaskFollowUp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="chennel" jdbcType="INTEGER" property="chennel" />
+    <result column="content" jdbcType="INTEGER" property="content" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="this_date" jdbcType="DATE" property="thisDate" />
+    <result column="next_date" jdbcType="DATE" property="nextDate" />
+    <result column="next_chennel" jdbcType="INTEGER" property="nextChennel" />
+    <result column="next_content" jdbcType="INTEGER" property="nextContent" />
+    <result column="next_service_item" jdbcType="TINYINT" property="nextServiceItem" />
+    <result column="next_remark" jdbcType="VARCHAR" property="nextRemark" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="data_status" jdbcType="TINYINT" property="dataStatus" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, order_status, customer_id, chennel, content, remark, this_date, next_date, 
+    next_chennel, next_content, next_service_item, next_remark, create_id, create_time, 
+    data_status,status
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.customer.TaskFollowUpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_follow_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task_follow_up
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task_follow_up
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.customer.TaskFollowUp">
+    insert into task_follow_up (id, order_id, order_status, 
+      customer_id, chennel, content, 
+      remark, this_date, next_date, 
+      next_chennel, next_content, next_service_item, 
+      next_remark, create_id, create_time, 
+      data_status,status)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=INTEGER}, #{chennel,jdbcType=INTEGER}, #{content,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{thisDate,jdbcType=DATE}, #{nextDate,jdbcType=DATE}, 
+      #{nextChennel,jdbcType=INTEGER}, #{nextContent,jdbcType=INTEGER}, #{nextServiceItem,jdbcType=TINYINT}, 
+      #{nextRemark,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{dataStatus,jdbcType=TINYINT},#{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.customer.TaskFollowUp">
+    insert into task_follow_up
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="chennel != null">
+        chennel,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="thisDate != null">
+        this_date,
+      </if>
+      <if test="nextDate != null">
+        next_date,
+      </if>
+      <if test="nextChennel != null">
+        next_chennel,
+      </if>
+      <if test="nextContent != null">
+        next_content,
+      </if>
+      <if test="nextServiceItem != null">
+        next_service_item,
+      </if>
+      <if test="nextRemark != null">
+        next_remark,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="dataStatus != null">
+        data_status,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="chennel != null">
+        #{chennel,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="thisDate != null">
+        #{thisDate,jdbcType=DATE},
+      </if>
+      <if test="nextDate != null">
+        #{nextDate,jdbcType=DATE},
+      </if>
+      <if test="nextChennel != null">
+        #{nextChennel,jdbcType=INTEGER},
+      </if>
+      <if test="nextContent != null">
+        #{nextContent,jdbcType=INTEGER},
+      </if>
+      <if test="nextServiceItem != null">
+        #{nextServiceItem,jdbcType=TINYINT},
+      </if>
+      <if test="nextRemark != null">
+        #{nextRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null">
+        #{dataStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.TaskFollowUp">
+    update task_follow_up
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="chennel != null">
+        chennel = #{chennel,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="thisDate != null">
+        this_date = #{thisDate,jdbcType=DATE},
+      </if>
+      <if test="nextDate != null">
+        next_date = #{nextDate,jdbcType=DATE},
+      </if>
+      <if test="nextChennel != null">
+        next_chennel = #{nextChennel,jdbcType=INTEGER},
+      </if>
+      <if test="nextContent != null">
+        next_content = #{nextContent,jdbcType=INTEGER},
+      </if>
+      <if test="nextServiceItem != null">
+        next_service_item = #{nextServiceItem,jdbcType=TINYINT},
+      </if>
+      <if test="nextRemark != null">
+        next_remark = #{nextRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null">
+        data_status = #{dataStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.TaskFollowUp">
+    update task_follow_up
+    set order_id = #{orderId,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      chennel = #{chennel,jdbcType=INTEGER},
+      content = #{content,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      this_date = #{thisDate,jdbcType=DATE},
+      next_date = #{nextDate,jdbcType=DATE},
+      next_chennel = #{nextChennel,jdbcType=INTEGER},
+      next_content = #{nextContent,jdbcType=INTEGER},
+      next_service_item = #{nextServiceItem,jdbcType=TINYINT},
+      next_remark = #{nextRemark,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 获取任务数量 -->
+  <select id="getTaskNumByEmployee" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT IFNULL(SUM(CASE WHEN next_content = 1 THEN 1 ELSE 0 END),0) AS customerFollowUp,
+	 IFNULL(SUM(CASE WHEN next_content = 2 THEN 1 ELSE 0 END),0) AS invite,
+	 IFNULL(SUM(CASE WHEN next_content = 3 THEN 1 ELSE 0 END),0) AS orderFollowUp, 
+	IFNULL(SUM(CASE WHEN next_content = 4 THEN 1 ELSE 0 END),0) AS todayDeliver,
+	 IFNULL(SUM(CASE WHEN next_content = 5 THEN 1 ELSE 0 END),0) AS afterService FROM task_follow_up 
+	where create_id = #{employeeId} and data_status = 1 and status = 1
+	<!-- and next_date >= NOW() -->
+	AND DATE_FORMAT(next_date, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')
+  </select>
+  
+  <select id="selectTaskList" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT t.id,t.order_id orderId,o.order_num orderNum, c.id cusId, c.name cusName, c.phone cusIphone,
+        o.delivery_date deliveryDate,o.status orderStatus,o.create_time createTime,c.`level`,
+        o.car_status carStatus,o.boutique_status boutiqueStatus,g.storage_status storageStatus,
+        o.insurer_status insurerStatus,o.extension_status extensionStatus,
+        o.finance_status financeStatus,o.other_status otherStatus,
+        c.create_time as cusCreateTime,CONCAT(cb.`name`,f.`name`,v.`name`) vehicleName,
+        cb.`name` brandName,g.vin,g.vehicle_id vehicleId,f.`name` familyName,ff.`name` intentionFamily,
+        MAX(t.next_date) as nextDate,t.remark,ac.approval_status,ac.approval_type,ac.id as approvalId
+        FROM task_follow_up t
+			LEFT JOIN `order` o on o.id = t.order_id AND o.`status` >=2
+        LEFT JOIN employee e ON e.id = t.create_id
+        LEFT JOIN customer c ON c.id = t.customer_id
+        LEFT JOIN car_good_info g ON g.id = o.car_id 
+		LEFT JOIN car_family f ON f.id = g.family_id
+		LEFT JOIN car_brand cb ON cb.id = f.brand_id
+        LEFT JOIN car_vehicle_conf v ON g.vehicle_id = v.id
+		LEFT JOIN car_family ff ON ff.id = c.intention_family_id
+        LEFT JOIN approval_cus ac ON ac.cus_id=c.id
+        AND ac.employee_id=t.create_id AND ac.data_status=1
+        where 1=1 AND t.status = 1
+		<if test="storeId != null">
+            AND e.store_id = #{storeId}
+        </if>
+        <if test="orderId != null">
+            AND o.id = #{orderId}
+        </if>
+        <if test="employeeId != null">
+            AND t.create_id = #{employeeId}
+        </if>
+        <if test="nextContent != null">
+            AND t.next_content = #{nextContent}
+        </if>
+        <if test="nextDate != null">
+        	<if test="dateRange != 30">
+            	AND date(t.next_date) = DATE_FORMAT(#{nextDate}, '%Y-%m-%d')
+            </if>
+            <if test="dateRange == 30">
+            	AND date(t.next_date) &lt;= DATE_FORMAT(#{nextDate}, '%Y-%m-%d')
+            </if>
+        </if>
+        <if test="nextServiceItem != null">
+            AND t.next_service_item = #{nextServiceItem}
+        </if>
+		GROUP BY t.id 
+  </select>
+
+    <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        tfu.id taskId,
+        c.id cusId,
+        c. NAME cusName,
+        c.phone,
+        c.sex,
+        c.`level`,
+        cf. NAME vehicleName,
+        tfu.next_date nextDate,
+        tfu.next_content nextContent
+        FROM
+        task_follow_up tfu
+        LEFT JOIN customer c ON tfu.customer_id = c.id
+        LEFT JOIN car_family cf ON c.intention_family_id = cf.id
+        WHERE 1=1
+        <if test="employeeId != null">
+            AND tfu.create_id = #{employeeId}
+        </if>
+        <if test="taskType != null">
+            AND tfu.next_content = #{taskType}
+        </if>
+        <if test="nextDate != null">
+            AND DATE_FORMAT(tfu.next_date, '%Y-%m-%d') = DATE_FORMAT(#{nextDate}, '%Y-%m-%d')
+        </if>
+        ORDER BY tfu.create_time DESC
+    </select>
+  <select id="selectListByParams2" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        tfu.id taskId,
+        o.id orderId,
+        o.order_num orderNum,
+        o.`status` orderStatus,
+        c.id cusId,
+        c. NAME cusName,
+        c.phone,
+        cvc. NAME vehicleName,
+        tfu.next_date nextDate,
+        tfu.next_content nextContent
+        FROM
+        task_follow_up tfu
+        LEFT JOIN `order` o ON tfu.order_id = o.id
+        LEFT JOIN customer c ON tfu.customer_id = c.id
+        LEFT JOIN car_good_info cgi ON o.car_id = cgi.id
+        LEFT JOIN car_vehicle_conf cvc ON cgi.vehicle_id = cvc.id
+        WHERE 1=1
+        <if test="employeeId != null">
+          AND tfu.create_id = #{employeeId}
+        </if>
+        <if test="taskType != null">
+          AND tfu.next_content = #{taskType}
+        </if>
+        <if test="nextDate != null">
+          AND DATE_FORMAT(tfu.next_date, '%Y-%m-%d') = DATE_FORMAT(#{nextDate}, '%Y-%m-%d')
+        </if>
+        ORDER BY tfu.create_time DESC
+  </select>
+      
+  <select id="selectTaskByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task_follow_up
+    where 1=1 
+    <if test="customerId != null">
+     AND customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="nextDate != null">
+      AND DATE_FORMAT(next_date, '%Y-%m-%d') = DATE_FORMAT(#{nextDate}, '%Y-%m-%d')
+    </if>
+    <if test="thisDate != null">
+      AND DATE_FORMAT(this_date, '%Y-%m-%d') = DATE_FORMAT(#{thisDate}, '%Y-%m-%d')
+    </if>
+    <if test="status != null">
+      AND status = #{status}
+    </if>
+    ORDER BY create_time DESC
+    limit 1
+  </select>
+  
+  <select id="selectCountByStore" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(0) 
+    FROM task_follow_up t
+	LEFT JOIN employee e ON t.create_id = e.id
+	where 
+	t.next_content = 4 
+	and t.status = 1 
+	and t.data_status = 1
+	<if test="storeId != null">
+        AND e.store_id=#{storeId,jdbcType=INTEGER}
+    </if>
+    <if test="deliverTime != null">
+        AND date_format(t.next_date, '%Y-%m') = date_format(#{deliverTime}, '%Y-%m')
+    </if>
+  </select>
+  
+  <select id="selectByCustomerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    task_follow_up
+    WHERE
+    customer_id =  #{customerId,jdbcType=INTEGER}
+    ORDER BY
+    this_date DESC
+  </select>
+  
+  <update id="completeTask" parameterType="com.unicdata.entity.customer.TaskFollowUp">
+    update task_follow_up
+    set status = 2
+    where next_content = #{content,jdbcType=INTEGER}
+    AND next_date &lt;= NOW() AND `status` = 1
+  </update>
+</mapper>

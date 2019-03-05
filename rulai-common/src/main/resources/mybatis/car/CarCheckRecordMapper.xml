@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.car.CarCheckRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarCheckRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_id" property="carId" jdbcType="INTEGER" />
+    <result column="check_page" property="checkPage" jdbcType="VARCHAR" />
+    <result column="exception_photo" property="exceptionPhoto" jdbcType="VARCHAR" />
+    <result column="exception_explain" property="exceptionExplain" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="check_status" property="checkStatus" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="check_type" property="checkType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_id, check_page, exception_photo, exception_explain, create_time, check_status, 
+    update_time, store_id,check_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_check_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_check_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarCheckRecord" >
+   insert into car_check_record (id, car_id, exception_explain, 
+      create_time, check_status, update_time, 
+      store_id, check_type, check_page, 
+      exception_photo)
+    values (#{id,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER}, #{exceptionExplain,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{checkStatus,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=INTEGER}, #{checkType,jdbcType=INTEGER}, #{checkPage,jdbcType=LONGVARCHAR}, 
+      #{exceptionPhoto,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarCheckRecord" >
+     insert into car_check_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="exceptionExplain != null" >
+        exception_explain,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="checkType != null" >
+        check_type,
+      </if>
+      <if test="checkPage != null" >
+        check_page,
+      </if>
+      <if test="exceptionPhoto != null" >
+        exception_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionExplain != null" >
+        #{exceptionExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="checkType != null" >
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkPage != null" >
+        #{checkPage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exceptionPhoto != null" >
+        #{exceptionPhoto,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarCheckRecord" >
+   update car_check_record
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionExplain != null" >
+        exception_explain = #{exceptionExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="checkType != null" >
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkPage != null" >
+        check_page = #{checkPage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exceptionPhoto != null" >
+        exception_photo = #{exceptionPhoto,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarCheckRecord" >
+   update car_check_record
+    set car_id = #{carId,jdbcType=INTEGER},
+      exception_explain = #{exceptionExplain,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      check_status = #{checkStatus,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=INTEGER},
+      check_type = #{checkType,jdbcType=INTEGER},
+      check_page = #{checkPage,jdbcType=LONGVARCHAR},
+      exception_photo = #{exceptionPhoto,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 暂收入库检测完善检测信息 wp -->
+  <update id="updateCheckStatus" parameterType="com.unicdata.entity.car.CarCheckRecord" >
+    update car_check_record
+    <set >
+       <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionExplain != null" >
+        exception_explain = #{exceptionExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="checkType != null" >
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkPage != null" >
+        check_page = #{checkPage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exceptionPhoto != null" >
+        exception_photo = #{exceptionPhoto,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=INTEGER}
+    and check_type = #{checkType,jdbcType=INTEGER}
+    order by create_time desc limit 1
+  </update>
+  
+</mapper>

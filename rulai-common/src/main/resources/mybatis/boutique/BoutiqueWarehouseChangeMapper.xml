@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueWarehouseChangeMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="emplyoee_id" jdbcType="INTEGER" property="emplyoeeId" />
+    <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+    <result column="time_stamp" jdbcType="TIMESTAMP" property="timeStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, emplyoee_id, apply_name, apply_date, note, store_id, type_live, time_stamp
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChangeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_warehouse_change
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_warehouse_change
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_warehouse_change
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+    insert into boutique_warehouse_change (id, emplyoee_id, apply_name, 
+      apply_date, note, store_id, 
+      type_live, time_stamp)
+    values (#{id,jdbcType=INTEGER}, #{emplyoeeId,jdbcType=INTEGER}, #{applyName,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{typeLive,jdbcType=INTEGER}, #{timeStamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+    insert into boutique_warehouse_change
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="emplyoeeId != null">
+        emplyoee_id,
+      </if>
+      <if test="applyName != null">
+        apply_name,
+      </if>
+      <if test="applyDate != null">
+        apply_date,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="emplyoeeId != null">
+        #{emplyoeeId,jdbcType=INTEGER},
+      </if>
+      <if test="applyName != null">
+        #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+    update boutique_warehouse_change
+    <set>
+      <if test="emplyoeeId != null">
+        emplyoee_id = #{emplyoeeId,jdbcType=INTEGER},
+      </if>
+      <if test="applyName != null">
+        apply_name = #{applyName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+    update boutique_warehouse_change
+    set emplyoee_id = #{emplyoeeId,jdbcType=INTEGER},
+      apply_name = #{applyName,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      time_stamp = #{timeStamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id" parameterType="com.unicdata.entity.boutique.BoutiqueWarehouseChange">
+  	INSERT INTO boutique_warehouse_change (id, emplyoee_id, apply_name, 
+      apply_date, note, store_id, 
+      type_live, time_stamp)
+    VALUES (#{id,jdbcType=INTEGER}, #{emplyoeeId,jdbcType=INTEGER}, #{applyName,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
+      #{typeLive,jdbcType=INTEGER}, #{timeStamp,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <select id="selectBoutiqueWareHouseChangePage" parameterType="com.unicdata.condition.WareHouseChangeCondition" resultMap="BaseResultMap" >
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_warehouse_change WHERE store_id = #{storeId,jdbcType=INTEGER} AND type_live = 1
+  	<if test="applyDate != null">
+  		AND apply_date &gt;= #{beginTime,jdbcType=VARCHAR} AND applyDate &lt;= #{endTime,jdbcType=VARCHAR}
+  	</if>
+  	<if test="applyName != null and applyName != ''">
+  		AND apply_name = #{applyName,jdbcType=VARCHAR}
+  	</if>
+  	ORDER BY apply_date DESC
+  </select>
+  
+</mapper>

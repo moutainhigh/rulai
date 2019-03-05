@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueWarehousePositionMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueWarehousePosition">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, num, name, warehouse_id, store_id, type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueWarehousePositionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_warehouse_position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_warehouse_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_warehouse_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueWarehousePosition">
+    insert into boutique_warehouse_position (id, num, name, 
+      warehouse_id, store_id, type_live
+      )
+    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{warehouseId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueWarehousePosition">
+    insert into boutique_warehouse_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueWarehousePosition">
+    update boutique_warehouse_position
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueWarehousePosition">
+    update boutique_warehouse_position
+    set num = #{num,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteByWarehouseId" parameterType="INTEGER" >
+	DELETE
+	FROM
+		boutique_warehouse_position
+	WHERE type_live = 1 AND
+  	warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  	AND  store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
+  
+  <select id="findAllByWarehouseId" parameterType="INTEGER" resultMap="BaseResultMap">
+  	SELECT
+	<include refid="Base_Column_List"/>
+	FROM
+		boutique_warehouse_position
+	WHERE type_live = 1 AND
+	warehouse_id = #{warehouseId,jdbcType=INTEGER}
+	AND  store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  
+  <update id="deleteById" parameterType="java.lang.Integer">
+  	UPDATE boutique_warehouse_position SET type_live = 0 WHERE id = #{id,jdbcType=INTEGER}
+  </update>  
+  
+  <select id="selectWarehousePositionAllPage" resultMap="BaseResultMap">
+  	SELECT
+	<include refid="Base_Column_List"/>
+	FROM
+		boutique_warehouse_position
+	WHERE type_live = 1 AND
+	warehouse_id = #{warehouseId,jdbcType=INTEGER}
+	AND  store_id = #{storeId,jdbcType=INTEGER}  	
+  
+  </select>
+
+  <select id="selectByName" resultType="com.unicdata.entity.boutique.BoutiqueWarehousePosition" parameterType="java.lang.String">
+    SELECT
+     *
+    FROM
+    boutique_warehouse_position
+    WHERE
+    name = #{name,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

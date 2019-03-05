@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.product.InsuranceTypeMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.product.InsuranceType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="self_defined" jdbcType="INTEGER" property="selfDefined" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="has_base_fee" jdbcType="INTEGER" property="hasBaseFee" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, enabled, remark, create_time, self_defined, level, parent_id, has_base_fee
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.product.InsuranceTypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from insurance_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from insurance_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from insurance_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.product.InsuranceType">
+    insert into insurance_type (id, name, enabled, 
+      remark, create_time, self_defined, 
+      level, parent_id, has_base_fee
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{selfDefined,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{hasBaseFee,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.product.InsuranceType">
+    insert into insurance_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="selfDefined != null">
+        self_defined,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="hasBaseFee != null">
+        has_base_fee,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selfDefined != null">
+        #{selfDefined,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="hasBaseFee != null">
+        #{hasBaseFee,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.product.InsuranceType">
+    update insurance_type
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selfDefined != null">
+        self_defined = #{selfDefined,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="hasBaseFee != null">
+        has_base_fee = #{hasBaseFee,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.product.InsuranceType">
+    update insurance_type
+    set name = #{name,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      self_defined = #{selfDefined,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      has_base_fee = #{hasBaseFee,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查子类险种 wp -->
+  <select id="selectChildTypes" resultType="java.util.Map" parameterType="integer">
+    SELECT
+    id,
+    name,
+    enabled,
+    self_defined selfDefined,
+    level,
+    parent_id parentId
+    FROM
+    insurance_type
+    WHERE parent_id=#{parentId}
+  </select>
+  <!-- 查保险父类型 wp -->
+  <select id="selectTypes" resultType="java.util.Map">
+  SELECT
+  id,
+  name,
+  enabled,
+  self_defined selfDefined,
+  level,
+  parent_id parentId
+  FROM
+  insurance_type
+  where
+  level=1
+  </select>
+  <select id="selectChildTypeList" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT it.id,it.`name`,it.`level`,it.parent_id parentId,it.enabled,
+	it.self_defined selfDefined,itp.price_one priceOne,itp.price_two priceTwo
+	 FROM insurance_type it 
+	LEFT JOIN insurance_type_price itp ON itp.insurance_id = it.id AND itp.store_id = #{storeId} 
+	WHERE it.`level` = #{level} 
+	<if test="parentId!=null">
+		AND it.parent_id = #{parentId}
+	</if>
+	GROUP BY it.id
+  </select>
+  <select id="selectInsuredAmounts" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT itp.price_one moneyNum,itp.price_two insuredAmount
+	 FROM insurance_type it 
+	LEFT JOIN insurance_type_price itp ON itp.insurance_id = it.id
+	WHERE itp.store_id = #{storeId} AND it.`level` = 2 AND it.id = #{insuranceId}
+  </select>
+</mapper>

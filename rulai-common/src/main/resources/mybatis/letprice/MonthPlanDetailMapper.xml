@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.letprice.MonthPlanDetailMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.letprice.MonthPlanDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="month_plan_id" jdbcType="INTEGER" property="monthPlanId" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="level_one" jdbcType="DECIMAL" property="levelOne" />
+    <result column="level_two" jdbcType="DECIMAL" property="levelTwo" />
+    <result column="level_three" jdbcType="DECIMAL" property="levelThree" />
+    <result column="level_one_adjust" jdbcType="DECIMAL" property="levelOneAdjust" />
+    <result column="level_two_adjust" jdbcType="DECIMAL" property="levelTwoAdjust" />
+    <result column="level_three_adjust" jdbcType="DECIMAL" property="levelThreeAdjust" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+
+  <resultMap id="joinCarResultMap" extends="BaseResultMap" type="com.unicdata.entity.letprice.MonthPlanDetail">
+    <result column="purchasePrice" jdbcType="DECIMAL" property="purchasePrice" />
+    <result column="forecastProfit" jdbcType="DECIMAL" property="forecastProfit" />
+    <result column="insideThePlan" jdbcType="INTEGER" property="insideThePlan" />
+    <result column="donationAmount" jdbcType="DECIMAL" property="donationAmount" />
+    <result column="salePrice" jdbcType="DECIMAL" property="salePrice" />
+    <result column="carId" jdbcType="INTEGER" property="carId" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, month_plan_id, car_id, level_one, level_two, level_three, status, employee_id, 
+    update_date, create_date,level_one_adjust, level_two_adjust, level_three_adjust
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.letprice.MonthPlanDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from month_plan_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from month_plan_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from month_plan_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.letprice.MonthPlanDetail">
+    insert into month_plan_detail (id, month_plan_id, car_id, 
+      level_one, level_two, level_three, 
+      status, employee_id, update_date, 
+      create_date,level_one_adjust, level_two_adjust, level_three_adjust)
+    values (#{id,jdbcType=INTEGER}, #{monthPlanId,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER}, 
+      #{levelOne,jdbcType=DECIMAL}, #{levelTwo,jdbcType=DECIMAL}, #{levelThree,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{employeeId,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP},#{levelOneAdjust,jdbcType=DECIMAL}, #{levelTwoAdjust,jdbcType=DECIMAL}, #{levelThreeAdjust,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.letprice.MonthPlanDetail">
+    insert into month_plan_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="monthPlanId != null">
+        month_plan_id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="levelOne != null">
+        level_one,
+      </if>
+      <if test="levelTwo != null">
+        level_two,
+      </if>
+      <if test="levelThree != null">
+        level_three,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="levelOneAdjust != null">
+        level_one_adjust,
+      </if>
+      <if test="levelTwoAdjust != null">
+        level_two_adjust,
+      </if>
+      <if test="levelThreeAdjust != null">
+        level_three_adjust,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="monthPlanId != null">
+        #{monthPlanId,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="levelOne != null">
+        #{levelOne,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTwo != null">
+        #{levelTwo,jdbcType=DECIMAL},
+      </if>
+      <if test="levelThree != null">
+        #{levelThree,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="levelOneAdjust != null">
+        #{levelOneAdjust,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTwoAdjust != null">
+        #{levelTwoAdjust,jdbcType=DECIMAL},
+      </if>
+      <if test="levelThreeAdjust != null">
+        #{levelThreeAdjust,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.letprice.MonthPlanDetail">
+    update month_plan_detail
+    <set>
+      <if test="monthPlanId != null">
+        month_plan_id = #{monthPlanId,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="levelOne != null">
+        level_one = #{levelOne,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTwo != null">
+        level_two = #{levelTwo,jdbcType=DECIMAL},
+      </if>
+      <if test="levelThree != null">
+        level_three = #{levelThree,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="levelOneAdjust != null">
+        level_one_adjust = #{levelOneAdjust,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTwoAdjust != null">
+        level_two_adjust = #{levelTwoAdjust,jdbcType=DECIMAL},
+      </if>
+      <if test="levelThreeAdjust != null">
+        level_three_adjust =#{levelThreeAdjust,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.letprice.MonthPlanDetail">
+    update month_plan_detail
+    set month_plan_id = #{monthPlanId,jdbcType=INTEGER},
+      car_id = #{carId,jdbcType=INTEGER},
+      level_one = #{levelOne,jdbcType=DECIMAL},
+      level_two = #{levelTwo,jdbcType=DECIMAL},
+      level_three = #{levelThree,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      level_one_adjust = #{levelOneAdjust,jdbcType=DECIMAL},
+      level_two_adjust = #{levelTwoAdjust,jdbcType=DECIMAL},
+      level_three_adjust =#{levelThreeAdjust,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCarGoodInfoByMonthPlanId" resultType="com.unicdata.entity.letprice.MonthPlanCarDto">
+    select car.id carId ,car.brand_name  brandName,car.family_name familyName, car.vehicle_name vehicleName,car.vehicle_id vehicleId, car.year,car.decorations_out_name decorationsOutName,
+    car.standard_price standardPrice,car.entire_purchase_price purchasePrice,car.forecast_profit forecastProfit,car.plan_allow_price planAllowPrice,car.order_status orderStatus,
+    vehicle.level_one vehicleLevelOne,vehicle.level_two vehicleLevelTwo,vehicle.level_three vehicleLevelThree, det.level_one levelOne ,det.level_two levelTwo ,det.level_three levelThree,
+    1 isSelect ,det.status
+    from car_good_info car
+    left join car_vehicle_conf vehicle on car.vehicle_id = vehicle.id
+    left join month_plan_detail det on car.id = det.car_id and det.month_plan_id = #{monthPlanId}
+    where car.order_status = 1 and det.id is null
+  </select>
+  <select id="selectMonthPlanDetailByMonthPlanId" resultType="com.unicdata.entity.letprice.MonthPlanCarDto">
+    select car.id carId ,car.brand_name  brandName,car.family_name familyName, car.vehicle_name vehicleName,car.vehicle_id vehicleId,car.year,car.decorations_out_name decorationsOutName,
+    car.standard_price standardPrice,car.entire_purchase_price purchasePrice,car.forecast_profit forecastProfit,car.plan_allow_price planAllowPrice,car.order_status orderStatus,
+    det.level_one_adjust vehicleLevelOne,det.level_two_adjust vehicleLevelTwo,det.level_three_adjust vehicleLevelThree, det.level_one levelOne ,det.level_two levelTwo ,det.level_three levelThree,
+    2 isSelect ,det.status
+    from month_plan_detail det
+    left join car_good_info car on car.id = det.car_id
+    where det.month_plan_id =  #{monthPlanId}
+  </select>
+
+  <select id="selectMonthPlanAndCarInfo" resultMap="joinCarResultMap">
+      select car.entire_purchase_price purchasePrice, car.count_profit forecastProfit ,full_pay_date , if(mpd.id is null ,2 ,1) insideThePlan,od.donation_amount donationAmount , od.sale_price salePrice ,car.id carId
+       from car_good_info car
+        left join `order` od on car.id = od.matching_car_id
+       left join month_plan_detail mpd on mpd.car_id = car.id and  month_plan_id = #{id}
+      where car.distributor_store_id = #{storeId} and #{planMonth} = date_format(full_pay_date ,'%Y-%m' )
+  </select>
+  <select id="selectMonthPlanAims" resultType="com.unicdata.entity.letprice.MonthPlanDetail">
+     select mpd.id,mpd.month_plan_id, mpd.level_two levelTwo ,car.purchase_price purchasePrice, car.forecast_profit forecastProfit,mpd.status from month_plan_detail mpd
+     left join car_good_info car on mpd.car_id = car.id
+     where month_plan_id = #{id}
+  </select>
+  <select id="selectVehicleMonthPlanDetail" resultType="map">
+    select mpd.id detailId,mp.id from month_plan_detail  mpd
+    left join month_plan mp on mpd.month_plan_id = mp.id
+    left join car_good_info car on car.id = mpd.car_id
+    where vehicle_id = #{carId} and order_status = 1 and mp.status  <![CDATA[ < ]]> 4
+  </select>
+  <select id="selectCarStockInfo" resultType="com.unicdata.entity.letprice.MonthPlanCarDto">
+    select car.id carId ,car.brand_name  brandName,car.family_name familyName, car.vehicle_name vehicleName,car.vehicle_id vehicleId, car.year,car.decorations_out_name decorationsOutName,
+        car.standard_price standardPrice,car.entire_purchase_price purchasePrice,car.forecast_profit forecastProfit,car.plan_allow_price planAllowPrice,car.order_status orderStatus,
+        vehicle.level_one vehicleLevelOne,vehicle.level_two vehicleLevelTwo,vehicle.level_three vehicleLevelThree, det.level_one levelOne ,det.level_two levelTwo ,det.level_three levelThree,
+        if(det.id is null ,1,2) isSelect ,det.status,car.in_storage_day inStorageDay
+        from car_good_info car
+        left join car_vehicle_conf vehicle on car.vehicle_id = vehicle.id
+        left join month_plan_detail det on car.id = det.car_id  and det.month_plan_id = #{monthPlanId}
+        left join `order` od on od.matching_car_id =car.id
+        where  car.distributor_store_id = #{storeId} and ( #{planMonth} = date_format(full_pay_date ,'%Y-%m')  or full_pay_date is null)
+  </select>
+
+</mapper>

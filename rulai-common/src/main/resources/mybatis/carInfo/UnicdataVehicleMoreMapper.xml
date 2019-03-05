@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.carInfo.UnicdataVehicleMoreMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.carInfo.UnicdataVehicleMore">
+    <id column="row_names" jdbcType="INTEGER" property="rowNames" />
+    <result column="unicdatakey" jdbcType="VARCHAR" property="unicdatakey" />
+    <result column="carstructure" jdbcType="VARCHAR" property="carstructure" />
+    <result column="length" jdbcType="VARCHAR" property="length" />
+    <result column="width" jdbcType="VARCHAR" property="width" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="wheelbase" jdbcType="VARCHAR" property="wheelbase" />
+    <result column="frontgauge" jdbcType="VARCHAR" property="frontgauge" />
+    <result column="backgauge" jdbcType="VARCHAR" property="backgauge" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="maxload" jdbcType="VARCHAR" property="maxload" />
+    <result column="fuelvolumn" jdbcType="VARCHAR" property="fuelvolumn" />
+    <result column="baggage" jdbcType="VARCHAR" property="baggage" />
+    <result column="doors" jdbcType="VARCHAR" property="doors" />
+    <result column="seats" jdbcType="VARCHAR" property="seats" />
+    <result column="emission" jdbcType="VARCHAR" property="emission" />
+    <result column="cylinder" jdbcType="VARCHAR" property="cylinder" />
+    <result column="fueltype" jdbcType="VARCHAR" property="fueltype" />
+    <result column="fuelnumber" jdbcType="VARCHAR" property="fuelnumber" />
+    <result column="lwv" jdbcType="VARCHAR" property="lwv" />
+    <result column="lwvnumber" jdbcType="VARCHAR" property="lwvnumber" />
+    <result column="valve" jdbcType="VARCHAR" property="valve" />
+    <result column="compress" jdbcType="DOUBLE" property="compress" />
+    <result column="fuelmethod" jdbcType="VARCHAR" property="fuelmethod" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="maxpower" jdbcType="VARCHAR" property="maxpower" />
+    <result column="maxrpm" jdbcType="VARCHAR" property="maxrpm" />
+    <result column="maxnm" jdbcType="VARCHAR" property="maxnm" />
+    <result column="maxps" jdbcType="VARCHAR" property="maxps" />
+    <result column="maxtorque" jdbcType="VARCHAR" property="maxtorque" />
+    <result column="motor_type" jdbcType="VARCHAR" property="motorType" />
+    <result column="total_power_EV" jdbcType="VARCHAR" property="totalPowerEv" />
+    <result column="total_torque_EV" jdbcType="VARCHAR" property="totalTorqueEv" />
+    <result column="front_peak_power_EV" jdbcType="VARCHAR" property="frontPeakPowerEv" />
+    <result column="front_peak_torque_EV" jdbcType="VARCHAR" property="frontPeakTorqueEv" />
+    <result column="rear_peak_power_EV" jdbcType="VARCHAR" property="rearPeakPowerEv" />
+    <result column="rear_peak_torque_EV" jdbcType="VARCHAR" property="rearPeakTorqueEv" />
+    <result column="vehicle_power" jdbcType="VARCHAR" property="vehiclePower" />
+    <result column="vehicle_torque" jdbcType="VARCHAR" property="vehicleTorque" />
+    <result column="battery_type" jdbcType="VARCHAR" property="batteryType" />
+    <result column="battery_range_MIIT" jdbcType="VARCHAR" property="batteryRangeMiit" />
+    <result column="battery_capacity" jdbcType="VARCHAR" property="batteryCapacity" />
+    <result column="power_consumption" jdbcType="VARCHAR" property="powerConsumption" />
+    <result column="battery_pack_warrenty" jdbcType="VARCHAR" property="batteryPackWarrenty" />
+    <result column="charging_time" jdbcType="VARCHAR" property="chargingTime" />
+    <result column="fast_charge_electricity" jdbcType="VARCHAR" property="fastChargeElectricity" />
+    <result column="charging_pile_price" jdbcType="VARCHAR" property="chargingPilePrice" />
+    <result column="geardesc" jdbcType="VARCHAR" property="geardesc" />
+    <result column="gearnumber" jdbcType="VARCHAR" property="gearnumber" />
+    <result column="driveway" jdbcType="VARCHAR" property="driveway" />
+    <result column="fronthang" jdbcType="VARCHAR" property="fronthang" />
+    <result column="backhang" jdbcType="VARCHAR" property="backhang" />
+    <result column="assistanttype" jdbcType="VARCHAR" property="assistanttype" />
+    <result column="steeringbox" jdbcType="VARCHAR" property="steeringbox" />
+    <result column="frontbrake" jdbcType="VARCHAR" property="frontbrake" />
+    <result column="backbrake" jdbcType="VARCHAR" property="backbrake" />
+    <result column="frontwheel" jdbcType="VARCHAR" property="frontwheel" />
+    <result column="backwheel" jdbcType="VARCHAR" property="backwheel" />
+    <result column="fronthub" jdbcType="VARCHAR" property="fronthub" />
+    <result column="backhub" jdbcType="VARCHAR" property="backhub" />
+    <result column="hubtype" jdbcType="VARCHAR" property="hubtype" />
+    <result column="sparewheel" jdbcType="VARCHAR" property="sparewheel" />
+    <result column="factory_brand_info" jdbcType="VARCHAR" property="factoryBrandInfo" />
+    <result column="vin_factory_brand" jdbcType="VARCHAR" property="vinFactoryBrand" />
+    <result column="vin_makeyear" jdbcType="VARCHAR" property="vinMakeyear" />
+    <result column="vin_fvs" jdbcType="VARCHAR" property="vinFvs" />
+    <result column="Price_low" jdbcType="DOUBLE" property="priceLow" />
+    <result column="vin_price" jdbcType="VARCHAR" property="vinPrice" />
+    <result column="vin_config" jdbcType="VARCHAR" property="vinConfig" />
+    <result column="vin_otherconfig" jdbcType="VARCHAR" property="vinOtherconfig" />
+    <result column="car_source" jdbcType="VARCHAR" property="carSource" />
+    <result column="sourceid" jdbcType="VARCHAR" property="sourceid" />
+    <result column="sourcefactoryid" jdbcType="VARCHAR" property="sourcefactoryid" />
+    <result column="sourcebrandid" jdbcType="VARCHAR" property="sourcebrandid" />
+    <result column="sourcefamilyid" jdbcType="VARCHAR" property="sourcefamilyid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    row_names, unicdatakey, carstructure, length, width, height, wheelbase, frontgauge, 
+    backgauge, weight, maxload, fuelvolumn, baggage, doors, seats, emission, cylinder, 
+    fueltype, fuelnumber, lwv, lwvnumber, valve, compress, fuelmethod, method, maxpower, 
+    maxrpm, maxnm, maxps, maxtorque, motor_type, total_power_EV, total_torque_EV, front_peak_power_EV, 
+    front_peak_torque_EV, rear_peak_power_EV, rear_peak_torque_EV, vehicle_power, vehicle_torque, 
+    battery_type, battery_range_MIIT, battery_capacity, power_consumption, battery_pack_warrenty, 
+    charging_time, fast_charge_electricity, charging_pile_price, geardesc, gearnumber, 
+    driveway, fronthang, backhang, assistanttype, steeringbox, frontbrake, backbrake, 
+    frontwheel, backwheel, fronthub, backhub, hubtype, sparewheel, factory_brand_info, 
+    vin_factory_brand, vin_makeyear, vin_fvs, Price_low, vin_price, vin_config, vin_otherconfig, 
+    car_source, sourceid, sourcefactoryid, sourcebrandid, sourcefamilyid
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.carInfo.UnicdataVehicleMoreExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from unicdata_vehicle_more
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from unicdata_vehicle_more
+    where row_names = #{rowNames,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from unicdata_vehicle_more
+    where row_names = #{rowNames,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.carInfo.UnicdataVehicleMore">
+    insert into unicdata_vehicle_more (row_names, unicdatakey, carstructure, 
+      length, width, height, 
+      wheelbase, frontgauge, backgauge, 
+      weight, maxload, fuelvolumn, 
+      baggage, doors, seats, 
+      emission, cylinder, fueltype, 
+      fuelnumber, lwv, lwvnumber, 
+      valve, compress, fuelmethod, 
+      method, maxpower, maxrpm, 
+      maxnm, maxps, maxtorque, 
+      motor_type, total_power_EV, total_torque_EV, 
+      front_peak_power_EV, front_peak_torque_EV, rear_peak_power_EV, 
+      rear_peak_torque_EV, vehicle_power, vehicle_torque, 
+      battery_type, battery_range_MIIT, battery_capacity, 
+      power_consumption, battery_pack_warrenty, 
+      charging_time, fast_charge_electricity, charging_pile_price, 
+      geardesc, gearnumber, driveway, 
+      fronthang, backhang, assistanttype, 
+      steeringbox, frontbrake, backbrake, 
+      frontwheel, backwheel, fronthub, 
+      backhub, hubtype, sparewheel, 
+      factory_brand_info, vin_factory_brand, vin_makeyear, 
+      vin_fvs, Price_low, vin_price, 
+      vin_config, vin_otherconfig, car_source, 
+      sourceid, sourcefactoryid, sourcebrandid, 
+      sourcefamilyid)
+    values (#{rowNames,jdbcType=INTEGER}, #{unicdatakey,jdbcType=VARCHAR}, #{carstructure,jdbcType=VARCHAR}, 
+      #{length,jdbcType=VARCHAR}, #{width,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
+      #{wheelbase,jdbcType=VARCHAR}, #{frontgauge,jdbcType=VARCHAR}, #{backgauge,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{maxload,jdbcType=VARCHAR}, #{fuelvolumn,jdbcType=VARCHAR}, 
+      #{baggage,jdbcType=VARCHAR}, #{doors,jdbcType=VARCHAR}, #{seats,jdbcType=VARCHAR}, 
+      #{emission,jdbcType=VARCHAR}, #{cylinder,jdbcType=VARCHAR}, #{fueltype,jdbcType=VARCHAR}, 
+      #{fuelnumber,jdbcType=VARCHAR}, #{lwv,jdbcType=VARCHAR}, #{lwvnumber,jdbcType=VARCHAR}, 
+      #{valve,jdbcType=VARCHAR}, #{compress,jdbcType=DOUBLE}, #{fuelmethod,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{maxpower,jdbcType=VARCHAR}, #{maxrpm,jdbcType=VARCHAR}, 
+      #{maxnm,jdbcType=VARCHAR}, #{maxps,jdbcType=VARCHAR}, #{maxtorque,jdbcType=VARCHAR}, 
+      #{motorType,jdbcType=VARCHAR}, #{totalPowerEv,jdbcType=VARCHAR}, #{totalTorqueEv,jdbcType=VARCHAR}, 
+      #{frontPeakPowerEv,jdbcType=VARCHAR}, #{frontPeakTorqueEv,jdbcType=VARCHAR}, #{rearPeakPowerEv,jdbcType=VARCHAR}, 
+      #{rearPeakTorqueEv,jdbcType=VARCHAR}, #{vehiclePower,jdbcType=VARCHAR}, #{vehicleTorque,jdbcType=VARCHAR}, 
+      #{batteryType,jdbcType=VARCHAR}, #{batteryRangeMiit,jdbcType=VARCHAR}, #{batteryCapacity,jdbcType=VARCHAR}, 
+      #{powerConsumption,jdbcType=VARCHAR}, #{batteryPackWarrenty,jdbcType=VARCHAR}, 
+      #{chargingTime,jdbcType=VARCHAR}, #{fastChargeElectricity,jdbcType=VARCHAR}, #{chargingPilePrice,jdbcType=VARCHAR}, 
+      #{geardesc,jdbcType=VARCHAR}, #{gearnumber,jdbcType=VARCHAR}, #{driveway,jdbcType=VARCHAR}, 
+      #{fronthang,jdbcType=VARCHAR}, #{backhang,jdbcType=VARCHAR}, #{assistanttype,jdbcType=VARCHAR}, 
+      #{steeringbox,jdbcType=VARCHAR}, #{frontbrake,jdbcType=VARCHAR}, #{backbrake,jdbcType=VARCHAR}, 
+      #{frontwheel,jdbcType=VARCHAR}, #{backwheel,jdbcType=VARCHAR}, #{fronthub,jdbcType=VARCHAR}, 
+      #{backhub,jdbcType=VARCHAR}, #{hubtype,jdbcType=VARCHAR}, #{sparewheel,jdbcType=VARCHAR}, 
+      #{factoryBrandInfo,jdbcType=VARCHAR}, #{vinFactoryBrand,jdbcType=VARCHAR}, #{vinMakeyear,jdbcType=VARCHAR}, 
+      #{vinFvs,jdbcType=VARCHAR}, #{priceLow,jdbcType=DOUBLE}, #{vinPrice,jdbcType=VARCHAR}, 
+      #{vinConfig,jdbcType=VARCHAR}, #{vinOtherconfig,jdbcType=VARCHAR}, #{carSource,jdbcType=VARCHAR}, 
+      #{sourceid,jdbcType=VARCHAR}, #{sourcefactoryid,jdbcType=VARCHAR}, #{sourcebrandid,jdbcType=VARCHAR}, 
+      #{sourcefamilyid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.carInfo.UnicdataVehicleMore">
+    insert into unicdata_vehicle_more
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowNames != null">
+        row_names,
+      </if>
+      <if test="unicdatakey != null">
+        unicdatakey,
+      </if>
+      <if test="carstructure != null">
+        carstructure,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="wheelbase != null">
+        wheelbase,
+      </if>
+      <if test="frontgauge != null">
+        frontgauge,
+      </if>
+      <if test="backgauge != null">
+        backgauge,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="maxload != null">
+        maxload,
+      </if>
+      <if test="fuelvolumn != null">
+        fuelvolumn,
+      </if>
+      <if test="baggage != null">
+        baggage,
+      </if>
+      <if test="doors != null">
+        doors,
+      </if>
+      <if test="seats != null">
+        seats,
+      </if>
+      <if test="emission != null">
+        emission,
+      </if>
+      <if test="cylinder != null">
+        cylinder,
+      </if>
+      <if test="fueltype != null">
+        fueltype,
+      </if>
+      <if test="fuelnumber != null">
+        fuelnumber,
+      </if>
+      <if test="lwv != null">
+        lwv,
+      </if>
+      <if test="lwvnumber != null">
+        lwvnumber,
+      </if>
+      <if test="valve != null">
+        valve,
+      </if>
+      <if test="compress != null">
+        compress,
+      </if>
+      <if test="fuelmethod != null">
+        fuelmethod,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="maxpower != null">
+        maxpower,
+      </if>
+      <if test="maxrpm != null">
+        maxrpm,
+      </if>
+      <if test="maxnm != null">
+        maxnm,
+      </if>
+      <if test="maxps != null">
+        maxps,
+      </if>
+      <if test="maxtorque != null">
+        maxtorque,
+      </if>
+      <if test="motorType != null">
+        motor_type,
+      </if>
+      <if test="totalPowerEv != null">
+        total_power_EV,
+      </if>
+      <if test="totalTorqueEv != null">
+        total_torque_EV,
+      </if>
+      <if test="frontPeakPowerEv != null">
+        front_peak_power_EV,
+      </if>
+      <if test="frontPeakTorqueEv != null">
+        front_peak_torque_EV,
+      </if>
+      <if test="rearPeakPowerEv != null">
+        rear_peak_power_EV,
+      </if>
+      <if test="rearPeakTorqueEv != null">
+        rear_peak_torque_EV,
+      </if>
+      <if test="vehiclePower != null">
+        vehicle_power,
+      </if>
+      <if test="vehicleTorque != null">
+        vehicle_torque,
+      </if>
+      <if test="batteryType != null">
+        battery_type,
+      </if>
+      <if test="batteryRangeMiit != null">
+        battery_range_MIIT,
+      </if>
+      <if test="batteryCapacity != null">
+        battery_capacity,
+      </if>
+      <if test="powerConsumption != null">
+        power_consumption,
+      </if>
+      <if test="batteryPackWarrenty != null">
+        battery_pack_warrenty,
+      </if>
+      <if test="chargingTime != null">
+        charging_time,
+      </if>
+      <if test="fastChargeElectricity != null">
+        fast_charge_electricity,
+      </if>
+      <if test="chargingPilePrice != null">
+        charging_pile_price,
+      </if>
+      <if test="geardesc != null">
+        geardesc,
+      </if>
+      <if test="gearnumber != null">
+        gearnumber,
+      </if>
+      <if test="driveway != null">
+        driveway,
+      </if>
+      <if test="fronthang != null">
+        fronthang,
+      </if>
+      <if test="backhang != null">
+        backhang,
+      </if>
+      <if test="assistanttype != null">
+        assistanttype,
+      </if>
+      <if test="steeringbox != null">
+        steeringbox,
+      </if>
+      <if test="frontbrake != null">
+        frontbrake,
+      </if>
+      <if test="backbrake != null">
+        backbrake,
+      </if>
+      <if test="frontwheel != null">
+        frontwheel,
+      </if>
+      <if test="backwheel != null">
+        backwheel,
+      </if>
+      <if test="fronthub != null">
+        fronthub,
+      </if>
+      <if test="backhub != null">
+        backhub,
+      </if>
+      <if test="hubtype != null">
+        hubtype,
+      </if>
+      <if test="sparewheel != null">
+        sparewheel,
+      </if>
+      <if test="factoryBrandInfo != null">
+        factory_brand_info,
+      </if>
+      <if test="vinFactoryBrand != null">
+        vin_factory_brand,
+      </if>
+      <if test="vinMakeyear != null">
+        vin_makeyear,
+      </if>
+      <if test="vinFvs != null">
+        vin_fvs,
+      </if>
+      <if test="priceLow != null">
+        Price_low,
+      </if>
+      <if test="vinPrice != null">
+        vin_price,
+      </if>
+      <if test="vinConfig != null">
+        vin_config,
+      </if>
+      <if test="vinOtherconfig != null">
+        vin_otherconfig,
+      </if>
+      <if test="carSource != null">
+        car_source,
+      </if>
+      <if test="sourceid != null">
+        sourceid,
+      </if>
+      <if test="sourcefactoryid != null">
+        sourcefactoryid,
+      </if>
+      <if test="sourcebrandid != null">
+        sourcebrandid,
+      </if>
+      <if test="sourcefamilyid != null">
+        sourcefamilyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowNames != null">
+        #{rowNames,jdbcType=INTEGER},
+      </if>
+      <if test="unicdatakey != null">
+        #{unicdatakey,jdbcType=VARCHAR},
+      </if>
+      <if test="carstructure != null">
+        #{carstructure,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="wheelbase != null">
+        #{wheelbase,jdbcType=VARCHAR},
+      </if>
+      <if test="frontgauge != null">
+        #{frontgauge,jdbcType=VARCHAR},
+      </if>
+      <if test="backgauge != null">
+        #{backgauge,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="maxload != null">
+        #{maxload,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelvolumn != null">
+        #{fuelvolumn,jdbcType=VARCHAR},
+      </if>
+      <if test="baggage != null">
+        #{baggage,jdbcType=VARCHAR},
+      </if>
+      <if test="doors != null">
+        #{doors,jdbcType=VARCHAR},
+      </if>
+      <if test="seats != null">
+        #{seats,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        #{emission,jdbcType=VARCHAR},
+      </if>
+      <if test="cylinder != null">
+        #{cylinder,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltype != null">
+        #{fueltype,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelnumber != null">
+        #{fuelnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lwv != null">
+        #{lwv,jdbcType=VARCHAR},
+      </if>
+      <if test="lwvnumber != null">
+        #{lwvnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="valve != null">
+        #{valve,jdbcType=VARCHAR},
+      </if>
+      <if test="compress != null">
+        #{compress,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelmethod != null">
+        #{fuelmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="maxpower != null">
+        #{maxpower,jdbcType=VARCHAR},
+      </if>
+      <if test="maxrpm != null">
+        #{maxrpm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxnm != null">
+        #{maxnm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxps != null">
+        #{maxps,jdbcType=VARCHAR},
+      </if>
+      <if test="maxtorque != null">
+        #{maxtorque,jdbcType=VARCHAR},
+      </if>
+      <if test="motorType != null">
+        #{motorType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPowerEv != null">
+        #{totalPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTorqueEv != null">
+        #{totalTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPeakPowerEv != null">
+        #{frontPeakPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPeakTorqueEv != null">
+        #{frontPeakTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="rearPeakPowerEv != null">
+        #{rearPeakPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="rearPeakTorqueEv != null">
+        #{rearPeakTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclePower != null">
+        #{vehiclePower,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleTorque != null">
+        #{vehicleTorque,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryType != null">
+        #{batteryType,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryRangeMiit != null">
+        #{batteryRangeMiit,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCapacity != null">
+        #{batteryCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="powerConsumption != null">
+        #{powerConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryPackWarrenty != null">
+        #{batteryPackWarrenty,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingTime != null">
+        #{chargingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fastChargeElectricity != null">
+        #{fastChargeElectricity,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingPilePrice != null">
+        #{chargingPilePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="geardesc != null">
+        #{geardesc,jdbcType=VARCHAR},
+      </if>
+      <if test="gearnumber != null">
+        #{gearnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driveway != null">
+        #{driveway,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthang != null">
+        #{fronthang,jdbcType=VARCHAR},
+      </if>
+      <if test="backhang != null">
+        #{backhang,jdbcType=VARCHAR},
+      </if>
+      <if test="assistanttype != null">
+        #{assistanttype,jdbcType=VARCHAR},
+      </if>
+      <if test="steeringbox != null">
+        #{steeringbox,jdbcType=VARCHAR},
+      </if>
+      <if test="frontbrake != null">
+        #{frontbrake,jdbcType=VARCHAR},
+      </if>
+      <if test="backbrake != null">
+        #{backbrake,jdbcType=VARCHAR},
+      </if>
+      <if test="frontwheel != null">
+        #{frontwheel,jdbcType=VARCHAR},
+      </if>
+      <if test="backwheel != null">
+        #{backwheel,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthub != null">
+        #{fronthub,jdbcType=VARCHAR},
+      </if>
+      <if test="backhub != null">
+        #{backhub,jdbcType=VARCHAR},
+      </if>
+      <if test="hubtype != null">
+        #{hubtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sparewheel != null">
+        #{sparewheel,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryBrandInfo != null">
+        #{factoryBrandInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="vinFactoryBrand != null">
+        #{vinFactoryBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="vinMakeyear != null">
+        #{vinMakeyear,jdbcType=VARCHAR},
+      </if>
+      <if test="vinFvs != null">
+        #{vinFvs,jdbcType=VARCHAR},
+      </if>
+      <if test="priceLow != null">
+        #{priceLow,jdbcType=DOUBLE},
+      </if>
+      <if test="vinPrice != null">
+        #{vinPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="vinConfig != null">
+        #{vinConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="vinOtherconfig != null">
+        #{vinOtherconfig,jdbcType=VARCHAR},
+      </if>
+      <if test="carSource != null">
+        #{carSource,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null">
+        #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcefactoryid != null">
+        #{sourcefactoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcebrandid != null">
+        #{sourcebrandid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcefamilyid != null">
+        #{sourcefamilyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.carInfo.UnicdataVehicleMore">
+    update unicdata_vehicle_more
+    <set>
+      <if test="unicdatakey != null">
+        unicdatakey = #{unicdatakey,jdbcType=VARCHAR},
+      </if>
+      <if test="carstructure != null">
+        carstructure = #{carstructure,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="wheelbase != null">
+        wheelbase = #{wheelbase,jdbcType=VARCHAR},
+      </if>
+      <if test="frontgauge != null">
+        frontgauge = #{frontgauge,jdbcType=VARCHAR},
+      </if>
+      <if test="backgauge != null">
+        backgauge = #{backgauge,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="maxload != null">
+        maxload = #{maxload,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelvolumn != null">
+        fuelvolumn = #{fuelvolumn,jdbcType=VARCHAR},
+      </if>
+      <if test="baggage != null">
+        baggage = #{baggage,jdbcType=VARCHAR},
+      </if>
+      <if test="doors != null">
+        doors = #{doors,jdbcType=VARCHAR},
+      </if>
+      <if test="seats != null">
+        seats = #{seats,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        emission = #{emission,jdbcType=VARCHAR},
+      </if>
+      <if test="cylinder != null">
+        cylinder = #{cylinder,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltype != null">
+        fueltype = #{fueltype,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelnumber != null">
+        fuelnumber = #{fuelnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lwv != null">
+        lwv = #{lwv,jdbcType=VARCHAR},
+      </if>
+      <if test="lwvnumber != null">
+        lwvnumber = #{lwvnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="valve != null">
+        valve = #{valve,jdbcType=VARCHAR},
+      </if>
+      <if test="compress != null">
+        compress = #{compress,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelmethod != null">
+        fuelmethod = #{fuelmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="maxpower != null">
+        maxpower = #{maxpower,jdbcType=VARCHAR},
+      </if>
+      <if test="maxrpm != null">
+        maxrpm = #{maxrpm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxnm != null">
+        maxnm = #{maxnm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxps != null">
+        maxps = #{maxps,jdbcType=VARCHAR},
+      </if>
+      <if test="maxtorque != null">
+        maxtorque = #{maxtorque,jdbcType=VARCHAR},
+      </if>
+      <if test="motorType != null">
+        motor_type = #{motorType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPowerEv != null">
+        total_power_EV = #{totalPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTorqueEv != null">
+        total_torque_EV = #{totalTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPeakPowerEv != null">
+        front_peak_power_EV = #{frontPeakPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPeakTorqueEv != null">
+        front_peak_torque_EV = #{frontPeakTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="rearPeakPowerEv != null">
+        rear_peak_power_EV = #{rearPeakPowerEv,jdbcType=VARCHAR},
+      </if>
+      <if test="rearPeakTorqueEv != null">
+        rear_peak_torque_EV = #{rearPeakTorqueEv,jdbcType=VARCHAR},
+      </if>
+      <if test="vehiclePower != null">
+        vehicle_power = #{vehiclePower,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleTorque != null">
+        vehicle_torque = #{vehicleTorque,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryType != null">
+        battery_type = #{batteryType,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryRangeMiit != null">
+        battery_range_MIIT = #{batteryRangeMiit,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryCapacity != null">
+        battery_capacity = #{batteryCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="powerConsumption != null">
+        power_consumption = #{powerConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="batteryPackWarrenty != null">
+        battery_pack_warrenty = #{batteryPackWarrenty,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingTime != null">
+        charging_time = #{chargingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fastChargeElectricity != null">
+        fast_charge_electricity = #{fastChargeElectricity,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingPilePrice != null">
+        charging_pile_price = #{chargingPilePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="geardesc != null">
+        geardesc = #{geardesc,jdbcType=VARCHAR},
+      </if>
+      <if test="gearnumber != null">
+        gearnumber = #{gearnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driveway != null">
+        driveway = #{driveway,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthang != null">
+        fronthang = #{fronthang,jdbcType=VARCHAR},
+      </if>
+      <if test="backhang != null">
+        backhang = #{backhang,jdbcType=VARCHAR},
+      </if>
+      <if test="assistanttype != null">
+        assistanttype = #{assistanttype,jdbcType=VARCHAR},
+      </if>
+      <if test="steeringbox != null">
+        steeringbox = #{steeringbox,jdbcType=VARCHAR},
+      </if>
+      <if test="frontbrake != null">
+        frontbrake = #{frontbrake,jdbcType=VARCHAR},
+      </if>
+      <if test="backbrake != null">
+        backbrake = #{backbrake,jdbcType=VARCHAR},
+      </if>
+      <if test="frontwheel != null">
+        frontwheel = #{frontwheel,jdbcType=VARCHAR},
+      </if>
+      <if test="backwheel != null">
+        backwheel = #{backwheel,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthub != null">
+        fronthub = #{fronthub,jdbcType=VARCHAR},
+      </if>
+      <if test="backhub != null">
+        backhub = #{backhub,jdbcType=VARCHAR},
+      </if>
+      <if test="hubtype != null">
+        hubtype = #{hubtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sparewheel != null">
+        sparewheel = #{sparewheel,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryBrandInfo != null">
+        factory_brand_info = #{factoryBrandInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="vinFactoryBrand != null">
+        vin_factory_brand = #{vinFactoryBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="vinMakeyear != null">
+        vin_makeyear = #{vinMakeyear,jdbcType=VARCHAR},
+      </if>
+      <if test="vinFvs != null">
+        vin_fvs = #{vinFvs,jdbcType=VARCHAR},
+      </if>
+      <if test="priceLow != null">
+        Price_low = #{priceLow,jdbcType=DOUBLE},
+      </if>
+      <if test="vinPrice != null">
+        vin_price = #{vinPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="vinConfig != null">
+        vin_config = #{vinConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="vinOtherconfig != null">
+        vin_otherconfig = #{vinOtherconfig,jdbcType=VARCHAR},
+      </if>
+      <if test="carSource != null">
+        car_source = #{carSource,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null">
+        sourceid = #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcefactoryid != null">
+        sourcefactoryid = #{sourcefactoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcebrandid != null">
+        sourcebrandid = #{sourcebrandid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcefamilyid != null">
+        sourcefamilyid = #{sourcefamilyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where row_names = #{rowNames,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.carInfo.UnicdataVehicleMore">
+    update unicdata_vehicle_more
+    set unicdatakey = #{unicdatakey,jdbcType=VARCHAR},
+      carstructure = #{carstructure,jdbcType=VARCHAR},
+      length = #{length,jdbcType=VARCHAR},
+      width = #{width,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      wheelbase = #{wheelbase,jdbcType=VARCHAR},
+      frontgauge = #{frontgauge,jdbcType=VARCHAR},
+      backgauge = #{backgauge,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      maxload = #{maxload,jdbcType=VARCHAR},
+      fuelvolumn = #{fuelvolumn,jdbcType=VARCHAR},
+      baggage = #{baggage,jdbcType=VARCHAR},
+      doors = #{doors,jdbcType=VARCHAR},
+      seats = #{seats,jdbcType=VARCHAR},
+      emission = #{emission,jdbcType=VARCHAR},
+      cylinder = #{cylinder,jdbcType=VARCHAR},
+      fueltype = #{fueltype,jdbcType=VARCHAR},
+      fuelnumber = #{fuelnumber,jdbcType=VARCHAR},
+      lwv = #{lwv,jdbcType=VARCHAR},
+      lwvnumber = #{lwvnumber,jdbcType=VARCHAR},
+      valve = #{valve,jdbcType=VARCHAR},
+      compress = #{compress,jdbcType=DOUBLE},
+      fuelmethod = #{fuelmethod,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      maxpower = #{maxpower,jdbcType=VARCHAR},
+      maxrpm = #{maxrpm,jdbcType=VARCHAR},
+      maxnm = #{maxnm,jdbcType=VARCHAR},
+      maxps = #{maxps,jdbcType=VARCHAR},
+      maxtorque = #{maxtorque,jdbcType=VARCHAR},
+      motor_type = #{motorType,jdbcType=VARCHAR},
+      total_power_EV = #{totalPowerEv,jdbcType=VARCHAR},
+      total_torque_EV = #{totalTorqueEv,jdbcType=VARCHAR},
+      front_peak_power_EV = #{frontPeakPowerEv,jdbcType=VARCHAR},
+      front_peak_torque_EV = #{frontPeakTorqueEv,jdbcType=VARCHAR},
+      rear_peak_power_EV = #{rearPeakPowerEv,jdbcType=VARCHAR},
+      rear_peak_torque_EV = #{rearPeakTorqueEv,jdbcType=VARCHAR},
+      vehicle_power = #{vehiclePower,jdbcType=VARCHAR},
+      vehicle_torque = #{vehicleTorque,jdbcType=VARCHAR},
+      battery_type = #{batteryType,jdbcType=VARCHAR},
+      battery_range_MIIT = #{batteryRangeMiit,jdbcType=VARCHAR},
+      battery_capacity = #{batteryCapacity,jdbcType=VARCHAR},
+      power_consumption = #{powerConsumption,jdbcType=VARCHAR},
+      battery_pack_warrenty = #{batteryPackWarrenty,jdbcType=VARCHAR},
+      charging_time = #{chargingTime,jdbcType=VARCHAR},
+      fast_charge_electricity = #{fastChargeElectricity,jdbcType=VARCHAR},
+      charging_pile_price = #{chargingPilePrice,jdbcType=VARCHAR},
+      geardesc = #{geardesc,jdbcType=VARCHAR},
+      gearnumber = #{gearnumber,jdbcType=VARCHAR},
+      driveway = #{driveway,jdbcType=VARCHAR},
+      fronthang = #{fronthang,jdbcType=VARCHAR},
+      backhang = #{backhang,jdbcType=VARCHAR},
+      assistanttype = #{assistanttype,jdbcType=VARCHAR},
+      steeringbox = #{steeringbox,jdbcType=VARCHAR},
+      frontbrake = #{frontbrake,jdbcType=VARCHAR},
+      backbrake = #{backbrake,jdbcType=VARCHAR},
+      frontwheel = #{frontwheel,jdbcType=VARCHAR},
+      backwheel = #{backwheel,jdbcType=VARCHAR},
+      fronthub = #{fronthub,jdbcType=VARCHAR},
+      backhub = #{backhub,jdbcType=VARCHAR},
+      hubtype = #{hubtype,jdbcType=VARCHAR},
+      sparewheel = #{sparewheel,jdbcType=VARCHAR},
+      factory_brand_info = #{factoryBrandInfo,jdbcType=VARCHAR},
+      vin_factory_brand = #{vinFactoryBrand,jdbcType=VARCHAR},
+      vin_makeyear = #{vinMakeyear,jdbcType=VARCHAR},
+      vin_fvs = #{vinFvs,jdbcType=VARCHAR},
+      Price_low = #{priceLow,jdbcType=DOUBLE},
+      vin_price = #{vinPrice,jdbcType=VARCHAR},
+      vin_config = #{vinConfig,jdbcType=VARCHAR},
+      vin_otherconfig = #{vinOtherconfig,jdbcType=VARCHAR},
+      car_source = #{carSource,jdbcType=VARCHAR},
+      sourceid = #{sourceid,jdbcType=VARCHAR},
+      sourcefactoryid = #{sourcefactoryid,jdbcType=VARCHAR},
+      sourcebrandid = #{sourcebrandid,jdbcType=VARCHAR},
+      sourcefamilyid = #{sourcefamilyid,jdbcType=VARCHAR}
+    where row_names = #{rowNames,jdbcType=INTEGER}
+  </update>
+</mapper>

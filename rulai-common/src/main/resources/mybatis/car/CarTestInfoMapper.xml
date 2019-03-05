@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarTestInfoMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarTestInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="distributor_store_id" jdbcType="INTEGER" property="distributorStoreId" />
+    <result column="vin" jdbcType="VARCHAR" property="vin" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="family_id" jdbcType="INTEGER" property="familyId" />
+    <result column="vehicle_id" jdbcType="INTEGER" property="vehicleId" />
+    <result column="decorations_out_id" jdbcType="INTEGER" property="decorationsOutId" />
+    <result column="decorations_out_name" jdbcType="VARCHAR" property="decorationsOutName" />
+    <result column="decorations_in_id" jdbcType="INTEGER" property="decorationsInId" />
+    <result column="decorations_in_name" jdbcType="VARCHAR" property="decorationsInName" />
+    <result column="engine_num" jdbcType="VARCHAR" property="engineNum" />
+    <result column="test_car_status" jdbcType="INTEGER" property="testCarStatus" />
+    <result column="miles" jdbcType="INTEGER" property="miles" />
+    <result column="license_num" jdbcType="VARCHAR" property="licenseNum" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distributor_store_id, vin, brand_id, family_id, vehicle_id, decorations_out_id, 
+    decorations_out_name, decorations_in_id, decorations_in_name, engine_num, test_car_status, 
+    miles, license_num, operator_id, create_date, update_date, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_test_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_test_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarTestInfo">
+    insert into car_test_info (id, distributor_store_id, vin, 
+      brand_id, family_id, vehicle_id, 
+      decorations_out_id, decorations_out_name, decorations_in_id, 
+      decorations_in_name, engine_num, test_car_status, 
+      miles, license_num, operator_id, 
+      create_date, update_date, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}, 
+      #{brandId,jdbcType=INTEGER}, #{familyId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, 
+      #{decorationsOutId,jdbcType=INTEGER}, #{decorationsOutName,jdbcType=VARCHAR}, #{decorationsInId,jdbcType=INTEGER}, 
+      #{decorationsInName,jdbcType=VARCHAR}, #{engineNum,jdbcType=VARCHAR}, #{testCarStatus,jdbcType=INTEGER}, 
+      #{miles,jdbcType=INTEGER}, #{licenseNum,jdbcType=VARCHAR}, #{operatorId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarTestInfo">
+    insert into car_test_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distributorStoreId != null">
+        distributor_store_id,
+      </if>
+      <if test="vin != null">
+        vin,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="familyId != null">
+        family_id,
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id,
+      </if>
+      <if test="decorationsOutId != null">
+        decorations_out_id,
+      </if>
+      <if test="decorationsOutName != null">
+        decorations_out_name,
+      </if>
+      <if test="decorationsInId != null">
+        decorations_in_id,
+      </if>
+      <if test="decorationsInName != null">
+        decorations_in_name,
+      </if>
+      <if test="engineNum != null">
+        engine_num,
+      </if>
+      <if test="testCarStatus != null">
+        test_car_status,
+      </if>
+      <if test="miles != null">
+        miles,
+      </if>
+      <if test="licenseNum != null">
+        license_num,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributorStoreId != null">
+        #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="familyId != null">
+        #{familyId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsOutId != null">
+        #{decorationsOutId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsOutName != null">
+        #{decorationsOutName,jdbcType=VARCHAR},
+      </if>
+      <if test="decorationsInId != null">
+        #{decorationsInId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsInName != null">
+        #{decorationsInName,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNum != null">
+        #{engineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="testCarStatus != null">
+        #{testCarStatus,jdbcType=INTEGER},
+      </if>
+      <if test="miles != null">
+        #{miles,jdbcType=INTEGER},
+      </if>
+      <if test="licenseNum != null">
+        #{licenseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarTestInfo">
+    update car_test_info
+    <set>
+      <if test="distributorStoreId != null">
+        distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="familyId != null">
+        family_id = #{familyId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsOutId != null">
+        decorations_out_id = #{decorationsOutId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsOutName != null">
+        decorations_out_name = #{decorationsOutName,jdbcType=VARCHAR},
+      </if>
+      <if test="decorationsInId != null">
+        decorations_in_id = #{decorationsInId,jdbcType=INTEGER},
+      </if>
+      <if test="decorationsInName != null">
+        decorations_in_name = #{decorationsInName,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNum != null">
+        engine_num = #{engineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="testCarStatus != null">
+        test_car_status = #{testCarStatus,jdbcType=INTEGER},
+      </if>
+      <if test="miles != null">
+        miles = #{miles,jdbcType=INTEGER},
+      </if>
+      <if test="licenseNum != null">
+        license_num = #{licenseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarTestInfo">
+    update car_test_info
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      vin = #{vin,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      family_id = #{familyId,jdbcType=INTEGER},
+      vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      decorations_out_id = #{decorationsOutId,jdbcType=INTEGER},
+      decorations_out_name = #{decorationsOutName,jdbcType=VARCHAR},
+      decorations_in_id = #{decorationsInId,jdbcType=INTEGER},
+      decorations_in_name = #{decorationsInName,jdbcType=VARCHAR},
+      engine_num = #{engineNum,jdbcType=VARCHAR},
+      test_car_status = #{testCarStatus,jdbcType=INTEGER},
+      miles = #{miles,jdbcType=INTEGER},
+      license_num = #{licenseNum,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByStore" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+		cti.id,
+		cti.distributor_store_id as distributorStoreId,
+		cti.vin,
+		cti.brand_id as brandId,
+		cti.family_id as familyId,
+		cti.vehicle_id as vehicleId,
+		cti.decorations_out_id as decorationsOutId,
+		cti.decorations_out_name as decorationsOutName,
+		cti.decorations_in_id as decorationsInId,
+		cti.decorations_in_name as decorationsInName,
+		cti.engine_num as engineNum,
+		cti.test_car_status as testCarStatus,
+		cti.miles,
+		cti.license_num as licenseNum,
+		cti.operator_id as operatorId,
+		cti.status,
+		cvc.year,
+		cb.name as brandName,
+		cf.name as familyName,
+		cvc.name as vehicleName
+	FROM
+		car_test_info cti
+	LEFT JOIN car_vehicle_conf cvc on cti.vehicle_id = cvc.id
+	LEFT JOIN car_brand cb on cti.brand_id = cb.id
+	LEFT JOIN car_family cf on cti.family_id = cf.id
+    where cti.distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+    and cti.status = 1
+    order by cti.create_date desc
+  </select>
+  <!-- 试驾车列 wp -->
+  <select id="selectTestCarList" resultType="java.util.Map" parameterType="java.util.Map">
+  	SELECT 
+		c.id,
+		c.family_id,
+		c.vehicle_id,
+		c.brand_id,
+		c.vin,
+		c.engine_num,
+		c.decorations_out_id,
+		c.decorations_out_name,
+		c.decorations_in_id,
+		c.decorations_in_name,
+		cvc.`name` AS chexing_name,
+		cf.`name` AS chexi_name,
+		cb.`name` AS pingpai_name,
+        c.license_num
+		FROM car_test_info c
+		LEFT JOIN car_vehicle_conf cvc ON c.vehicle_id=cvc.id
+		LEFT JOIN car_family cf ON cf.id=cvc.family_id
+		LEFT JOIN car_brand cb ON cb.id=cf.brand_id
+		WHERE c.distributor_store_id=cf.distributor_store_id=cb.distributor_store_id=cvc.distributor_store_id
+  		AND c.status=1 AND test_car_status=1
+  		<if test="storeId != null">
+        AND c.distributor_store_id=#{storeId}
+        </if>
+        <if test="searchName !=null">
+         AND cvc.`name` LIKE CONCAT('%',#{searchName},'%')
+         OR	cf.`name` LIKE CONCAT('%',#{searchName},'%')
+         OR c.engine_num LIKE CONCAT('%',#{searchName},'%')
+         OR c.license_num LIKE CONCAT('%',#{searchName},'%')
+         OR c.vin LIKE CONCAT('%',#{searchName},'%')
+        </if>
+  		order by c.create_date desc
+  </select>
+  <!-- 试驾车详情 wp -->
+  <select id="carTestDetailInfo" resultType="java.util.Map" parameterType="java.util.Map">
+  SELECT 
+	c.id,
+	c.family_id,
+	c.vehicle_id,
+	c.license_num,
+	c.brand_id,
+	c.vin,
+	c.engine_num,
+	c.decorations_out_id,
+	c.decorations_out_name,
+	c.decorations_in_id,
+	c.decorations_in_name,
+	cvc.`name` AS chexing_name,
+	cf.`name` AS chexi_name,
+	cb.`name` AS pingpai_name
+	FROM car_test_info c
+	LEFT JOIN car_vehicle_conf cvc ON c.vehicle_id=cvc.id
+	LEFT JOIN car_family cf ON cf.id=cvc.family_id
+	LEFT JOIN car_brand cb ON cb.id=cf.brand_id
+	WHERE c.distributor_store_id=
+	cf.distributor_store_id=
+	cb.distributor_store_id=
+	cvc.distributor_store_id
+	<if test="storeId != null">
+      AND c.distributor_store_id=#{storeId}
+    </if>
+    <if test="id != null">
+      AND c.id=#{id}
+    </if>
+  </select>
+  <!-- 获取车型 wp -->
+  <select id="carTestConf" parameterType="java.util.Map" resultType="java.util.Map">
+	  SELECT 
+		c.family_id,
+		c.vehicle_id,
+		c.brand_id,
+		c.vin,
+		c.engine_num,
+		cvc.`name` AS chexing_name,
+		cf.`name` AS chexi_name,
+		cb.`name` AS pingpai_name
+		FROM car_test_info c
+		LEFT JOIN car_vehicle_conf cvc ON c.vehicle_id=cvc.id
+		LEFT JOIN car_family cf ON cf.id=cvc.family_id
+		LEFT JOIN car_brand cb ON cb.id=cf.brand_id
+		WHERE c.distributor_store_id=
+		cf.distributor_store_id=
+		cb.distributor_store_id=
+		cvc.distributor_store_id
+		<if test="storeId != null">
+        AND c.distributor_store_id=#{storeId}
+   		</if>
+		GROUP BY c.vehicle_id
+  </select>
+  <!-- 扫一扫 wp -->
+  <select id="carTestScan" parameterType="string" resultType="java.util.Map">
+	   SELECT 
+		c.id,
+		c.family_id,
+		c.vehicle_id,
+		c.license_num,
+		c.brand_id,
+		c.vin,
+		c.engine_num,
+		c.decorations_out_id,
+		c.decorations_out_name,
+		c.decorations_in_id,
+		c.decorations_in_name,
+		cvc.`name` AS chexing_name,
+		cf.`name` AS chexi_name,
+		cb.`name` AS pingpai_name
+		FROM car_test_info c
+		LEFT JOIN car_vehicle_conf cvc ON c.vehicle_id=cvc.id
+		LEFT JOIN car_family cf ON cf.id=cvc.family_id
+		LEFT JOIN car_brand cb ON cb.id=cf.brand_id
+		WHERE c.distributor_store_id=
+		cf.distributor_store_id=
+		cb.distributor_store_id=
+		cvc.distributor_store_id
+		AND c.vin=#{vin,jdbcType=VARCHAR}
+  </select>
+</mapper>

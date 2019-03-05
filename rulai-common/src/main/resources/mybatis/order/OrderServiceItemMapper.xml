@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.order.OrderServiceItemMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.order.OrderServiceItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_service_id" jdbcType="INTEGER" property="orderServiceId" />
+    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
+    <result column="service_price" jdbcType="DECIMAL" property="servicePrice" />
+    <result column="is_gift" jdbcType="TINYINT" property="isGift" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="donation_amount" jdbcType="DECIMAL" property="donationAmount" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="license_plate_province" jdbcType="INTEGER" property="licensePlateProvince" />
+    <result column="license_plate_city" jdbcType="INTEGER" property="licensePlateCity" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_service_id, service_id, service_price, is_gift, remark, brand, donation_amount, 
+    license_plate, license_plate_province, license_plate_city, create_time, status
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.order.OrderServiceItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_service_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_service_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_service_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.order.OrderServiceItem">
+    insert into order_service_item (id, order_service_id, service_id, 
+      service_price, is_gift, remark, 
+      brand, donation_amount, license_plate, 
+      license_plate_province, license_plate_city, 
+      create_time, status)
+    values (#{id,jdbcType=INTEGER}, #{orderServiceId,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, 
+      #{servicePrice,jdbcType=DECIMAL}, #{isGift,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{donationAmount,jdbcType=DECIMAL}, #{licensePlate,jdbcType=VARCHAR}, 
+      #{licensePlateProvince,jdbcType=INTEGER}, #{licensePlateCity,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.order.OrderServiceItem">
+    insert into order_service_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderServiceId != null">
+        order_service_id,
+      </if>
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="servicePrice != null">
+        service_price,
+      </if>
+      <if test="isGift != null">
+        is_gift,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="donationAmount != null">
+        donation_amount,
+      </if>
+      <if test="licensePlate != null">
+        license_plate,
+      </if>
+      <if test="licensePlateProvince != null">
+        license_plate_province,
+      </if>
+      <if test="licensePlateCity != null">
+        license_plate_city,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderServiceId != null">
+        #{orderServiceId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePrice != null">
+        #{servicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isGift != null">
+        #{isGift,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="donationAmount != null">
+        #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="licensePlate != null">
+        #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlateProvince != null">
+        #{licensePlateProvince,jdbcType=INTEGER},
+      </if>
+      <if test="licensePlateCity != null">
+        #{licensePlateCity,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.order.OrderServiceItem">
+    update order_service_item
+    <set>
+      <if test="orderServiceId != null">
+        order_service_id = #{orderServiceId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePrice != null">
+        service_price = #{servicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isGift != null">
+        is_gift = #{isGift,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="donationAmount != null">
+        donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="licensePlate != null">
+        license_plate = #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlateProvince != null">
+        license_plate_province = #{licensePlateProvince,jdbcType=INTEGER},
+      </if>
+      <if test="licensePlateCity != null">
+        license_plate_city = #{licensePlateCity,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.order.OrderServiceItem">
+    update order_service_item
+    set order_service_id = #{orderServiceId,jdbcType=INTEGER},
+      service_id = #{serviceId,jdbcType=INTEGER},
+      service_price = #{servicePrice,jdbcType=DECIMAL},
+      is_gift = #{isGift,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      license_plate = #{licensePlate,jdbcType=VARCHAR},
+      license_plate_province = #{licensePlateProvince,jdbcType=INTEGER},
+      license_plate_city = #{licensePlateCity,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getItemsByOrderServiceId" parameterType="java.lang.Integer" resultType="java.util.Map">
+   	SELECT ss.id,ss.service_name serviceName,IFNULL(osi.service_price,ss.service_price) servicePrice,
+	IFNULL(osi.brand,'') brand,IFNULL(osi.donation_amount,0) donationAmount,ss.cost
+	 FROM store_service ss 
+	LEFT JOIN order_service_item osi ON osi.service_id = ss.id 
+	  WHERE osi.order_service_id=#{orderServiceId,jdbcType=INTEGER} 
+  </select>
+  
+  <select id="getItemsByMap" parameterType="java.util.Map" resultType="java.util.Map">
+   SELECT ss.id,ss.service_name serviceName,IFNULL(osi.service_price,0) servicePrice,
+	IFNULL(osi.brand,'') brand,IFNULL(osi.donation_amount,0) donationAmount, 
+	IF(osi.id IS NOT NULL,1,0) as choiceStatus
+	 FROM store_service ss 
+	LEFT JOIN order_service_item osi ON osi.service_id = ss.id 
+	AND order_service_id=#{orderServiceId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteOrderServiceItem" parameterType="com.unicdata.entity.order.OrderServiceItem">
+    delete from order_service_item
+    where order_service_id=#{orderServiceId,jdbcType=INTEGER}
+    <if test="serviceId != null">
+    	AND service_id = #{serviceId,jdbcType=INTEGER}
+    </if>
+  </delete>
+  <insert id="addOrderServiceItem" parameterType="java.util.List">
+        insert into order_service_item (order_service_id, service_id, 
+      service_price, remark,brand, donation_amount)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.orderServiceId,jdbcType=INTEGER}, #{item.serviceId,jdbcType=INTEGER}, 
+	      #{item.servicePrice,jdbcType=DECIMAL}, #{item.remark,jdbcType=VARCHAR}, 
+	      #{item.brand,jdbcType=VARCHAR}, #{item.donationAmount,jdbcType=DECIMAL})
+        </foreach>
+    </insert>
+    <select id="getSumByOrderServiceId" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+	   SELECT IFNULL(SUM(osi.service_price),0) servicePrice 
+	   FROM order_service_item osi 
+	   LEFT JOIN store_service ss ON ss.id = osi.service_id 
+	   WHERE osi.order_service_id = #{orderServiceId,jdbcType=INTEGER} AND ss.type = 1
+  </select>
+</mapper>

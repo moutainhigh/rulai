@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.policy.ListExceptionMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.policy.ListException">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rebate_project_id" jdbcType="INTEGER" property="rebateProjectId" />
+    <result column="list_type" jdbcType="BIT" property="listType" />
+    <result column="list_id" jdbcType="INTEGER" property="listId" />
+    <result column="vin" jdbcType="VARCHAR" property="vin" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, rebate_project_id, list_type, list_id, vin, money, create_date
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.policy.ListExceptionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from list_exception
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from list_exception
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from list_exception
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.policy.ListException">
+    insert into list_exception (id, rebate_project_id, list_type, 
+      list_id, vin, money, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{rebateProjectId,jdbcType=INTEGER}, #{listType,jdbcType=BIT}, 
+      #{listId,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.policy.ListException">
+    insert into list_exception
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rebateProjectId != null">
+        rebate_project_id,
+      </if>
+      <if test="listType != null">
+        list_type,
+      </if>
+      <if test="listId != null">
+        list_id,
+      </if>
+      <if test="vin != null">
+        vin,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rebateProjectId != null">
+        #{rebateProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="listType != null">
+        #{listType,jdbcType=BIT},
+      </if>
+      <if test="listId != null">
+        #{listId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.policy.ListException">
+    update list_exception
+    <set>
+      <if test="rebateProjectId != null">
+        rebate_project_id = #{rebateProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="listType != null">
+        list_type = #{listType,jdbcType=BIT},
+      </if>
+      <if test="listId != null">
+        list_id = #{listId,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.policy.ListException">
+    update list_exception
+    set rebate_project_id = #{rebateProjectId,jdbcType=INTEGER},
+      list_type = #{listType,jdbcType=BIT},
+      list_id = #{listId,jdbcType=INTEGER},
+      vin = #{vin,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

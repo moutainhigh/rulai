@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueReconciliationMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueReconciliation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="boutique_id" jdbcType="INTEGER" property="boutiqueId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="construction_time" jdbcType="TIMESTAMP" property="constructionTime" />
+    <result column="value" jdbcType="DECIMAL" property="value" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, supplier_id, boutique_id, num, construction_time, value, status, store_id, timestamp, 
+    type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueReconciliationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_reconciliation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueReconciliation">
+    insert into boutique_reconciliation (id, supplier_id, boutique_id, 
+      num, construction_time, value, 
+      status, store_id, timestamp, 
+      type_live)
+    values (#{id,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{boutiqueId,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{constructionTime,jdbcType=TIMESTAMP}, #{value,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{timestamp,jdbcType=TIMESTAMP}, 
+      #{typeLive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueReconciliation">
+    insert into boutique_reconciliation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="constructionTime != null">
+        construction_time,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="constructionTime != null">
+        #{constructionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueReconciliation">
+    update boutique_reconciliation
+    <set>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="constructionTime != null">
+        construction_time = #{constructionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueReconciliation">
+    update boutique_reconciliation
+    set supplier_id = #{supplierId,jdbcType=INTEGER},
+      boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      construction_time = #{constructionTime,jdbcType=TIMESTAMP},
+      value = #{value,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

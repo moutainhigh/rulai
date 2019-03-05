@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueRetailIncludePackDivisionMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivision">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="retial_include_id" jdbcType="INTEGER" property="retialIncludeId" />
+    <result column="pack_id" jdbcType="INTEGER" property="packId" />
+    <result column="boutique_id" jdbcType="INTEGER" property="boutiqueId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="division_value" jdbcType="DECIMAL" property="divisionValue" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, retial_include_id, pack_id, boutique_id, num, division_value, type_live, timestamp
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivisionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_retail_include_pack_division
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_retail_include_pack_division
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_retail_include_pack_division
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivision">
+    insert into boutique_retail_include_pack_division (id, retial_include_id, pack_id, 
+      boutique_id, num, division_value, 
+      type_live, timestamp)
+    values (#{id,jdbcType=INTEGER}, #{retialIncludeId,jdbcType=INTEGER}, #{packId,jdbcType=INTEGER}, 
+      #{boutiqueId,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{divisionValue,jdbcType=DECIMAL}, 
+      #{typeLive,jdbcType=INTEGER}, #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivision">
+    insert into boutique_retail_include_pack_division
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="retialIncludeId != null">
+        retial_include_id,
+      </if>
+      <if test="packId != null">
+        pack_id,
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="divisionValue != null">
+        division_value,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="retialIncludeId != null">
+        #{retialIncludeId,jdbcType=INTEGER},
+      </if>
+      <if test="packId != null">
+        #{packId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="divisionValue != null">
+        #{divisionValue,jdbcType=DECIMAL},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivision">
+    update boutique_retail_include_pack_division
+    <set>
+      <if test="retialIncludeId != null">
+        retial_include_id = #{retialIncludeId,jdbcType=INTEGER},
+      </if>
+      <if test="packId != null">
+        pack_id = #{packId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="divisionValue != null">
+        division_value = #{divisionValue,jdbcType=DECIMAL},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueRetailIncludePackDivision">
+    update boutique_retail_include_pack_division
+    set retial_include_id = #{retialIncludeId,jdbcType=INTEGER},
+      pack_id = #{packId,jdbcType=INTEGER},
+      boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      division_value = #{divisionValue,jdbcType=DECIMAL},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByIncludeIdAndBoutiqueId" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_retail_include_pack_division 
+  	WHERE retial_include_id = #{retailId,jdbcType=INTEGER} AND boutique_id = #{boutiqueId,jdbcType=INTEGER}
+  
+  
+  </select>
+  
+</mapper>

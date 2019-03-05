@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.policy.PlanExtractionRebateMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.policy.PlanExtractionRebate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_year" jdbcType="INTEGER" property="planYear" />
+    <result column="plan_extraction_date" jdbcType="INTEGER" property="planExtractionDate" />
+    <result column="plan_extraction_id" jdbcType="INTEGER" property="planExtractionId" />
+    <result column="rebate_project_id" jdbcType="INTEGER" property="rebateProjectId" />
+    <result column="rebate_project_name" jdbcType="VARCHAR" property="rebateProjectName" />
+    <result column="month_plan_money" jdbcType="DECIMAL" property="monthPlanMoney" />
+    <result column="year_plan_money" jdbcType="DECIMAL" property="yearPlanMoney" />
+    <result column="year_plan_abjust_money" jdbcType="DECIMAL" property="yearPlanAbjustMoney" />
+    <result column="proofreader_money" jdbcType="DECIMAL" property="proofreaderMoney" />
+    <result column="arrive_bill_money" jdbcType="DECIMAL" property="arriveBillMoney" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, plan_year, plan_extraction_date, plan_extraction_id, rebate_project_id, rebate_project_name, 
+    month_plan_money, year_plan_money, year_plan_abjust_money, proofreader_money, arrive_bill_money, 
+    store_id, status, employee_id, update_date, create_date
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.policy.PlanExtractionRebateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from plan_extraction_rebate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plan_extraction_rebate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from plan_extraction_rebate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.policy.PlanExtractionRebate">
+    insert into plan_extraction_rebate (id, plan_year, plan_extraction_date, 
+      plan_extraction_id, rebate_project_id, rebate_project_name, 
+      month_plan_money, year_plan_money, year_plan_abjust_money, 
+      proofreader_money, arrive_bill_money, store_id, 
+      status, employee_id, update_date, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{planYear,jdbcType=INTEGER}, #{planExtractionDate,jdbcType=INTEGER}, 
+      #{planExtractionId,jdbcType=INTEGER}, #{rebateProjectId,jdbcType=INTEGER}, #{rebateProjectName,jdbcType=VARCHAR}, 
+      #{monthPlanMoney,jdbcType=DECIMAL}, #{yearPlanMoney,jdbcType=DECIMAL}, #{yearPlanAbjustMoney,jdbcType=DECIMAL}, 
+      #{proofreaderMoney,jdbcType=DECIMAL}, #{arriveBillMoney,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{employeeId,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.policy.PlanExtractionRebate">
+    insert into plan_extraction_rebate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planYear != null">
+        plan_year,
+      </if>
+      <if test="planExtractionDate != null">
+        plan_extraction_date,
+      </if>
+      <if test="planExtractionId != null">
+        plan_extraction_id,
+      </if>
+      <if test="rebateProjectId != null">
+        rebate_project_id,
+      </if>
+      <if test="rebateProjectName != null">
+        rebate_project_name,
+      </if>
+      <if test="monthPlanMoney != null">
+        month_plan_money,
+      </if>
+      <if test="yearPlanMoney != null">
+        year_plan_money,
+      </if>
+      <if test="yearPlanAbjustMoney != null">
+        year_plan_abjust_money,
+      </if>
+      <if test="proofreaderMoney != null">
+        proofreader_money,
+      </if>
+      <if test="arriveBillMoney != null">
+        arrive_bill_money,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planYear != null">
+        #{planYear,jdbcType=INTEGER},
+      </if>
+      <if test="planExtractionDate != null">
+        #{planExtractionDate,jdbcType=INTEGER},
+      </if>
+      <if test="planExtractionId != null">
+        #{planExtractionId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateProjectId != null">
+        #{rebateProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateProjectName != null">
+        #{rebateProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPlanMoney != null">
+        #{monthPlanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPlanMoney != null">
+        #{yearPlanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPlanAbjustMoney != null">
+        #{yearPlanAbjustMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="proofreaderMoney != null">
+        #{proofreaderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveBillMoney != null">
+        #{arriveBillMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.policy.PlanExtractionRebate">
+    update plan_extraction_rebate
+    <set>
+      <if test="planYear != null">
+        plan_year = #{planYear,jdbcType=INTEGER},
+      </if>
+      <if test="planExtractionDate != null">
+        plan_extraction_date = #{planExtractionDate,jdbcType=INTEGER},
+      </if>
+      <if test="planExtractionId != null">
+        plan_extraction_id = #{planExtractionId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateProjectId != null">
+        rebate_project_id = #{rebateProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateProjectName != null">
+        rebate_project_name = #{rebateProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPlanMoney != null">
+        month_plan_money = #{monthPlanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPlanMoney != null">
+        year_plan_money = #{yearPlanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPlanAbjustMoney != null">
+        year_plan_abjust_money = #{yearPlanAbjustMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="proofreaderMoney != null">
+        proofreader_money = #{proofreaderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveBillMoney != null">
+        arrive_bill_money = #{arriveBillMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.policy.PlanExtractionRebate">
+    update plan_extraction_rebate
+    set plan_year = #{planYear,jdbcType=INTEGER},
+      plan_extraction_date = #{planExtractionDate,jdbcType=INTEGER},
+      plan_extraction_id = #{planExtractionId,jdbcType=INTEGER},
+      rebate_project_id = #{rebateProjectId,jdbcType=INTEGER},
+      rebate_project_name = #{rebateProjectName,jdbcType=VARCHAR},
+      month_plan_money = #{monthPlanMoney,jdbcType=DECIMAL},
+      year_plan_money = #{yearPlanMoney,jdbcType=DECIMAL},
+      year_plan_abjust_money = #{yearPlanAbjustMoney,jdbcType=DECIMAL},
+      proofreader_money = #{proofreaderMoney,jdbcType=DECIMAL},
+      arrive_bill_money = #{arriveBillMoney,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectRebateMonthPlan" resultMap="BaseResultMap">
+    select rp.id rebate_project_id ,rp.rebate_name rebate_project_name,sum(rc.plan_extraction) month_plan_money,sum(rc.proofreader_money) proofreader_money,sum(rc.arrive_bill_money) arrive_bill_money ,rp.store_id
+    from rebate_project rp
+    left join rebate_car rc on rc.rebate_project_id = rp.id
+    left join car_good_info car on rc.car_id = car.id
+    where rebate_start_date <![CDATA[ <= ]]>  #{endDate}  AND rebate_end_date <![CDATA[ >= ]]> #{startDate} and rp.store_id = #{storeId}
+    and (car.first_dms_date between #{startDate} and #{endDate} or car.full_pay_date between #{startDate} and #{endDate})
+    group by rp.id
+  </select>
+
+
+</mapper>

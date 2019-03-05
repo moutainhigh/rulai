@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.product.InsurerMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.product.Insurer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="contactor" jdbcType="VARCHAR" property="contactor" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="rebate_ratio" jdbcType="DECIMAL" property="rebateRatio" />
+    <result column="tax_removal_ratio" jdbcType="DECIMAL" property="taxRemovalRatio" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, enabled, contactor, phone, address, remark, create_time, modify_time, operator_id, 
+    store_id, rebate_ratio, tax_removal_ratio, state, cost
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.product.InsurerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from insurer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from insurer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from insurer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.product.Insurer" useGeneratedKeys="true" keyProperty="id">
+    insert into insurer (id, name, enabled, 
+      contactor, phone, address, 
+      remark, create_time, modify_time, 
+      operator_id, store_id, rebate_ratio, 
+      tax_removal_ratio, state, cost
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
+      #{contactor,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{operatorId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{rebateRatio,jdbcType=DECIMAL}, 
+      #{taxRemovalRatio,jdbcType=DECIMAL}, #{state,jdbcType=INTEGER}, #{cost,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.product.Insurer" useGeneratedKeys="true" keyProperty="id">
+    insert into insurer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="contactor != null">
+        contactor,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="rebateRatio != null">
+        rebate_ratio,
+      </if>
+      <if test="taxRemovalRatio != null">
+        tax_removal_ratio,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="contactor != null">
+        #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateRatio != null">
+        #{rebateRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="taxRemovalRatio != null">
+        #{taxRemovalRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.product.Insurer">
+    update insurer
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="contactor != null">
+        contactor = #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="rebateRatio != null">
+        rebate_ratio = #{rebateRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="taxRemovalRatio != null">
+        tax_removal_ratio = #{taxRemovalRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.product.Insurer">
+    update insurer
+    set name = #{name,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      contactor = #{contactor,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      rebate_ratio = #{rebateRatio,jdbcType=DECIMAL},
+      tax_removal_ratio = #{taxRemovalRatio,jdbcType=DECIMAL},
+      state = #{state,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+    select id,name,contactor,phone,address,enabled,remark,tax_removal_ratio taxRemovalRatio,rebate_ratio rebateRatio,cost
+    from
+    insurer
+    where 1 = 1
+    <if test="name != null and name !=''">
+      AND name LIKE CONCAT('%',#{name},'%')
+    </if>
+    <if test="enabled != null">
+      AND enabled = #{enabled}
+    </if>
+    <if test="storeId != null">
+      AND store_id = #{storeId}
+    </if>
+    order by id desc
+  </select>
+
+  <!-- 查保险公司 wp -->
+  <select id="selectInsure" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from insurer WHERE enabled=1 AND state=1
+    <if test="_parameter !=null">
+      AND store_id = #{_parameter,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!-- 查保险公司下的险种 wp -->
+  <select id="selectInsurerType" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT
+    i.name iname,
+    i.id iid,
+    it.name itname,
+    it.id itid,
+    it.parent_id pids
+    FROM insurer i
+    RIGHT JOIN insurance_connection ic
+    ON ic.insurer_id = i.id
+    LEFT JOIN insurance_type it
+    ON it.id=ic.insurance_id
+    WHERE i.enabled=1
+    AND it.enabled=1
+    AND i.state=1
+    <if test="storeId !=null">
+      AND i.store_id=#{storeId,jdbcType=INTEGER}
+    </if>
+    <if test="insurerId !=null">
+      AND i.id=#{insurerId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!-- 保险公司及对应的险种 wp -->
+  <select id="selectInsurerAndType" resultMap="BaseResultMap">
+    SELECT
+    i.id id,
+    i.name name,
+    it.id itid,
+    it.name itname,
+    it.parent_id pids,
+    it.self_defined self_defined,
+    ic.ratio, ratio
+    FROM insurer i
+    LEFT JOIN insurance_connection ic
+    ON ic.insurer_id = i.id
+    LEFT JOIN insurance_type it
+    ON it.id=ic.insurance_id
+    WHERE i.enabled=1
+    AND it.enabled=1
+    AND i.state=1
+    AND it.level=1
+  </select>
+</mapper>

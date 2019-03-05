@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarOutApplicationMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarOutApplication">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="distributor_store_id" jdbcType="INTEGER" property="distributorStoreId"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="applicate_num" jdbcType="INTEGER" property="applicateNum"/>
+        <result column="applicate_date" jdbcType="TIMESTAMP" property="applicateDate"/>
+        <result column="plan_out_date" jdbcType="TIMESTAMP" property="planOutDate"/>
+        <result column="plan_return_date" jdbcType="TIMESTAMP" property="planReturnDate"/>
+        <result column="destination" jdbcType="VARCHAR" property="destination"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="applicate_status" jdbcType="INTEGER" property="applicateStatus"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operatorId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="approval_status" jdbcType="TINYINT" property="approvalStatus"/>
+        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+        <result column="approval_time" jdbcType="TIMESTAMP" property="approvalTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.unicdata.entity.car.CarOutApplication">
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, distributor_store_id, code, name, applicate_num, applicate_date, plan_out_date, 
+    plan_return_date, destination, type, applicate_status, operator_id, create_date, 
+    update_date, status, approval_status, employee_id, approval_time
+  </sql>
+    <sql id="Blob_Column_List">
+    remark
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from car_out_application
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_out_application
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.car.CarOutApplication">
+    insert into car_out_application (id, distributor_store_id, code, 
+      name, applicate_num, applicate_date, 
+      plan_out_date, plan_return_date, destination, 
+      type, applicate_status, operator_id, 
+      create_date, update_date, status, 
+      approval_status, employee_id, approval_time, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{applicateNum,jdbcType=INTEGER}, #{applicateDate,jdbcType=TIMESTAMP}, 
+      #{planOutDate,jdbcType=TIMESTAMP}, #{planReturnDate,jdbcType=TIMESTAMP}, #{destination,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{applicateStatus,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{approvalStatus,jdbcType=TINYINT}, #{employeeId,jdbcType=INTEGER}, #{approvalTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarOutApplication" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into car_out_application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="distributorStoreId != null">
+                distributor_store_id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="applicateNum != null">
+                applicate_num,
+            </if>
+            <if test="applicateDate != null">
+                applicate_date,
+            </if>
+            <if test="planOutDate != null">
+                plan_out_date,
+            </if>
+            <if test="planReturnDate != null">
+                plan_return_date,
+            </if>
+            <if test="destination != null">
+                destination,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="applicateStatus != null">
+                applicate_status,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="approvalStatus != null">
+                approval_status,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="approvalTime != null">
+                approval_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="distributorStoreId != null">
+                #{distributorStoreId,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="applicateNum != null">
+                #{applicateNum,jdbcType=INTEGER},
+            </if>
+            <if test="applicateDate != null">
+                #{applicateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planOutDate != null">
+                #{planOutDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planReturnDate != null">
+                #{planReturnDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="destination != null">
+                #{destination,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="applicateStatus != null">
+                #{applicateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="approvalStatus != null">
+                #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="approvalTime != null">
+                #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarOutApplication">
+        update car_out_application
+        <set>
+            <if test="distributorStoreId != null">
+                distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="applicateNum != null">
+                applicate_num = #{applicateNum,jdbcType=INTEGER},
+            </if>
+            <if test="applicateDate != null">
+                applicate_date = #{applicateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planOutDate != null">
+                plan_out_date = #{planOutDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planReturnDate != null">
+                plan_return_date = #{planReturnDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="destination != null">
+                destination = #{destination,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="applicateStatus != null">
+                applicate_status = #{applicateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="approvalStatus != null">
+                approval_status = #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="approvalTime != null">
+                approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unicdata.entity.car.CarOutApplication">
+    update car_out_application
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      applicate_num = #{applicateNum,jdbcType=INTEGER},
+      applicate_date = #{applicateDate,jdbcType=TIMESTAMP},
+      plan_out_date = #{planOutDate,jdbcType=TIMESTAMP},
+      plan_return_date = #{planReturnDate,jdbcType=TIMESTAMP},
+      destination = #{destination,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      applicate_status = #{applicateStatus,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      approval_status = #{approvalStatus,jdbcType=TINYINT},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarOutApplication">
+    update car_out_application
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      applicate_num = #{applicateNum,jdbcType=INTEGER},
+      applicate_date = #{applicateDate,jdbcType=TIMESTAMP},
+      plan_out_date = #{planOutDate,jdbcType=TIMESTAMP},
+      plan_return_date = #{planReturnDate,jdbcType=TIMESTAMP},
+      destination = #{destination,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      applicate_status = #{applicateStatus,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      approval_status = #{approvalStatus,jdbcType=TINYINT},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectListByStore" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from car_out_application
+        where distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+        and status = 1
+        order by create_date desc
+    </select>
+    <!-- 外出申请单列表 wp -->
+    <select id="selectCarOutApply" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        id,
+        code,
+        name,
+        DATE_FORMAT(coa.plan_out_date,'%Y-%m-%d %H:%i') plan_out_date,
+        DATE_FORMAT(coa.plan_return_date,'%Y-%m-%d %H:%i') plan_return_date,
+        applicate_num,
+        destination,
+        CASE WHEN
+        applicate_status IS NULL
+        THEN 1
+        WHEN applicate_status=1
+        THEN 2
+        WHEN applicate_status=2
+        THEN 1
+        END AS
+        outstore_status
+        FROM
+        car_out_application coa
+        WHERE coa.approval_status=1
+        <if test="planOutDay != null">
+            and DATE_FORMAT(coa.plan_out_date,'%Y-%m-%d')=DATE_FORMAT(#{planOutDay},'%Y-%m-%d')
+        </if>
+        <if test="storeId!= null">
+            and distributor_store_id=#{storeId}
+        </if>
+    </select>
+    <!-- 查外出订单下的汽车列表 wp -->
+    <select id="selectCarListByApply" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        c.id,
+        c.distributor_store_id,
+        c.family_id,
+        c.vehicle_id,
+        c.brand_id,
+        c.vin,
+        c.engine_num,
+        c.storage_status,
+        c.warehouse_id,
+        c.storage_id,
+        c.decorations_out_id,
+        c.decorations_out_name,
+        c.decorations_in_id,
+        c.decorations_in_name,
+        c.new_boutique_status,
+        c.optional_package_status,
+        c.in_storage_day,
+        (SELECT cw.name from car_warehouse cw WHERE cw.id=c.warehouse_id) cangku_name,
+        (SELECT name FROM car_storage cs WHERE cs.id=c.storage_id) kuwei,
+        cvc.`name` AS chexing_name,
+        cf.`name` AS chexi_name,
+        cb.`name` AS pingpai_name
+        FROM car_out co
+        LEFT JOIN car_good_info c
+        ON c.id=co.car_good_id
+        LEFT JOIN car_vehicle_conf cvc
+        ON cvc.id=c.vehicle_id
+        LEFT JOIN car_family cf
+        ON cf.id=cvc.family_id
+        LEFT JOIN car_brand cb
+        ON cb.id=cf.brand_id
+        WHERE co.status=1
+        <if test="applicationId != null and applicationId !=''">
+            and co.application_id=#{applicationId}
+        </if>
+        <if test="storeId != null and storeId !=''">
+            and co.distributor_store_id=#{storeId}
+        </if>
+    </select>
+    <select id="listCreateBy" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from car_out_application
+        where distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+        and status = 1 AND operator_id = #{createId}
+        <if test="createTime != null and createTime !=''">
+            AND DATE_FORMAT(create_date,'%Y-%m-%d') = #{createTime}
+        </if>
+        <if test="approvalStatus != null and approvalStatus !=''">
+            AND approval_status = #{approvalStatus}
+        </if>
+        order by create_date desc
+    </select>
+
+    <select id="selectListByParam" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from car_out_application
+        where distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+        and status = 1
+        <if test="createTime != null">
+            AND DATE_FORMAT(create_date,'%Y-%m-%d') = #{createTime}
+        </if>
+        <if test="approvalStatus != null">
+            AND approval_status = #{approvalStatus}
+        </if>
+        order by create_date desc
+    </select>
+</mapper>

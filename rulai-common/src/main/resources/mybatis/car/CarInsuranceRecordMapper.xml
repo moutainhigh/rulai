@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarInsuranceRecordMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarInsuranceRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="test_car_id" jdbcType="INTEGER" property="testCarId" />
+    <result column="insurer_id" jdbcType="INTEGER" property="insurerId" />
+    <result column="insurance_type_id" jdbcType="INTEGER" property="insuranceTypeId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="insurance_money" jdbcType="DOUBLE" property="insuranceMoney" />
+    <result column="sali_pic" jdbcType="VARCHAR" property="saliPic" />
+    <result column="commercial_pic" jdbcType="VARCHAR" property="commercialPic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, test_car_id, insurer_id, insurance_type_id, price, operator_id, create_date, 
+    update_date, status, end_time, insurance_money, sali_pic, commercial_pic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_insurance_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_insurance_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarInsuranceRecord">
+    insert into car_insurance_record (id, test_car_id, insurer_id, 
+      insurance_type_id, price, operator_id, 
+      create_date, update_date, status, 
+      end_time, insurance_money, sali_pic, 
+      commercial_pic)
+    values (#{id,jdbcType=INTEGER}, #{testCarId,jdbcType=INTEGER}, #{insurerId,jdbcType=INTEGER}, 
+      #{insuranceTypeId,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{operatorId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{endTime,jdbcType=DATE}, #{insuranceMoney,jdbcType=DOUBLE}, #{saliPic,jdbcType=VARCHAR}, 
+      #{commercialPic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarInsuranceRecord">
+    insert into car_insurance_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testCarId != null">
+        test_car_id,
+      </if>
+      <if test="insurerId != null">
+        insurer_id,
+      </if>
+      <if test="insuranceTypeId != null">
+        insurance_type_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="insuranceMoney != null">
+        insurance_money,
+      </if>
+      <if test="saliPic != null">
+        sali_pic,
+      </if>
+      <if test="commercialPic != null">
+        commercial_pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testCarId != null">
+        #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="insurerId != null">
+        #{insurerId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceTypeId != null">
+        #{insuranceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="insuranceMoney != null">
+        #{insuranceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="saliPic != null">
+        #{saliPic,jdbcType=VARCHAR},
+      </if>
+      <if test="commercialPic != null">
+        #{commercialPic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarInsuranceRecord">
+    update car_insurance_record
+    <set>
+      <if test="testCarId != null">
+        test_car_id = #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="insurerId != null">
+        insurer_id = #{insurerId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceTypeId != null">
+        insurance_type_id = #{insuranceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="insuranceMoney != null">
+        insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="saliPic != null">
+        sali_pic = #{saliPic,jdbcType=VARCHAR},
+      </if>
+      <if test="commercialPic != null">
+        commercial_pic = #{commercialPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarInsuranceRecord">
+    update car_insurance_record
+    set test_car_id = #{testCarId,jdbcType=INTEGER},
+      insurer_id = #{insurerId,jdbcType=INTEGER},
+      insurance_type_id = #{insuranceTypeId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=DATE},
+      insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+      sali_pic = #{saliPic,jdbcType=VARCHAR},
+      commercial_pic = #{commercialPic,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByTestCar" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+		cir.price,
+		cir.sali_pic as saliPic,
+		cir.commercial_pic as commercialPic,
+		DATE_FORMAT(cir.create_date,'%Y-%m-%d %H:%i:%s')createDate,
+		DATE_FORMAT(cir.end_time,'%Y-%m-%d %H:%i:%s')endTime,
+		i.name as companyName
+	FROM
+		car_insurance_record cir
+	LEFT JOIN insurer i on cir.insurer_id = i.id
+    where cir.test_car_id = #{testCarId,jdbcType=INTEGER}
+    and cir.status = 1
+    order by cir.create_date desc
+  </select>
+  <!-- 试驾车保险历史记录列 wp -->
+  <select id="selectInsurRecordList" parameterType="integer" resultType="java.util.Map">
+  	SELECT
+	cir.id,
+	cir.test_car_id,
+	cir.insurer_id,
+	cir.insurance_type_id,
+	cir.price,
+	DATE_FORMAT(cir.create_date,'%Y-%m-%d %H:%i:%s') createDate,
+	DATE_FORMAT(cir.end_time,'%Y-%m-%d') end_time,
+	(SELECT name FROM insurer WHERE id=cir.insurer_id) insurer_name
+	FROM car_insurance_record cir
+	WHERE cir.`status`=1
+	AND test_car_id=#{testCarId,jdbcType=INTEGER}
+  </select>
+  <!-- 保险到期提醒 wp -->
+  <select id="selectInsurerRemind" resultType="java.util.Map" parameterType="integer">
+  SELECT 
+		cvc.`name` AS chexing_name,
+		cf.`name` AS chexi_name,
+		cb.`name` AS pingpai_name,
+		DATE_FORMAT(cir.end_time,'%Y-%m-%d') end_time,
+		cir.test_car_id,
+		TIMESTAMPDIFF(DAY,NOW(),cir.end_time) valid_time,
+		c.license_num
+		FROM car_insurance_record  cir
+		LEFT JOIN car_test_info c
+		ON c.id=cir.test_car_id
+		LEFT JOIN car_vehicle_conf cvc
+		ON cvc.id=c.vehicle_id
+		LEFT JOIN car_family cf
+		ON cf.id=cvc.family_id
+		LEFT JOIN car_brand cb 
+		ON cb.id=cf.brand_id
+		WHERE
+		cir.status=1
+		AND TIMESTAMPDIFF(DAY,NOW(),cir.end_time) &lt;=20
+		AND cir.end_time>NOW()
+		<if test="_parameter != null" >
+        AND c.distributor_store_id=#{_parameter}
+        </if>
+		GROUP BY
+		cir.test_car_id,insurer_id,cir.end_time
+  </select>
+  <!-- 变更汽车的保险登记状态 wp -->
+  <update id="updateByCarIdSelective" parameterType="com.unicdata.entity.car.CarInsuranceRecord" >
+    update car_insurance_record
+    <set >
+      <if test="testCarId != null" >
+        test_car_id = #{testCarId,jdbcType=INTEGER},
+      </if>
+      <if test="insurerId != null" >
+        insurer_id = #{insurerId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceTypeId != null" >
+        insurance_type_id = #{insuranceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="insuranceMoney != null" >
+        insurance_money = #{insuranceMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+   		WHERE 
+        test_car_id = #{testCarId,jdbcType=INTEGER}
+        AND insurer_id = #{insurerId,jdbcType=INTEGER}
+        AND insurance_type_id = #{insuranceTypeId,jdbcType=INTEGER}
+  </update>
+  <!-- 查车辆保险记录是否有登记 wp-->
+  <select id="selectExsitRecord" resultType="java.util.Map" parameterType="com.unicdata.entity.car.CarInsuranceRecord">
+  SELECT 
+	id,
+	test_car_id
+	FROM car_insurance_record c
+	WHERE c.status=1
+      AND c.test_car_id=#{testCarId}
+      AND c.insurance_type_id=#{insuranceTypeId}
+  </select>
+  <!-- 变更保额(添加保额) wp-->
+  <update id="updateInsurerMoney" parameterType="java.util.Map">
+  UPDATE car_insurance_record 
+	SET insurance_money=#{insuranceMoney}
+	WHERE status=1
+	AND test_car_id=#{testCarId}
+	AND insurer_id=#{insurerId}
+	AND insurance_type_id=#{insuranceType}
+  </update>
+</mapper>

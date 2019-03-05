@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.CarWashMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.CarWash">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="car_number" jdbcType="VARCHAR" property="carNumber"/>
+        <result column="vin_code" jdbcType="VARCHAR" property="vinCode"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operatorId"/>
+        <result column="store_id" jdbcType="INTEGER" property="storeId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, employee_id, customer_id, customer_name, car_number, vin_code, state, apply_time, 
+    begin_time, end_time, sort, operator_id, store_id
+  </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.boutique.CarWashExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from car_wash
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="pageNumber != null and pageSize != null and pageSize != 0">
+            limit #{pageNumber},#{pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from car_wash
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_wash
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.boutique.CarWash">
+    insert into car_wash (id, employee_id, customer_id, 
+      customer_name, car_number, vin_code, 
+      state, apply_time, begin_time, 
+      end_time, sort, operator_id, 
+      store_id)
+    values (#{id,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{customerName,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, #{vinCode,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{applyTime,jdbcType=TIMESTAMP}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER}, 
+      #{storeId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.CarWash">
+        insert into car_wash
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="carNumber != null">
+                car_number,
+            </if>
+            <if test="vinCode != null">
+                vin_code,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="applyTime != null">
+                apply_time,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="carNumber != null">
+                #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="vinCode != null">
+                #{vinCode,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.CarWash">
+        update car_wash
+        <set>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="carNumber != null">
+                car_number = #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="vinCode != null">
+                vin_code = #{vinCode,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="applyTime != null">
+                apply_time = #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.CarWash">
+    update car_wash
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      vin_code = #{vinCode,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getMaxSort" resultType="Integer">
+    select max(sort) from car_wash
+  </select>
+
+    <select id="countByExample" parameterType="com.unicdata.entity.boutique.CarWashExample"
+            resultType="java.lang.Integer">
+        select count(*) from car_wash
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+        cw.id,eg.group_name groupName,e.full_name employeeName,cw.customer_name customerName,cw.car_number
+        carNumber,cw.vin_code vinCode,
+        DATE_FORMAT(apply_time,'%Y-%m-%d %H:%i') applyTime,DATE_FORMAT(begin_time,'%Y-%m-%d %H:%i')
+        beginTime,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i') endTime,cw.state
+        from
+        car_wash cw LEFT JOIN employee e ON cw.employee_id = e.id LEFT JOIN employee_group eg ON e.department_id = eg.id
+        where 1 = 1
+        <if test="name != null and name !=''">
+            AND customer_name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="beginTime != null and beginTime !=''">
+            AND apply_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            AND apply_time &lt; #{endTime}
+        </if>
+        <if test="state != null">
+            AND state = #{state}
+        </if>
+        <if test="state == null">
+            AND state in(0,1)
+        </if>
+        ORDER BY cw.state ASC,cw.sort DESC,cw.apply_time ASC
+    </select>
+
+    <select id="selectCarWashList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        cw.id,
+        eg.group_name,
+        e.full_name,
+        cw.apply_time,
+        cw.begin_time,
+        cw.end_time,
+        cw.state,
+        cw.vin_code,
+        cw.car_number,
+        CONCAT(cb.`name`,cf.`name`) AS carName
+        FROM
+        car_wash cw
+        LEFT JOIN employee e ON cw.employee_id = e.id
+        LEFT JOIN employee_group eg ON e.department_id = eg.id
+        LEFT JOIN car_good_info cg ON cw.vin_code = cg.vin
+        LEFT JOIN car_brand cb ON cb.id = cg.brand_id
+        LEFT JOIN car_family cf ON cg.family_id = cf.id
+        WHERE 1=1
+        <if test="storeId != null">
+            AND cw.store_id = #{storeId}
+        </if>
+        <if test="null != mouthApplyTime">
+            AND date_format(cw.apply_time, '%Y-%m') = date_format(#{mouthApplyTime}, '%Y-%m')
+        </if>
+        <if test="null != applyTime">
+            AND date_format(cw.apply_time, '%Y-%m-%d') = date_format(#{applyTime}, '%Y-%m-%d')
+        </if>
+        <if test="state != null">
+            AND cw.state = #{state}
+        </if>
+        ORDER BY cw.apply_time DESC
+    </select>
+
+    <select id="selectMouthCarWashSum" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        COUNT(1) as s,
+        date_format(cw.apply_time, '%Y-%m-%d') AS t
+        FROM
+        car_wash cw
+        WHERE 1=1
+        <if test="storeId != null">
+            AND cw.store_id = #{storeId}
+        </if>
+        <if test="null != mouthApplyTime">
+            AND date_format(cw.apply_time, '%Y-%m') = date_format(#{mouthApplyTime}, '%Y-%m')
+        </if>
+        <if test="state != null">
+            AND cw.state = #{state}
+        </if>
+        GROUP BY t
+    </select>
+    <!--获取洗车数量-->
+    <select id="countByToDay" parameterType="com.unicdata.entity.boutique.CarWash" resultType="java.lang.Integer">
+        select count(1) from car_wash cw
+        WHERE 1=1
+        <if test="state != null">
+            AND cw.state = #{state}
+        </if>
+        <if test="storeId != null">
+            AND cw.store_id = #{storeId}
+        </if>
+        <if test="null != applyTime">
+            AND date_format(cw.apply_time, '%Y-%m-%d') = date_format(#{applyTime}, '%Y-%m-%d')
+        </if>
+    </select>
+</mapper>

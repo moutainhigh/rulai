@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.system.EmployeeMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.system.Employee">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code_num" property="codeNum" jdbcType="VARCHAR"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="full_name" property="fullName" jdbcType="VARCHAR"/>
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="cust_mail" property="custMail" jdbcType="VARCHAR"/>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"/>
+        <result column="store_id" property="storeId" jdbcType="INTEGER"/>
+        <result column="user_status" property="userStatus" jdbcType="TINYINT"/>
+        <result column="data_status" property="dataStatus" jdbcType="TINYINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="subjection_type" property="subjectionType" jdbcType="TINYINT"/>
+        <result column="department_id" property="departmentId" jdbcType="TINYINT"/>
+        <result column="department_desc" property="departmentDesc" jdbcType="VARCHAR"/>
+        <result column="post_id" property="postId" jdbcType="INTEGER"/>
+        <result column="post_name" property="postName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP"/>
+        <association property="employeeStatus" javaType="com.unicdata.entity.system.EmployeeStatus">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+            <result column="type" jdbcType="INTEGER" property="type"/>
+            <result column="contact_time" jdbcType="TIMESTAMP" property="contactTime"/>
+        </association>
+        <association property="employeeGroup" javaType="com.unicdata.entity.system.EmployeeGroup">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+            <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+            <result column="sortno" jdbcType="INTEGER" property="sortno"/>
+            <result column="group_type" jdbcType="TINYINT" property="groupType"/>
+            <result column="data_status" jdbcType="TINYINT" property="dataStatus"/>
+            <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, code_num, login_name, pwd, full_name, phone_num, cust_mail, group_id, store_id, 
+    user_status, data_status, create_date, update_date, subjection_type, department_id, 
+    department_desc, post_id, post_name, sex, operation_time
+    </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.system.EmployeeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from employee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.unicdata.entity.system.Employee">
+    insert into employee (id, code_num, login_name, 
+      pwd, full_name, phone_num, 
+      cust_mail, group_id, store_id, 
+      user_status, data_status, create_date, 
+      update_date, subjection_type, department_id, 
+      department_desc, post_id, post_name, 
+      sex, operation_time)
+    values (#{id,jdbcType=INTEGER}, #{codeNum,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{custMail,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{userStatus,jdbcType=TINYINT}, #{dataStatus,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{subjectionType,jdbcType=TINYINT}, #{departmentId,jdbcType=TINYINT}, 
+      #{departmentDesc,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, #{postName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{operationTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true"
+            parameterType="com.unicdata.entity.system.Employee">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="codeNum != null">
+                code_num,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="fullName != null">
+                full_name,
+            </if>
+            <if test="phoneNum != null">
+                phone_num,
+            </if>
+            <if test="custMail != null">
+                cust_mail,
+            </if>
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="userStatus != null">
+                user_status,
+            </if>
+            <if test="dataStatus != null">
+                data_status,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="subjectionType != null">
+                subjection_type,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="departmentDesc != null">
+                department_desc,
+            </if>
+            <if test="postId != null">
+                post_id,
+            </if>
+            <if test="postName != null">
+                post_name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="operationTime != null">
+                operation_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="codeNum != null">
+                #{codeNum,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="custMail != null">
+                #{custMail,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=TINYINT},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="subjectionType != null">
+                #{subjectionType,jdbcType=TINYINT},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=TINYINT},
+            </if>
+            <if test="departmentDesc != null">
+                #{departmentDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="postId != null">
+                #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="postName != null">
+                #{postName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="operationTime != null">
+                #{operationTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.system.Employee">
+        update employee
+        <set>
+            <if test="codeNum != null">
+                code_num = #{codeNum,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                full_name = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                phone_num = #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="custMail != null">
+                cust_mail = #{custMail,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                group_id = #{groupId,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                user_status = #{userStatus,jdbcType=TINYINT},
+            </if>
+            <if test="dataStatus != null">
+                data_status = #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="subjectionType != null">
+                subjection_type = #{subjectionType,jdbcType=TINYINT},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=TINYINT},
+            </if>
+            <if test="departmentDesc != null">
+                department_desc = #{departmentDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="postId != null">
+                post_id = #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="postName != null">
+                post_name = #{postName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="operationTime != null">
+                operation_time = #{operationTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.system.Employee">
+   update employee
+    set code_num = #{codeNum,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      cust_mail = #{custMail,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      user_status = #{userStatus,jdbcType=TINYINT},
+      data_status = #{dataStatus,jdbcType=TINYINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      subjection_type = #{subjectionType,jdbcType=TINYINT},
+      department_id = #{departmentId,jdbcType=TINYINT},
+      department_desc = #{departmentDesc,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      post_name = #{postName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="selectByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where login_name = #{loginName,jdbcType=VARCHAR}
+    </select>
+    <insert id="distributionRole">
+    INSERT INTO employee_role (employee_id, role_id) VALUES (#{employeeId}, #{roleId});
+  </insert>
+    <delete id="userDeleteRole">
+    delete from employee_role where employee_id = #{0}
+  </delete>
+    <delete id="delRoleByUser">
+    delete from employee_role where role_id = #{0}
+  </delete>
+    <select id="findEmployeeRole" resultMap="BaseResultMap">
+    select e.* ,group_concat(er.role_id) roleIds from employee e
+    left join employee_role er on e.id = er.employee_id
+    where e.id = #{0}
+  </select>
+    <select id="selectByEmployeeIds" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where 1=1
+        <if test="groupId != null">
+            and group_id = #{groupId,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            and store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+
+
+    </select>
+
+    <!-- 获取前台空闲销售/DCC wp -->
+    <select id="selectEmployeAndGroup" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        e.id eid,
+        e.login_name,
+        e.code_num,
+        e.full_name,
+        e.post_name,
+        eg.group_name,
+        eg.id egid,
+        DATE_FORMAT(e.operation_time,'%Y-%m-%d %H:%i:%s') operation_time,
+        es.type
+        FROM
+        employee_group eg
+        RIGHT JOIN employee e ON e.department_id=eg.id
+        LEFT JOIN employee_status es ON es.employee_id=e.id
+        WHERE e.data_status=1
+        AND eg.data_status=1
+        AND e.user_status=1
+        AND es.type IN
+        <foreach item="typeList" index="index" collection="typeList"
+                 open="(" separator="," close=")">#{typeList}
+        </foreach>
+        <if test="storeId != null">
+            and e.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="postName != null">
+            and e.post_name like CONCAT('%',#{postName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="name != null">
+            and e.full_name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+       		AND e.id NOT IN(<!-- 过滤掉有任务空闲的销售顾问 wp-->
+			SELECT
+			CASE 
+			WHEN pf.replace_employee_id IS NULL
+			THEN pf.employee_id
+			WHEN pf.replace_employee_id IS NOT NULL
+			THEN pf.replace_employee_id
+			END AS empid
+			FROM passenger_flow pf
+			WHERE pf.status IN (1,2)
+			AND DATE_FORMAT(pf.create_time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+			)
+        ORDER BY e.operation_time ASC ,e.id ASC
+    </select>
+    <!--根据岗位名称获取销售顾问-->
+    <select id="selectEmployeByPostName" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        e.id eid,
+        e.login_name,
+        e.code_num,
+        e.full_name,
+        e.post_name,
+        eg.group_name,
+        eg.id egid
+        FROM
+        employee e
+        RIGHT JOIN employee_group eg ON e.department_id = eg.id
+        AND eg.data_status = 1
+        LEFT JOIN employee_status es ON es.employee_id = e.id
+        WHERE
+        e.data_status = 1
+        AND e.user_status = 1
+        <if test="storeId != null">
+            and e.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="postNameList != null">
+            AND post_name IN
+            <foreach collection="postNameList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <choose>
+            <when test="status != null and postName != null ">
+                AND e.post_name = #{postName,jdbcType=VARCHAR}
+                AND es.type = #{status,jdbcType=INTEGER}
+            </when>
+            <when test="status == null and postName != null ">
+                and e.post_name = #{postName,jdbcType=VARCHAR}
+            </when>
+            <otherwise></otherwise>
+        </choose>
+        <if test="name != null">
+            and e.full_name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectCustomersByRoleId" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        e.*
+        FROM
+        employee e
+        LEFT JOIN employee_role er ON e.id = er.employee_id
+        WHERE 1=1
+        AND data_status=1
+        <if test="storeId != null">
+            AND e.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="roleId != null">
+            AND er.role_id = #{roleId,jdbcType=INTEGER}
+        </if>
+        <if test="postName != null">
+            AND e.post_name like CONCAT('%',#{postName,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectAllUserByPerName" resultMap="BaseResultMap">
+   	SELECT
+	e.*
+	FROM
+		employee e
+	LEFT JOIN employee_role er ON e.id = er.employee_id
+	LEFT JOIN role_permission r ON er.role_id = r.role_id
+	LEFT JOIN permissions p ON r.permission_id = p.id  
+	WHERE
+		e.store_id = #{storeId,jdbcType=INTEGER} AND p.permission_name = #{perName,jdbcType=VARCHAR} 
+   
+   </select>
+    <!-- 获取财务角色的人员（盘点） wp -->
+    <select id="selectPanDianEmps" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        e.*
+        FROM
+        employee e
+        LEFT JOIN employee_status es
+        ON es.employee_id=e.id
+        WHERE e.post_name LIKE CONCAT('%',#{postName,jdbcType=VARCHAR},'%')
+        AND e.store_id = #{storeId,jdbcType=INTEGER}
+        AND es.type = 0
+    </select>
+    <!-- 变更销售顾问状态 wp -->
+    <update id="updateEmpStatus" parameterType="java.util.Map">
+	UPDATE employee_status
+	SET type=#{type}
+	WHERE employee_id=#{employeeId}
+    </update>
+    <update id="updateByPostId">
+        update employee set post_name = #{postName} where post_id = #{postId}
+    </update>
+    <!-- 我的信息 wp -->
+    <select id="myInfo" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT 
+	e.id,
+	e.full_name fullName,
+	e.post_name postName,
+	es.type
+	FROM employee e
+	LEFT JOIN employee_status es
+	ON es.employee_id=e.id
+	WHERE e.id=#{employeeId}
+    </select>
+    <update id="updateEmpStatusByPostName" parameterType="java.lang.String">
+		UPDATE employee_status
+		SET type=0
+	WHERE employee_id in (SELECT id FROM employee WHERE post_name = #{postName})
+    </update>
+    <!-- 查询门店某个岗位的员工列表-->
+    <select id="selectByParam" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT <include refid="Base_Column_List"/> FROM employee WHERE post_name = #{postName} AND store_id = #{storeId}
+    </select>
+</mapper>

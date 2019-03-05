@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.approval.ApprovalCusMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.approval.ApprovalCus">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cus_id" jdbcType="INTEGER" property="cusId"/>
+        <result column="approval_type" jdbcType="TINYINT" property="approvalType"/>
+        <result column="apply_reason" jdbcType="VARCHAR" property="applyReason"/>
+        <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime"/>
+        <result column="approval_status" jdbcType="TINYINT" property="approvalStatus"/>
+        <result column="approval_time" jdbcType="TIMESTAMP" property="approvalTime"/>
+        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+        <result column="data_status" jdbcType="TINYINT" property="dataStatus"/>
+        <result column="approve_id" jdbcType="INTEGER" property="approveId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cus_id, approval_type, apply_reason, apply_time, approval_status, approval_time, 
+    employee_id, data_status,approve_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from approval_cus
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByCusId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from approval_cus
+        where cus_id = #{cusId,jdbcType=INTEGER} AND data_status=1 ORDER BY create_time DESC
+    </select>
+    <!-- 获取客户审批条数 -->
+    <select id="getApprovalCusNum" parameterType="com.unicdata.entity.approval.ApprovalCus"
+            resultType="java.lang.Integer">
+        SELECT  IFNULL(COUNT(1), 0) num FROM (
+        select id from approval_cus
+        where data_status = 1
+        <if test="null != employeeId">
+            AND employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="null != approvalStatus">
+            AND (
+            approval_status = #{approvalStatus,jdbcType=INTEGER}
+            or DATE_FORMAT(apply_time,'%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')
+            or DATE_FORMAT(approval_time,'%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')
+            )
+        </if>
+        GROUP BY cus_id )a
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from approval_cus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.approval.ApprovalCus">
+    insert into approval_cus (id, cus_id, approval_type, 
+      apply_reason, apply_time, approval_status, 
+      approval_time, employee_id, data_status,approve_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{cusId,jdbcType=INTEGER}, #{approvalType,jdbcType=TINYINT}, 
+      #{applyReason,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{approvalStatus,jdbcType=TINYINT}, 
+      #{approvalTime,jdbcType=TIMESTAMP}, #{employeeId,jdbcType=INTEGER}, #{dataStatus,jdbcType=TINYINT}
+      , #{approveId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.approval.ApprovalCus">
+        insert into approval_cus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cusId != null">
+                cus_id,
+            </if>
+            <if test="approvalType != null">
+                approval_type,
+            </if>
+            <if test="applyReason != null">
+                apply_reason,
+            </if>
+            <if test="applyTime != null">
+                apply_time,
+            </if>
+            <if test="approvalStatus != null">
+                approval_status,
+            </if>
+            <if test="approvalTime != null">
+                approval_time,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="dataStatus != null">
+                data_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="cusId != null">
+                #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="approvalType != null">
+                #{approvalType,jdbcType=TINYINT},
+            </if>
+            <if test="applyReason != null">
+                #{applyReason,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalStatus != null">
+                #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalTime != null">
+                #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.approval.ApprovalCus">
+        update approval_cus
+        <set>
+            <if test="cusId != null">
+                cus_id = #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="approvalType != null">
+                approval_type = #{approvalType,jdbcType=TINYINT},
+            </if>
+            <if test="applyReason != null">
+                apply_reason = #{applyReason,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                apply_time = #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalStatus != null">
+                approval_status = #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalTime != null">
+                approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                data_status = #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approveId != null">
+                approve_id = #{approveId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.approval.ApprovalCus">
+     update approval_cus
+        set cus_id = #{cusId,jdbcType=INTEGER},
+        approval_type = #{approvalType,jdbcType=TINYINT},
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+        approval_status = #{approvalStatus,jdbcType=TINYINT},
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+        approve_id = #{approveId,jdbcType=INTEGER},
+        employee_id = #{employeeId,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        data_status = #{dataStatus,jdbcType=TINYINT}
+        where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--展厅经理或销售经理通过门店id获取审批人员-->
+    <select id="selectByCodeNum" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        ac.id AS approvalId,
+        ac.apply_time,
+        ac.approval_time,
+        ac.cus_id,
+        ac.approval_type,
+        ac.approval_status,
+        CONCAT( cb.`name`,cf.`name`) as carName,
+        c.`name` AS customerName,
+        c.level,
+        c.industry,
+        ac.apply_reason,
+        e.full_name,
+        e.id as employeeId,
+        c.phone,
+        TO_DAYS(NOW()) - TO_DAYS(c.create_time) AS numberDays,
+        c.create_time
+        FROM
+        approval_cus ac
+        LEFT JOIN customer c ON ac.cus_id = c.id
+        LEFT JOIN employee e ON e.id = ac.employee_id
+        LEFT JOIN car_family cf ON c.intention_family_id = cf.id
+        LEFT JOIN car_brand cb ON cb.id = cf.brand_id
+        WHERE
+        e.store_id=#{storeId,jdbcType=INTEGER}
+        <if test="employeeId != null">
+            AND ac.employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="applyTime != null and approvalStatus != null">
+            AND( DATE_FORMAT(ac.apply_time,'%Y-%m-%d') =DATE_FORMAT(#{applyTime}, '%Y-%m-%d')
+            OR DATE_FORMAT(ac.approval_time,'%Y-%m-%d') =DATE_FORMAT(#{applyTime}, '%Y-%m-%d')
+            OR ac.approval_status = #{approvalStatus,jdbcType=TINYINT})
+        </if>
+        AND ac.data_status = 1
+        AND e.user_status=1
+        AND e.data_status=1
+        AND ac.apply_time IN (
+        SELECT
+        MAX(acc.apply_time)
+        FROM
+        approval_cus acc
+        LEFT JOIN customer c ON acc.cus_id = c.id
+        LEFT JOIN employee e ON e.id = acc.employee_id
+        WHERE e.store_id = #{storeId,jdbcType=INTEGER}
+        AND acc.data_status = 1
+        AND e.user_status = 1
+        AND e.data_status = 1
+        GROUP BY
+        acc.cus_id
+        )
+        ORDER BY ac.apply_time DESC
+    </select>
+
+    <select id="selectApprovalDetailsById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        c.id,
+        c.`name` AS customerName,
+        c.phone,
+        TO_DAYS(NOW()) - TO_DAYS(c.create_time) AS numberDays,
+        c.create_time,
+        c.integrity,
+        c.sex,
+        cf.`name` AS carFamilyName,
+        CONCAT_WS(
+        ci.city_name,
+        p.province_name,
+        d.district_name
+        ) AS area,
+        c.owned_car,
+        c.license_plate,
+        dy.resource_value,
+        c.`usage`,
+        c.attention_car_one,
+        c.attention_car_two,
+        c.attention_car_three,
+        c.`level`,
+        IFNULL(diy.resource_value,'') AS contactTime
+        FROM
+        customer c
+        LEFT JOIN car_family cf ON cf.id = c.intention_family_id
+        LEFT JOIN province p ON p.id = c.province_id
+        LEFT JOIN city ci ON ci.id = c.city_id
+        LEFT JOIN district d ON d.id = c.district_id
+        <!--3渠道来源4信息来源网站 -->
+        LEFT JOIN dictionary dy ON dy.resource_key = c.channel AND dy.type=3
+        LEFT JOIN dictionary diy ON diy.resource_key = c.contact_time AND diy.type=6
+        WHERE 1=1
+        <if test="id != null">
+            AND c.id=#{id,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        ac.id approvalId,
+        c.id customerId,
+        c. NAME cusName,
+        c.phone cusPhone,
+        CASE c.sex
+        WHEN 0 THEN
+        '男'
+        WHEN 1 THEN
+        '女'
+        ELSE
+        ''
+        END AS sex,
+        c.`level`,
+        cf.`name` intentionVehicleName,
+        ac.apply_reason applyReason,
+        e.full_name employeeName,
+        DATE_FORMAT(ac.apply_time,'%Y-%m-%d %H:%m:%s') applyTime,
+        ac.approval_status approvalStatus
+        FROM
+        approval_cus ac
+        LEFT JOIN customer c ON ac.cus_id = c.id
+        LEFT JOIN car_family cf ON c.intention_family_id = cf.id
+        LEFT JOIN employee e ON ac.employee_id = e.id
+        WHERE
+        1=1
+        <if test="approvalType != null">
+            AND ac.approval_type=#{approvalType,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            AND e.store_id=#{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="employeeId != null">
+            AND ac.employee_id=#{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="applyTime != null">
+            AND DATE_FORMAT(ac.apply_time,'%Y-%m-%d') =DATE_FORMAT(#{applyTime}, '%Y-%m-%d')
+        </if>
+        ORDER BY ac.apply_time ASC
+    </select>
+</mapper>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarAllotApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarAllotApplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="distributor_store_id" property="distributorStoreId" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="allot_num" property="allotNum" jdbcType="INTEGER" />
+    <result column="operate_date" property="operateDate" jdbcType="TIMESTAMP" />
+    <result column="to_store_name" property="toStoreName" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="operate_status" property="operateStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.unicdata.entity.car.CarAllotApplication" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, distributor_store_id, code, name, type, allot_num, operate_date, to_store_name, 
+    linkman, link_phone, operator_id, create_date, update_date, status, operate_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_allot_application
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_allot_application
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarAllotApplication" >
+    insert into car_allot_application (id, distributor_store_id, code, 
+      name, type, allot_num, 
+      operate_date, to_store_name, linkman, 
+      link_phone, operator_id, create_date, 
+      update_date, status, operate_status, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{allotNum,jdbcType=INTEGER}, 
+      #{operateDate,jdbcType=TIMESTAMP}, #{toStoreName,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{linkPhone,jdbcType=VARCHAR}, #{operatorId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{operateStatus,jdbcType=INTEGER}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarAllotApplication" useGeneratedKeys="true" keyProperty="id">
+    insert into car_allot_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="distributorStoreId != null" >
+        distributor_store_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="allotNum != null" >
+        allot_num,
+      </if>
+      <if test="operateDate != null" >
+        operate_date,
+      </if>
+      <if test="toStoreName != null" >
+        to_store_name,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operateStatus != null" >
+        operate_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributorStoreId != null" >
+        #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="allotNum != null" >
+        #{allotNum,jdbcType=INTEGER},
+      </if>
+      <if test="operateDate != null" >
+        #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toStoreName != null" >
+        #{toStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operateStatus != null" >
+        #{operateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarAllotApplication" >
+    update car_allot_application
+    <set >
+      <if test="distributorStoreId != null" >
+        distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="allotNum != null" >
+        allot_num = #{allotNum,jdbcType=INTEGER},
+      </if>
+      <if test="operateDate != null" >
+        operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toStoreName != null" >
+        to_store_name = #{toStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operateStatus != null" >
+        operate_status = #{operateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unicdata.entity.car.CarAllotApplication" >
+    update car_allot_application
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      allot_num = #{allotNum,jdbcType=INTEGER},
+      operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      to_store_name = #{toStoreName,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      operate_status = #{operateStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarAllotApplication" >
+    update car_allot_application
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      allot_num = #{allotNum,jdbcType=INTEGER},
+      operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      to_store_name = #{toStoreName,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      operate_status = #{operateStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByStore" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+		caa.id,
+		caa.code,
+		caa.name,
+		caa.type,
+		caa.allot_num as allotNum,
+		DATE_FORMAT(caa.operate_date,'%Y-%m-%d %H:%i:%s') operateDate,
+		caa.linkman,
+		caa.link_phone as linkPhone,
+		caa.status,
+		caa.remark,
+		caa.to_store_name as toStoreName
+	FROM
+		car_allot_application caa
+    where caa.distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+    and caa.status = 1
+    order by caa.create_date desc
+  </select>
+  <!-- 今日调拨申请单 wp -->
+  <select id="selectAllotApplication" resultType="java.util.Map" parameterType="java.util.Map">
+  SELECT 
+	id,
+	distributor_store_id,
+	code,
+	name,
+	allot_num
+	FROM
+	car_allot_application
+	WHERE status=1
+	and DATE_FORMAT(operate_date,'%Y-%m-%d')=DATE_FORMAT(#{operateDate},'%Y-%m-%d')
+	and distributor_store_id=#{storeId}
+  </select>
+  <!-- 今日调拨申请单下的汽车 wp -->
+  <select id="selectCarListByAllot" parameterType="java.util.Map" resultType="java.util.Map">
+  SELECT 
+	c.id,
+	c.distributor_store_id,
+	c.family_id,
+	c.vehicle_id,
+	c.brand_id,
+	c.vin,
+	c.engine_num,
+	c.storage_status,
+	c.warehouse_id,
+	c.storage_id,
+	c.decorations_out_id,
+	c.decorations_out_name,
+	c.decorations_in_id,
+	c.decorations_in_name,
+	c.new_boutique_status,
+	c.optional_package_status,
+	c.in_storage_day,
+	(SELECT cw.name from car_warehouse cw WHERE cw.id=c.warehouse_id) cangku_name,
+	(SELECT name FROM car_storage cs WHERE cs.id=c.storage_id) kuwei, 
+	cvc.`name` AS chexing_name,
+	cf.`name` AS chexi_name,
+	cb.`name` AS pingpai_name,
+	caa.code,
+	CASE WHEN
+	c.storage_status IN(3,4,5,6)
+	THEN 2
+	ELSE 1
+	END AS car_outstore_status 
+	FROM car_allot_application caa
+	RIGHT JOIN 
+	car_allot ca
+	ON ca.application_id=caa.id
+	LEFT JOIN car_good_info c
+	ON c.id=ca.car_good_id
+	LEFT JOIN car_vehicle_conf cvc
+	ON cvc.id=c.vehicle_id
+	LEFT JOIN car_family cf
+	ON cf.id=cvc.family_id
+	LEFT JOIN car_brand cb 
+	ON cb.id=cf.brand_id
+	WHERE 
+	ca.application_id=#{applicationId}
+  </select>
+</mapper>

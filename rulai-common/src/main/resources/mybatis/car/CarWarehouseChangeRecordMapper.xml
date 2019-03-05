@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarWarehouseChangeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="distributor_store_id" jdbcType="INTEGER" property="distributorStoreId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="operate_date" jdbcType="TIMESTAMP" property="operateDate" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distributor_store_id, code, name, operate_date, operator_id, create_date, update_date, 
+    status
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_warehouse_change_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_warehouse_change_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    insert into car_warehouse_change_record (id, distributor_store_id, code, 
+      name, operate_date, operator_id, 
+      create_date, update_date, status, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{operateDate,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarWarehouseChangeRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into car_warehouse_change_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distributorStoreId != null">
+        distributor_store_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributorStoreId != null">
+        #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    update car_warehouse_change_record
+    <set>
+      <if test="distributorStoreId != null">
+        distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    update car_warehouse_change_record
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarWarehouseChangeRecord">
+    update car_warehouse_change_record
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectListByStore" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    SELECT
+		<include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+    from car_warehouse_change_record
+    where distributor_store_id = #{distributorStoreId,jdbcType=INTEGER}
+    and status = 1
+    order by create_date desc
+  </select>
+  <select id="selectByRecordId" parameterType="java.lang.Integer" resultType="java.util.Map">
+     SELECT
+		cwa.name as beforeWarehouse,
+		cwb.name as afterWarehouse,
+		csa.name as beforeStorage,
+		csb.name as afterStorage,
+		cgi.vin,
+		cgi.engine_num as engineNum,
+		cgi.family_name as familyName,
+		cgi.vehicle_name as vehicleName,
+		cgi.decorations_out_name as decorationsOutName,
+		cgi.decorations_in_name as decorationsInName
+	FROM
+		car_warehouse_change_record cwcr
+	LEFT JOIN car_warehouse_change cwc on cwc.change_application_id = cwcr.id
+	LEFT JOIN car_warehouse cwa on cwc.before_warehouse_id = cwa.id
+	LEFT JOIN car_warehouse cwb on cwc.after_warehouse_id = cwb.id
+	LEFT JOIN car_storage csa on cwc.before_storage_id = csa.id
+	LEFT JOIN car_storage csb on cwc.after_storage_id = csb.id
+	LEFT JOIN car_good_info cgi on cwc.car_good_id = cgi.id
+    where cwcr.id = #{id,jdbcType=INTEGER}
+    order by cwcr.create_date desc
+  </select>
+</mapper>

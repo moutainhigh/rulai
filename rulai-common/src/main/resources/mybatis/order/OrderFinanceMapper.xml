@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.order.OrderFinanceMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.order.OrderFinance">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="finance_id" jdbcType="INTEGER" property="financeId" />
+    <result column="loan_amount" jdbcType="DECIMAL" property="loanAmount" />
+    <result column="payment_ratio" jdbcType="DECIMAL" property="paymentRatio" />
+    <result column="down_payment" jdbcType="DECIMAL" property="downPayment" />
+    <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="loan_term" jdbcType="INTEGER" property="loanTerm" />
+    <result column="monthly_supply" jdbcType="DECIMAL" property="monthlySupply" />
+    <result column="is_subsidy" jdbcType="INTEGER" property="isSubsidy" />
+    <result column="subsidy_interest" jdbcType="DECIMAL" property="subsidyInterest" />
+    <result column="bond" jdbcType="DECIMAL" property="bond" />
+    <result column="charge_type" jdbcType="TINYINT" property="chargeType" />
+    <result column="charge_ratio" jdbcType="DECIMAL" property="chargeRatio" />
+    <result column="charge" jdbcType="DECIMAL" property="charge" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="loan_status" jdbcType="INTEGER" property="loanStatus" />
+    <result column="loan_date" jdbcType="DATE" property="loanDate" />
+    <result column="apply_date" jdbcType="DATE" property="applyDate" />
+    <result column="mortgage_cost" jdbcType="DECIMAL" property="mortgageCost" />
+    <result column="mortgage_charge" jdbcType="DECIMAL" property="mortgageCharge" />
+    <result column="sum_finance_price" jdbcType="DECIMAL" property="sumFinancePrice" />
+    <result column="donation_amount" jdbcType="DECIMAL" property="donationAmount" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="margin" jdbcType="DECIMAL" property="margin" />
+    <result column="is_gps" jdbcType="INTEGER" property="isGps" />
+    <result column="finance_charge" jdbcType="DECIMAL" property="financeCharge" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, finance_id, loan_amount, payment_ratio, down_payment, loan_rate, interest, 
+    loan_term, monthly_supply, is_subsidy, subsidy_interest, bond, charge_type, charge_ratio, 
+    charge, create_time, loan_status, loan_date, apply_date, mortgage_cost, mortgage_charge, 
+    sum_finance_price, donation_amount, total_amount, margin, is_gps, finance_charge
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.order.OrderFinanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_finance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_finance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_finance
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.order.OrderFinance">
+    insert into order_finance (id, order_id, finance_id, 
+      loan_amount, payment_ratio, down_payment, 
+      loan_rate, interest, loan_term, 
+      monthly_supply, is_subsidy, subsidy_interest, 
+      bond, charge_type, charge_ratio, 
+      charge, create_time, loan_status, 
+      loan_date, apply_date, mortgage_cost, 
+      mortgage_charge, sum_finance_price, donation_amount, 
+      total_amount, margin, is_gps, 
+      finance_charge)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{financeId,jdbcType=INTEGER}, 
+      #{loanAmount,jdbcType=DECIMAL}, #{paymentRatio,jdbcType=DECIMAL}, #{downPayment,jdbcType=DECIMAL}, 
+      #{loanRate,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{loanTerm,jdbcType=INTEGER}, 
+      #{monthlySupply,jdbcType=DECIMAL}, #{isSubsidy,jdbcType=INTEGER}, #{subsidyInterest,jdbcType=DECIMAL}, 
+      #{bond,jdbcType=DECIMAL}, #{chargeType,jdbcType=TINYINT}, #{chargeRatio,jdbcType=DECIMAL}, 
+      #{charge,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{loanStatus,jdbcType=INTEGER}, 
+      #{loanDate,jdbcType=DATE}, #{applyDate,jdbcType=DATE}, #{mortgageCost,jdbcType=DECIMAL}, 
+      #{mortgageCharge,jdbcType=DECIMAL}, #{sumFinancePrice,jdbcType=DECIMAL}, #{donationAmount,jdbcType=DECIMAL}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{margin,jdbcType=DECIMAL}, #{isGps,jdbcType=INTEGER}, 
+      #{financeCharge,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.order.OrderFinance">
+    insert into order_finance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="financeId != null">
+        finance_id,
+      </if>
+      <if test="loanAmount != null">
+        loan_amount,
+      </if>
+      <if test="paymentRatio != null">
+        payment_ratio,
+      </if>
+      <if test="downPayment != null">
+        down_payment,
+      </if>
+      <if test="loanRate != null">
+        loan_rate,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="loanTerm != null">
+        loan_term,
+      </if>
+      <if test="monthlySupply != null">
+        monthly_supply,
+      </if>
+      <if test="isSubsidy != null">
+        is_subsidy,
+      </if>
+      <if test="subsidyInterest != null">
+        subsidy_interest,
+      </if>
+      <if test="bond != null">
+        bond,
+      </if>
+      <if test="chargeType != null">
+        charge_type,
+      </if>
+      <if test="chargeRatio != null">
+        charge_ratio,
+      </if>
+      <if test="charge != null">
+        charge,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="loanStatus != null">
+        loan_status,
+      </if>
+      <if test="loanDate != null">
+        loan_date,
+      </if>
+      <if test="applyDate != null">
+        apply_date,
+      </if>
+      <if test="mortgageCost != null">
+        mortgage_cost,
+      </if>
+      <if test="mortgageCharge != null">
+        mortgage_charge,
+      </if>
+      <if test="sumFinancePrice != null">
+        sum_finance_price,
+      </if>
+      <if test="donationAmount != null">
+        donation_amount,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="margin != null">
+        margin,
+      </if>
+      <if test="isGps != null">
+        is_gps,
+      </if>
+      <if test="financeCharge != null">
+        finance_charge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="financeId != null">
+        #{financeId,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmount != null">
+        #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentRatio != null">
+        #{paymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="downPayment != null">
+        #{downPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRate != null">
+        #{loanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTerm != null">
+        #{loanTerm,jdbcType=INTEGER},
+      </if>
+      <if test="monthlySupply != null">
+        #{monthlySupply,jdbcType=DECIMAL},
+      </if>
+      <if test="isSubsidy != null">
+        #{isSubsidy,jdbcType=INTEGER},
+      </if>
+      <if test="subsidyInterest != null">
+        #{subsidyInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="bond != null">
+        #{bond,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=TINYINT},
+      </if>
+      <if test="chargeRatio != null">
+        #{chargeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="charge != null">
+        #{charge,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanStatus != null">
+        #{loanStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loanDate != null">
+        #{loanDate,jdbcType=DATE},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="mortgageCost != null">
+        #{mortgageCost,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageCharge != null">
+        #{mortgageCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="sumFinancePrice != null">
+        #{sumFinancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="donationAmount != null">
+        #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="margin != null">
+        #{margin,jdbcType=DECIMAL},
+      </if>
+      <if test="isGps != null">
+        #{isGps,jdbcType=INTEGER},
+      </if>
+      <if test="financeCharge != null">
+        #{financeCharge,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.order.OrderFinance">
+    update order_finance
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="financeId != null">
+        finance_id = #{financeId,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmount != null">
+        loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentRatio != null">
+        payment_ratio = #{paymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="downPayment != null">
+        down_payment = #{downPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRate != null">
+        loan_rate = #{loanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTerm != null">
+        loan_term = #{loanTerm,jdbcType=INTEGER},
+      </if>
+      <if test="monthlySupply != null">
+        monthly_supply = #{monthlySupply,jdbcType=DECIMAL},
+      </if>
+      <if test="isSubsidy != null">
+        is_subsidy = #{isSubsidy,jdbcType=INTEGER},
+      </if>
+      <if test="subsidyInterest != null">
+        subsidy_interest = #{subsidyInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="bond != null">
+        bond = #{bond,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeType != null">
+        charge_type = #{chargeType,jdbcType=TINYINT},
+      </if>
+      <if test="chargeRatio != null">
+        charge_ratio = #{chargeRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="charge != null">
+        charge = #{charge,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanStatus != null">
+        loan_status = #{loanStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loanDate != null">
+        loan_date = #{loanDate,jdbcType=DATE},
+      </if>
+      <if test="applyDate != null">
+        apply_date = #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="mortgageCost != null">
+        mortgage_cost = #{mortgageCost,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageCharge != null">
+        mortgage_charge = #{mortgageCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="sumFinancePrice != null">
+        sum_finance_price = #{sumFinancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="donationAmount != null">
+        donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="margin != null">
+        margin = #{margin,jdbcType=DECIMAL},
+      </if>
+      <if test="isGps != null">
+        is_gps = #{isGps,jdbcType=INTEGER},
+      </if>
+      <if test="financeCharge != null">
+        finance_charge = #{financeCharge,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.order.OrderFinance">
+    update order_finance
+    set order_id = #{orderId,jdbcType=INTEGER},
+      finance_id = #{financeId,jdbcType=INTEGER},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      payment_ratio = #{paymentRatio,jdbcType=DECIMAL},
+      down_payment = #{downPayment,jdbcType=DECIMAL},
+      loan_rate = #{loanRate,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      loan_term = #{loanTerm,jdbcType=INTEGER},
+      monthly_supply = #{monthlySupply,jdbcType=DECIMAL},
+      is_subsidy = #{isSubsidy,jdbcType=INTEGER},
+      subsidy_interest = #{subsidyInterest,jdbcType=DECIMAL},
+      bond = #{bond,jdbcType=DECIMAL},
+      charge_type = #{chargeType,jdbcType=TINYINT},
+      charge_ratio = #{chargeRatio,jdbcType=DECIMAL},
+      charge = #{charge,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      loan_status = #{loanStatus,jdbcType=INTEGER},
+      loan_date = #{loanDate,jdbcType=DATE},
+      apply_date = #{applyDate,jdbcType=DATE},
+      mortgage_cost = #{mortgageCost,jdbcType=DECIMAL},
+      mortgage_charge = #{mortgageCharge,jdbcType=DECIMAL},
+      sum_finance_price = #{sumFinancePrice,jdbcType=DECIMAL},
+      donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      margin = #{margin,jdbcType=DECIMAL},
+      is_gps = #{isGps,jdbcType=INTEGER},
+      finance_charge = #{financeCharge,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByOrderId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+    fc.`name`,
+    of.id,
+    of.loan_amount,
+    of.down_payment,
+    of.loan_rate,
+    of.loan_term,
+    of.bond,
+    of.total_amount totalAmount,
+    of.charge
+    FROM
+    order_finance of
+    LEFT JOIN finance_company fc ON of.finance_id=fc.id
+    WHERE of.order_id=#{orderId,jdbcType=INTEGER}
+  </select>
+
+  <select id="getOrderFinance" resultType="java.util.Map">
+    SELECT
+    f.id financeOrderId,
+    c.id companyId,
+    c.`name` companyName,
+    f.loan_amount loanAmount,
+    f.down_payment downPayment,
+    f.loan_rate loanRate,
+    f.loan_term loanTerm,
+    f.bond,
+    f.interest,
+    f.charge_type chargeType,
+    f.charge_ratio chargeRatio,
+    f.charge,
+    f.sum_finance_price sumFinancePrice,
+    f.donation_amount donationAmount,
+    f.total_amount totalAmount,
+    f.margin,
+    f.monthly_supply monthlySupply,
+    f.is_gps isGps,
+    f.loan_status loanStatus,
+    f.loan_date loanDate,
+    f.mortgage_charge mortgageCharge,
+    f.mortgage_cost mortgageCost,
+    f.subsidy_interest subsidyInterest,
+    f.is_subsidy isSubsidy
+    FROM
+    order_finance f
+    LEFT JOIN finance_company c ON f.finance_id = c.id
+    WHERE f.order_id = #{orderId}
+  </select>
+
+  <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT
+    orf.id,
+    o.order_num orderNum,
+    o.`status` orderStatus,
+    e.full_name employeeName,
+    cvc.NAME vehicleName,
+    o.cus_name cusName,
+    o.cus_iphone cusPhone,
+    o.use_name useName,
+    o.use_iphone usePhone,
+    orf.down_payment downPayment,
+    orf.loan_amount loanAmount,
+    orf.bond,
+    orf.charge charge,
+    orf.loan_status loanStatus,
+    orf.apply_date applyDate,
+    orf.loan_date loanDate,
+    cgi.vin,
+    orf.finance_charge financeCharge,
+    orf.mortgage_cost cost,
+    orf.is_gps isGps,
+    cf.name familyName
+    FROM
+    order_finance orf
+    INNER JOIN `order` o ON o.id = orf.order_id
+    LEFT JOIN car_good_info cgi ON o.car_id = cgi.id
+    LEFT JOIN car_family cf ON cgi.family_id = cf.id
+    LEFT JOIN car_vehicle_conf cvc ON cgi.vehicle_id = cvc.id
+    LEFT JOIN employee e ON o.create_id = e.id
+    WHERE
+    o.`status` IN(3,4,9)
+    <if test="storeId != null and storeId != ''">
+      AND e.store_id = #{storeId}
+    </if>
+    <if test="orderNum != null and orderNum != ''">
+      AND o.order_num LIKE CONCAT('%',#{orderNum},'%')
+    </if>
+    <if test="cusName != null and cusName != ''">
+      AND o.cus_name LIKE CONCAT('%',#{cusName},'%')
+    </if>
+    <if test="cusPhone != null and cusPhone != ''">
+      AND o.cus_iphone LIKE CONCAT('%',#{cusPhone},'%')
+    </if>
+    <if test="vin != null and vin != ''">
+      AND cgi.vin LIKE CONCAT('%',#{vin},'%')
+    </if>
+    ORDER BY orf.create_time DESC
+  </select>
+  <delete id="deleteOrderFinance" parameterType="java.lang.Integer">
+    delete from order_finance
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectFinanceByOrderId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+    f.id orderId,
+    f.loan_amount loanAmount,
+    f.down_payment downPayment,
+    f.bond,
+    f.charge,
+    f.mortgage_charge mortgageCharge
+    FROM
+    order_finance f
+    WHERE
+    f.order_id = #{orderId}
+  </select>
+  <select id="getOrderFinanceByOrderId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_finance
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.letprice.MonthPlanMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.letprice.MonthPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_year" jdbcType="INTEGER" property="planYear" />
+    <result column="plan_month" jdbcType="VARCHAR" property="planMonth" />
+    <result column="goal_sales_volume" jdbcType="INTEGER" property="goalSalesVolume" />
+    <result column="goal_gross_profit" jdbcType="DECIMAL" property="goalGrossProfit" />
+    <result column="plan_sales_volume" jdbcType="INTEGER" property="planSalesVolume" />
+    <result column="plan_gross_profit" jdbcType="DECIMAL" property="planGrossProfit" />
+    <result column="complete_sales_volume" jdbcType="INTEGER" property="completeSalesVolume" />
+    <result column="complete_gross_profit" jdbcType="DECIMAL" property="completeGrossProfit" />
+    <result column="difference_sales_volume" jdbcType="INTEGER" property="differenceSalesVolume" />
+    <result column="difference_gross_profit" jdbcType="DECIMAL" property="differenceGrossProfit" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="budget_volume" jdbcType="INTEGER" property="budgetVolume" />
+    <result column="budget_gross_profit" jdbcType="DECIMAL" property="budgetGrossProfit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, plan_year, plan_month, goal_sales_volume, goal_gross_profit, plan_sales_volume, 
+    plan_gross_profit, complete_sales_volume, complete_gross_profit, difference_sales_volume, 
+    difference_gross_profit, store_id, status, employee_id, update_date, create_date ,remark ,budget_volume ,budget_gross_profit
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.letprice.MonthPlanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from month_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from month_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from month_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.letprice.MonthPlan">
+    insert into month_plan (id, plan_year, plan_month, 
+      goal_sales_volume, goal_gross_profit, plan_sales_volume, 
+      plan_gross_profit, complete_sales_volume, complete_gross_profit, 
+      difference_sales_volume, difference_gross_profit, 
+      store_id, status, employee_id, 
+      update_date, create_date,remark,budget_volume ,budget_gross_profit)
+    values (#{id,jdbcType=INTEGER}, #{planYear,jdbcType=INTEGER}, #{planMonth,jdbcType=VARCHAR},
+      #{goalSalesVolume,jdbcType=INTEGER}, #{goalGrossProfit,jdbcType=DECIMAL}, #{planSalesVolume,jdbcType=INTEGER}, 
+      #{planGrossProfit,jdbcType=DECIMAL}, #{completeSalesVolume,jdbcType=INTEGER}, #{completeGrossProfit,jdbcType=DECIMAL}, 
+      #{differenceSalesVolume,jdbcType=INTEGER}, #{differenceGrossProfit,jdbcType=DECIMAL}, 
+      #{storeId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{employeeId,jdbcType=INTEGER}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{budgetVolume,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.letprice.MonthPlan">
+    insert into month_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planYear != null">
+        plan_year,
+      </if>
+      <if test="planMonth != null">
+        plan_month,
+      </if>
+      <if test="goalSalesVolume != null">
+        goal_sales_volume,
+      </if>
+      <if test="goalGrossProfit != null">
+        goal_gross_profit,
+      </if>
+      <if test="planSalesVolume != null">
+        plan_sales_volume,
+      </if>
+      <if test="planGrossProfit != null">
+        plan_gross_profit,
+      </if>
+      <if test="completeSalesVolume != null">
+        complete_sales_volume,
+      </if>
+      <if test="completeGrossProfit != null">
+        complete_gross_profit,
+      </if>
+      <if test="differenceSalesVolume != null">
+        difference_sales_volume,
+      </if>
+      <if test="differenceGrossProfit != null">
+        difference_gross_profit,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="remark != null">
+        remark ,
+      </if>
+      <if test="budgetVolume != null">
+        budget_volume ,
+      </if>
+      <if test="budgetGrossProfit != null">
+        budget_gross_profit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planYear != null">
+        #{planYear,jdbcType=INTEGER},
+      </if>
+      <if test="planMonth != null">
+        #{planMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="goalSalesVolume != null">
+        #{goalSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="goalGrossProfit != null">
+        #{goalGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="planSalesVolume != null">
+        #{planSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="planGrossProfit != null">
+        #{planGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="completeSalesVolume != null">
+        #{completeSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="completeGrossProfit != null">
+        #{completeGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="differenceSalesVolume != null">
+        #{differenceSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="differenceGrossProfit != null">
+        #{differenceGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="budgetVolume != null">
+        #{budgetVolume,jdbcType=DECIMAL},
+      </if>
+      <if test="budgetGrossProfit != null">
+        #{budgetGrossProfit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.letprice.MonthPlan">
+    update month_plan
+    <set>
+      <if test="planYear != null">
+        plan_year = #{planYear,jdbcType=INTEGER},
+      </if>
+      <if test="planMonth != null">
+        plan_month = #{planMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="goalSalesVolume != null">
+        goal_sales_volume = #{goalSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="goalGrossProfit != null">
+        goal_gross_profit = #{goalGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="planSalesVolume != null">
+        plan_sales_volume = #{planSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="planGrossProfit != null">
+        plan_gross_profit = #{planGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="completeSalesVolume != null">
+        complete_sales_volume = #{completeSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="completeGrossProfit != null">
+        complete_gross_profit = #{completeGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="differenceSalesVolume != null">
+        difference_sales_volume = #{differenceSalesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="differenceGrossProfit != null">
+        difference_gross_profit = #{differenceGrossProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="budgetVolume != null">
+        budget_volume = #{budgetVolume,jdbcType=INTEGER},
+      </if>
+      <if test="budgetGrossProfit != null">
+        budget_gross_profit = #{budgetGrossProfit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.letprice.MonthPlan">
+    update month_plan
+    set plan_year = #{planYear,jdbcType=INTEGER},
+      plan_month = #{planMonth,jdbcType=VARCHAR},
+      goal_sales_volume = #{goalSalesVolume,jdbcType=INTEGER},
+      goal_gross_profit = #{goalGrossProfit,jdbcType=DECIMAL},
+      plan_sales_volume = #{planSalesVolume,jdbcType=INTEGER},
+      plan_gross_profit = #{planGrossProfit,jdbcType=DECIMAL},
+      complete_sales_volume = #{completeSalesVolume,jdbcType=INTEGER},
+      complete_gross_profit = #{completeGrossProfit,jdbcType=DECIMAL},
+      difference_sales_volume = #{differenceSalesVolume,jdbcType=INTEGER},
+      difference_gross_profit = #{differenceGrossProfit,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      budget_volume = #{budgetVolume,jdbcType=DECIMAL},
+      budget_gross_profit = #{budgetGrossProfit,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateGoal">
+    update month_plan set goal_sales_volume =#{goalSalesVolume,jdbcType=INTEGER}, goal_gross_profit =  #{goalGrossProfit,jdbcType=DECIMAL} ,update_date = now() where id =  #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBudget">
+    update month_plan set budget_volume =#{budgetVolume,jdbcType=INTEGER}, budget_gross_profit =  #{budgetGrossProfit,jdbcType=DECIMAL} ,update_date = now() where id =  #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

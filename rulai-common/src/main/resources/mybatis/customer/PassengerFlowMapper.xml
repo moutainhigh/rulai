@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.customer.PassengerFlowMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.PassengerFlow">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="store_id" property="storeId" jdbcType="INTEGER"/>
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER"/>
+        <result column="replace_employee_id" property="replaceEmployeeId" jdbcType="INTEGER"/>
+        <result column="cus_id" property="cusId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="owned_car" property="ownedCar" jdbcType="INTEGER"/>
+        <result column="license_plate" property="licensePlate" jdbcType="VARCHAR"/>
+        <result column="leave_time" property="leaveTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="is_archives" property="isArchives" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="data_status" property="dataStatus" jdbcType="TINYINT"/>
+        <result column="create_employee_id" property="createEmployeeId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, store_id, employee_id, replace_employee_id, cus_id, type, owned_car, license_plate, 
+    leave_time, create_time, is_archives, status, data_status, create_employee_id
+  </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.customer.PassengerFlowExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from passenger_flow
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from passenger_flow
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from passenger_flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.customer.PassengerFlow">
+    insert into passenger_flow (id, store_id, employee_id, 
+      replace_employee_id, cus_id, type, 
+      owned_car, license_plate, leave_time, 
+      create_time, is_archives, status, 
+      data_status, create_employee_id)
+    values (#{id,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, 
+      #{replaceEmployeeId,jdbcType=INTEGER}, #{cusId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{ownedCar,jdbcType=INTEGER}, #{licensePlate,jdbcType=VARCHAR}, #{leaveTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isArchives,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{dataStatus,jdbcType=TINYINT}, #{createEmployeeId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.customer.PassengerFlow" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into passenger_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="replaceEmployeeId != null">
+                replace_employee_id,
+            </if>
+            <if test="cusId != null">
+                cus_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="ownedCar != null">
+                owned_car,
+            </if>
+            <if test="licensePlate != null">
+                license_plate,
+            </if>
+            <if test="leaveTime != null">
+                leave_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="isArchives != null">
+                is_archives,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="dataStatus != null">
+                data_status,
+            </if>
+            <if test="createEmployeeId != null">
+                create_employee_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="replaceEmployeeId != null">
+                #{replaceEmployeeId,jdbcType=INTEGER},
+            </if>
+            <if test="cusId != null">
+                #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="ownedCar != null">
+                #{ownedCar,jdbcType=INTEGER},
+            </if>
+            <if test="licensePlate != null">
+                #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="leaveTime != null">
+                #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isArchives != null">
+                #{isArchives,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createEmployeeId != null">
+                #{createEmployeeId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.PassengerFlow">
+        update passenger_flow
+        <set>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="replaceEmployeeId != null">
+                replace_employee_id = #{replaceEmployeeId,jdbcType=INTEGER},
+            </if>
+            <if test="cusId != null">
+                cus_id = #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="ownedCar != null">
+                owned_car = #{ownedCar,jdbcType=INTEGER},
+            </if>
+            <if test="licensePlate != null">
+                license_plate = #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="leaveTime != null">
+                leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isArchives != null">
+                is_archives = #{isArchives,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="dataStatus != null">
+                data_status = #{dataStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createEmployeeId != null">
+                create_employee_id = #{createEmployeeId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.PassengerFlow">
+    update passenger_flow
+    set store_id = #{storeId,jdbcType=INTEGER},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      replace_employee_id = #{replaceEmployeeId,jdbcType=INTEGER},
+      cus_id = #{cusId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      owned_car = #{ownedCar,jdbcType=INTEGER},
+      license_plate = #{licensePlate,jdbcType=VARCHAR},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_archives = #{isArchives,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      data_status = #{dataStatus,jdbcType=TINYINT},
+      create_employee_id = #{createEmployeeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByCondition" parameterType="com.unicdata.entity.customer.PassengerFlow"
+            resultType="java.util.Map">
+        select
+        id,cus_id cusId, type,date_format(create_time, '%Y-%m-%d') create_time,
+        is_archives isArchives, status
+        from passenger_flow
+        where data_status = 1
+        <if test="employeeId != null">
+            AND employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="type != null">
+            AND type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            AND status = #{status,jdbcType=INTEGER}
+        </if>
+        Limit 1
+    </select>
+    <!-- 分页获取客流列表 -->
+    <select id="selectPassengerFlowMes" parameterType="com.unicdata.entity.customer.PassengerFlow"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from passenger_flow
+        where data_status = 1
+        <if test="employeeId != null">
+            AND employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            AND store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            AND date(create_time) = DATE_FORMAT(#{createTime}, '%Y-%m-%d')
+        </if>
+        <if test="replaceEmployeeId != null">
+            AND replace_employee_id IS NOT NULL
+        </if>
+    </select>
+
+    <!-- 分页获取客流列表 -->
+    <select id="getPassengerFlowList" parameterType="com.unicdata.entity.customer.PassengerFlow"
+            resultType="java.util.Map">
+        SELECT pf.id,pf.cus_id,pf.type,DATE_FORMAT(pf.create_time,'%H:%i') formatTime,
+        pf.status,pf.is_archives isArchives,pf.create_time,td.status isTestDrive,
+        c.name,c.phone,CONCAT(cb.name,f.name) intentionVehicle,c.level,
+        IFNULL(MAX(t.next_date),'') as nextDate,IFNULL(td.perfect_state,2) perfectState,
+        e.full_name fullName
+        FROM passenger_flow pf
+        LEFT JOIN employee e ON e.id = pf.employee_id
+        LEFT JOIN customer c ON c.id = pf.cus_id
+        LEFT JOIN car_family f ON f.id = c.intention_family_id
+        LEFT JOIN car_brand cb ON cb.id = f.brand_id
+        LEFT JOIN task_follow_up t on t.customer_id = pf.cus_id
+        LEFT JOIN test_drive td ON td.cus_id = pf.cus_id
+        where pf.data_status = 1
+        <if test="employeeId != null">
+            AND pf.employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            AND pf.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            AND date(pf.create_time) = DATE_FORMAT(#{createTime}, '%Y-%m-%d')
+        </if>
+        GROUP BY pf.id
+        ORDER BY pf.create_time DESC
+    </select>
+
+    <!-- 获取当日客流列表 -->
+    <select id="getMouthPassengerFlowList" parameterType="com.unicdata.entity.customer.PassengerFlow"
+            resultType="java.lang.Integer">
+        select
+        count(1)
+        from passenger_flow
+        where data_status = 1
+        <if test="employeeId != null">
+            AND employee_id = #{employeeId,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            AND store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            AND date_format(create_time, '%Y-%m-%d') = date_format(#{createTime}, '%Y-%m-%d')
+        </if>
+        <if test="type != null">
+            AND type = #{type,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <!-- 替岗换销售wp -->
+    <update id="changeSellMan" parameterType="com.unicdata.entity.customer.PassengerFlow">
+        update passenger_flow
+        <set>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="replaceEmployeeId != null">
+                replace_employee_id = #{replaceEmployeeId,jdbcType=INTEGER},
+            </if>
+            <if test="cusId != null">
+                cus_id = #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="ownedCar != null">
+                owned_car = #{ownedCar,jdbcType=INTEGER},
+            </if>
+            <if test="licensePlate != null">
+                license_plate = #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="leaveTime != null">
+                leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isArchives != null">
+                is_archives = #{isArchives,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="dataStatus != null">
+                data_status = #{dataStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--替岗后换销售（替岗为null） wp -->
+    <update id="changeRepalceNull" parameterType="com.unicdata.entity.customer.PassengerFlow">
+	  UPDATE passenger_flow 
+	  SET
+	  replace_employee_id = NULL
+	  where id=#{id}
+  </update>
+    <select id="thisMonthPassengerFlow" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        IFNULL(COUNT(1),0)
+        FROM
+        passenger_flow f
+        WHERE
+        DATE_FORMAT(f.create_time, '%m-%Y') = DATE_FORMAT(NOW(), '%m-%Y')
+        <if test="employeeId != null">
+            AND f.employee_id = #{employeeId}
+        </if>
+        <if test="storeId != null">
+            AND f.store_id = #{storeId}
+        </if>
+    </select>
+    <!-- 根据车牌号获取二次到店的顾客信息 门禁提醒 wp -->
+    <select id="selectCustomerByLicensePlate" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        c.id,
+        c.passenger_id,
+        c.name,
+        c.phone,
+        c.sex,
+        c.number,
+        c.owned_car,
+        c.license_plate,
+        pf.employee_id,
+        e.full_name ename
+        FROM
+        customer c
+        LEFT JOIN passenger_flow pf
+        ON pf.id=c.passenger_id
+        left join employee e
+        ON e.id=pf.employee_id
+        WHERE 1=1
+        <if test="licensePlate != null">
+            AND c.license_plate = #{licensePlate}
+        </if>
+        <if test="storeId != null">
+            AND c.store_id = #{storeId}
+        </if>
+    </select>
+    <!-- 前台首页未接待、正接待列表查询 wp -->
+    <select id="selectDoingPassengerFlow" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT
+		pf.id pfid,
+		pf.type pftype,
+		pf.status,
+		pf.cus_id,
+		eg.group_name,
+		pf.employee_id,
+		pf.replace_employee_id
+		FROM
+		employee_group eg
+		RIGHT JOIN 
+		employee e
+		ON eg.id=e.department_id
+		RIGHT JOIN 
+		passenger_flow pf
+		ON e.id=pf.employee_id
+		LEFT JOIN
+		customer c
+		ON c.passenger_id=pf.id 
+		WHERE
+		pf.status IN(1,2)
+        <if test="storeId != null">
+            AND pf.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        AND DATE_FORMAT(pf.create_time,'%Y-%m-%d') = DATE_FORMAT(now(),'%Y-%m-%d')
+    </select>
+
+    <update id="updateReplacePostData" parameterType="java.util.Map">
+	  UPDATE customer SET employee_id = #{employeeId} where id = #{customerId};
+	  UPDATE `order` SET create_id = #{employeeId} where cus_id = #{customerId} AND create_id = #{replaceEmployeeId};
+	  UPDATE task_follow_up SET create_id = #{employeeId} where customer_id = #{customerId} AND create_id = #{replaceEmployeeId};
+	  UPDATE approval_cus SET employee_id = #{employeeId} where cus_id = #{customerId} AND employee_id = #{replaceEmployeeId};
+	  UPDATE approval_order SET employee_id = #{employeeId} where cus_id = #{customerId} AND employee_id = #{replaceEmployeeId};
+	  UPDATE deliver_car SET create_id = #{employeeId} where cus_id = #{customerId} AND create_id = #{replaceEmployeeId};
+    </update>
+    <select id="thisMonthFirstPassengerFlow" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM passenger_flow f WHERE f.type = 1 AND DATE_FORMAT(f.create_time, '%m-%Y') =
+        DATE_FORMAT(NOW(), '%m-%Y')
+        <if test="employeeId != null">
+            AND create_employee_id = #{employeeId}
+        </if>
+        <if test="storeId != null">
+            AND store_id = #{storeId}
+        </if>
+    </select>
+    <!-- 试驾状态处理(正在进行的客流)wp -->
+    <select id="testStatus" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT
+		td.status tdstatus,
+		DATE_FORMAT(td.end_time,'%H:%i') end_time,
+		DATE_FORMAT(td.create_time,'%H:%i') tdcreat_time
+		FROM
+		test_drive td
+		WHERE
+		td.cus_id=#{cusid}
+		AND DATE_FORMAT(td.create_time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+		ORDER BY td.create_time
+		DESC LIMIT 1
+    </select>
+
+    <select id="selectFlowListByParams" resultType="com.unicdata.entity.customer.PassengerFlowDto" parameterType="java.util.Map">
+        SELECT
+          pf.id passengerId,
+          pf.type,
+          pf.create_time arriveTime,
+          pf.leave_time leaveTime,
+          yb.full_name ybName,
+          xs.full_name xsName,
+          xs.department_desc departmentName,
+          c.id cusId,
+          c.name cusName,
+          c.phone cusPhone,
+          c.sex cusSex,
+          c.province_id provinceId,
+          c.city_id cityId,
+          c.district_id districtId,
+          c.owned_car ownedCar,
+          c.intention_family_id intentionFamilyId,
+          c.`level` level,
+          c.budget budget,
+          c.expect_buy_time expectBuyTime,
+          c.cus_info_sources cusInfoSources,
+          c.attention_car_two attentionCarOne,
+          c.attention_car_two attentionCarTwo,
+          c.attention_car_three attentionCarThree
+        FROM
+            passenger_flow pf
+        LEFT JOIN employee yb ON yb.id = pf.create_employee_id
+        LEFT JOIN employee xs ON xs.id = pf.employee_id
+        LEFT JOIN customer c ON pf.cus_id = c.id
+        WHERE 1 = 1
+        <if test="storeId != null">
+            AND pf.store_id = #{storeId}
+        </if>
+        <if test="date != null and date != ''">
+            AND DATE_FORMAT(pf.create_time,'%Y-%m-%d')=DATE_FORMAT(#{date},'%Y-%m-%d')
+        </if>
+        <if test="type != null">
+            AND pf.type = #{type}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND c.name LIKE CONCAT('%',#{keyword},'%') OR c.phone LIKE CONCAT('%',#{keyword},'%')
+        </if>
+    </select>
+</mapper>

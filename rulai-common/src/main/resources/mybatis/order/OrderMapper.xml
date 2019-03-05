@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.order.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.order.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_num" jdbcType="VARCHAR" property="orderNum"/>
+        <result column="cus_id" jdbcType="INTEGER" property="cusId"/>
+        <result column="cus_name" jdbcType="VARCHAR" property="cusName"/>
+        <result column="cus_iphone" jdbcType="VARCHAR" property="cusIphone"/>
+        <result column="use_name" jdbcType="VARCHAR" property="useName"/>
+        <result column="use_iphone" jdbcType="VARCHAR" property="useIphone"/>
+        <result column="use_type" jdbcType="TINYINT" property="useType"/>
+        <result column="card_type" jdbcType="TINYINT" property="cardType"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
+        <result column="delivery_date" jdbcType="DATE" property="deliveryDate"/>
+        <result column="car_id" jdbcType="INTEGER" property="carId"/>
+        <result column="matching_car_id" jdbcType="INTEGER" property="matchingCarId"/>
+        <result column="sale_price" jdbcType="DECIMAL" property="salePrice"/>
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice"/>
+        <result column="donation_amount" jdbcType="DECIMAL" property="donationAmount"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="deposit" jdbcType="DECIMAL" property="deposit"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="car_price_status" jdbcType="TINYINT" property="carPriceStatus"/>
+        <result column="boutique_price_status" jdbcType="TINYINT" property="boutiquePriceStatus"/>
+        <result column="car_status" jdbcType="TINYINT" property="carStatus"/>
+        <result column="boutique_status" jdbcType="TINYINT" property="boutiqueStatus"/>
+        <result column="insurer_status" jdbcType="TINYINT" property="insurerStatus"/>
+        <result column="extension_status" jdbcType="TINYINT" property="extensionStatus"/>
+        <result column="finance_status" jdbcType="TINYINT" property="financeStatus"/>
+        <result column="other_status" jdbcType="TINYINT" property="otherStatus"/>
+        <result column="margin" jdbcType="DECIMAL" property="margin"/>
+        <result column="service_id" jdbcType="INTEGER" property="serviceId"/>
+        <result column="create_id" jdbcType="INTEGER" property="createId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="order_type" jdbcType="TINYINT" property="orderType"/>
+        <result column="loan_amount" jdbcType="DECIMAL" property="loanAmount"/>
+        <result column="done_time" jdbcType="TIMESTAMP" property="doneTime"/>
+        <result column="if_equipment" jdbcType="TINYINT" property="ifEquipment"/>
+        <result column="equipment_time" jdbcType="TIMESTAMP" property="equipmentTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, order_num, cus_id, cus_name, cus_iphone, use_name, use_iphone, use_type, card_type, 
+    number, delivery_date, car_id, matching_car_id, sale_price, purchase_price, donation_amount, 
+    amount, deposit, status, car_price_status, boutique_price_status, car_status, boutique_status, 
+    insurer_status, extension_status, finance_status, other_status, margin, service_id, 
+    create_id, create_time, order_type, loan_amount, done_time, if_equipment, equipment_time
+  </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.order.OrderExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from `order`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `order`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.order.Order">
+    insert into `order` (id, order_num, cus_id, 
+      cus_name, cus_iphone, use_name, 
+      use_iphone, use_type, card_type, 
+      number, delivery_date, car_id, 
+      matching_car_id, sale_price, purchase_price, 
+      donation_amount, amount, deposit, 
+      status, car_price_status, boutique_price_status, 
+      car_status, boutique_status, insurer_status, 
+      extension_status, finance_status, other_status, 
+      margin, service_id, create_id, 
+      create_time, order_type, loan_amount, 
+      done_time, if_equipment, equipment_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR}, #{cusId,jdbcType=INTEGER}, 
+      #{cusName,jdbcType=VARCHAR}, #{cusIphone,jdbcType=VARCHAR}, #{useName,jdbcType=VARCHAR}, 
+      #{useIphone,jdbcType=VARCHAR}, #{useType,jdbcType=TINYINT}, #{cardType,jdbcType=TINYINT}, 
+      #{number,jdbcType=VARCHAR}, #{deliveryDate,jdbcType=DATE}, #{carId,jdbcType=INTEGER}, 
+      #{matchingCarId,jdbcType=INTEGER}, #{salePrice,jdbcType=DECIMAL}, #{purchasePrice,jdbcType=DECIMAL}, 
+      #{donationAmount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{deposit,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{carPriceStatus,jdbcType=TINYINT}, #{boutiquePriceStatus,jdbcType=TINYINT}, 
+      #{carStatus,jdbcType=TINYINT}, #{boutiqueStatus,jdbcType=TINYINT}, #{insurerStatus,jdbcType=TINYINT}, 
+      #{extensionStatus,jdbcType=TINYINT}, #{financeStatus,jdbcType=TINYINT}, #{otherStatus,jdbcType=TINYINT}, 
+      #{margin,jdbcType=DECIMAL}, #{serviceId,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{orderType,jdbcType=TINYINT}, #{loanAmount,jdbcType=DECIMAL}, 
+      #{doneTime,jdbcType=TIMESTAMP}, #{ifEquipment,jdbcType=TINYINT}, #{equipmentTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" keyProperty="id" parameterType="com.unicdata.entity.order.Order"
+            useGeneratedKeys="true">
+        insert into `order`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="cusId != null">
+                cus_id,
+            </if>
+            <if test="cusName != null">
+                cus_name,
+            </if>
+            <if test="cusIphone != null">
+                cus_iphone,
+            </if>
+            <if test="useName != null">
+                use_name,
+            </if>
+            <if test="useIphone != null">
+                use_iphone,
+            </if>
+            <if test="useType != null">
+                use_type,
+            </if>
+            <if test="cardType != null">
+                card_type,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="deliveryDate != null">
+                delivery_date,
+            </if>
+            <if test="carId != null">
+                car_id,
+            </if>
+            <if test="matchingCarId != null">
+                matching_car_id,
+            </if>
+            <if test="salePrice != null">
+                sale_price,
+            </if>
+            <if test="purchasePrice != null">
+                purchase_price,
+            </if>
+            <if test="donationAmount != null">
+                donation_amount,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="deposit != null">
+                deposit,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="carPriceStatus != null">
+                car_price_status,
+            </if>
+            <if test="boutiquePriceStatus != null">
+                boutique_price_status,
+            </if>
+            <if test="carStatus != null">
+                car_status,
+            </if>
+            <if test="boutiqueStatus != null">
+                boutique_status,
+            </if>
+            <if test="insurerStatus != null">
+                insurer_status,
+            </if>
+            <if test="extensionStatus != null">
+                extension_status,
+            </if>
+            <if test="financeStatus != null">
+                finance_status,
+            </if>
+            <if test="otherStatus != null">
+                other_status,
+            </if>
+            <if test="margin != null">
+                margin,
+            </if>
+            <if test="serviceId != null">
+                service_id,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="loanAmount != null">
+                loan_amount,
+            </if>
+            <if test="doneTime != null">
+                done_time,
+            </if>
+            <if test="ifEquipment != null">
+                if_equipment,
+            </if>
+            <if test="equipmentTime != null">
+                equipment_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=VARCHAR},
+            </if>
+            <if test="cusId != null">
+                #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="cusName != null">
+                #{cusName,jdbcType=VARCHAR},
+            </if>
+            <if test="cusIphone != null">
+                #{cusIphone,jdbcType=VARCHAR},
+            </if>
+            <if test="useName != null">
+                #{useName,jdbcType=VARCHAR},
+            </if>
+            <if test="useIphone != null">
+                #{useIphone,jdbcType=VARCHAR},
+            </if>
+            <if test="useType != null">
+                #{useType,jdbcType=TINYINT},
+            </if>
+            <if test="cardType != null">
+                #{cardType,jdbcType=TINYINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryDate != null">
+                #{deliveryDate,jdbcType=DATE},
+            </if>
+            <if test="carId != null">
+                #{carId,jdbcType=INTEGER},
+            </if>
+            <if test="matchingCarId != null">
+                #{matchingCarId,jdbcType=INTEGER},
+            </if>
+            <if test="salePrice != null">
+                #{salePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="purchasePrice != null">
+                #{purchasePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="donationAmount != null">
+                #{donationAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="carPriceStatus != null">
+                #{carPriceStatus,jdbcType=TINYINT},
+            </if>
+            <if test="boutiquePriceStatus != null">
+                #{boutiquePriceStatus,jdbcType=TINYINT},
+            </if>
+            <if test="carStatus != null">
+                #{carStatus,jdbcType=TINYINT},
+            </if>
+            <if test="boutiqueStatus != null">
+                #{boutiqueStatus,jdbcType=TINYINT},
+            </if>
+            <if test="insurerStatus != null">
+                #{insurerStatus,jdbcType=TINYINT},
+            </if>
+            <if test="extensionStatus != null">
+                #{extensionStatus,jdbcType=TINYINT},
+            </if>
+            <if test="financeStatus != null">
+                #{financeStatus,jdbcType=TINYINT},
+            </if>
+            <if test="otherStatus != null">
+                #{otherStatus,jdbcType=TINYINT},
+            </if>
+            <if test="margin != null">
+                #{margin,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceId != null">
+                #{serviceId,jdbcType=INTEGER},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=TINYINT},
+            </if>
+            <if test="loanAmount != null">
+                #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="doneTime != null">
+                #{doneTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ifEquipment != null">
+                #{ifEquipment,jdbcType=TINYINT},
+            </if>
+            <if test="equipmentTime != null">
+                #{equipmentTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.order.Order">
+        update `order`
+        <set>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=VARCHAR},
+            </if>
+            <if test="cusId != null">
+                cus_id = #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="cusName != null">
+                cus_name = #{cusName,jdbcType=VARCHAR},
+            </if>
+            <if test="cusIphone != null">
+                cus_iphone = #{cusIphone,jdbcType=VARCHAR},
+            </if>
+            <if test="useName != null">
+                use_name = #{useName,jdbcType=VARCHAR},
+            </if>
+            <if test="useIphone != null">
+                use_iphone = #{useIphone,jdbcType=VARCHAR},
+            </if>
+            <if test="useType != null">
+                use_type = #{useType,jdbcType=TINYINT},
+            </if>
+            <if test="cardType != null">
+                card_type = #{cardType,jdbcType=TINYINT},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryDate != null">
+                delivery_date = #{deliveryDate,jdbcType=DATE},
+            </if>
+            <if test="carId != null">
+                car_id = #{carId,jdbcType=INTEGER},
+            </if>
+            <if test="matchingCarId != null">
+                matching_car_id = #{matchingCarId,jdbcType=INTEGER},
+            </if>
+            <if test="salePrice != null">
+                sale_price = #{salePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="purchasePrice != null">
+                purchase_price = #{purchasePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="donationAmount != null">
+                donation_amount = #{donationAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                deposit = #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="carPriceStatus != null">
+                car_price_status = #{carPriceStatus,jdbcType=TINYINT},
+            </if>
+            <if test="boutiquePriceStatus != null">
+                boutique_price_status = #{boutiquePriceStatus,jdbcType=TINYINT},
+            </if>
+            <if test="carStatus != null">
+                car_status = #{carStatus,jdbcType=TINYINT},
+            </if>
+            <if test="boutiqueStatus != null">
+                boutique_status = #{boutiqueStatus,jdbcType=TINYINT},
+            </if>
+            <if test="insurerStatus != null">
+                insurer_status = #{insurerStatus,jdbcType=TINYINT},
+            </if>
+            <if test="extensionStatus != null">
+                extension_status = #{extensionStatus,jdbcType=TINYINT},
+            </if>
+            <if test="financeStatus != null">
+                finance_status = #{financeStatus,jdbcType=TINYINT},
+            </if>
+            <if test="otherStatus != null">
+                other_status = #{otherStatus,jdbcType=TINYINT},
+            </if>
+            <if test="margin != null">
+                margin = #{margin,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceId != null">
+                service_id = #{serviceId,jdbcType=INTEGER},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=TINYINT},
+            </if>
+            <if test="loanAmount != null">
+                loan_amount = #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="doneTime != null">
+                done_time = #{doneTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ifEquipment != null">
+                if_equipment = #{ifEquipment,jdbcType=TINYINT},
+            </if>
+            <if test="equipmentTime != null">
+                equipment_time = #{equipmentTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.order.Order">
+    update `order`
+    set order_num = #{orderNum,jdbcType=VARCHAR},
+      cus_id = #{cusId,jdbcType=INTEGER},
+      cus_name = #{cusName,jdbcType=VARCHAR},
+      cus_iphone = #{cusIphone,jdbcType=VARCHAR},
+      use_name = #{useName,jdbcType=VARCHAR},
+      use_iphone = #{useIphone,jdbcType=VARCHAR},
+      use_type = #{useType,jdbcType=TINYINT},
+      card_type = #{cardType,jdbcType=TINYINT},
+      number = #{number,jdbcType=VARCHAR},
+      delivery_date = #{deliveryDate,jdbcType=DATE},
+      car_id = #{carId,jdbcType=INTEGER},
+      matching_car_id = #{matchingCarId,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      purchase_price = #{purchasePrice,jdbcType=DECIMAL},
+      donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      car_price_status = #{carPriceStatus,jdbcType=TINYINT},
+      boutique_price_status = #{boutiquePriceStatus,jdbcType=TINYINT},
+      car_status = #{carStatus,jdbcType=TINYINT},
+      boutique_status = #{boutiqueStatus,jdbcType=TINYINT},
+      insurer_status = #{insurerStatus,jdbcType=TINYINT},
+      extension_status = #{extensionStatus,jdbcType=TINYINT},
+      finance_status = #{financeStatus,jdbcType=TINYINT},
+      other_status = #{otherStatus,jdbcType=TINYINT},
+      margin = #{margin,jdbcType=DECIMAL},
+      service_id = #{serviceId,jdbcType=INTEGER},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_type = #{orderType,jdbcType=TINYINT},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      done_time = #{doneTime,jdbcType=TIMESTAMP},
+      if_equipment = #{ifEquipment,jdbcType=TINYINT},
+      equipment_time = #{equipmentTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!-- 获取每月订单数量 -->
+    <select id="getCurrentMothOrderNum" parameterType="com.unicdata.entity.order.Order" resultType="java.lang.Integer">
+        select
+        IFNULL(COUNT(1),0) num
+        from `order`
+        where 1 = 1
+        <if test="createId != null">
+            AND create_id = #{createId,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            AND status &gt;= #{status,jdbcType=INTEGER} AND status &lt;= 7
+        </if>
+        <if test="createTime != null">
+            AND date(create_time) = DATE_FORMAT(#{createTime}, '%Y-%m-%d')
+        </if>
+        <if test="deliveryDate != null">
+            AND date(delivery_date) = DATE_FORMAT(#{deliveryDate}, '%Y-%m-%d')
+        </if>
+    </select>
+
+    <!-- 获取每月订单数量 -->
+    <select id="getCurrentMothOrderNumTwo" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select
+        IFNULL(COUNT(1),0) num
+        from `order` o
+        LEFT JOIN employee e on e.id=o.create_id
+        where 1 = 1
+        <if test="createId != null">
+            AND create_id = #{createId,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            AND status &gt;= #{status,jdbcType=INTEGER} AND status &lt;= 7
+        </if>
+        <if test="createTime != null">
+            AND date(create_time) = DATE_FORMAT(#{createTime}, '%Y-%m-%d')
+        </if>
+        <if test="deliveryDate != null">
+            AND date(delivery_date) = DATE_FORMAT(#{deliveryDate}, '%Y-%m-%d')
+        </if>
+        <if test="storeId != null">
+            AND e.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <!-- 门店某月某日订单数 -->
+    <select id="getMothOrderNumByStoreId" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        COUNT(1) as sum,
+        SUM(o.margin) as sumMargin
+        FROM
+        `order` o
+        LEFT JOIN employee e ON e.id=o.create_id
+        LEFT JOIN employee_group eg ON eg.id=e.department_id
+        WHERE 1=1 AND eg.data_status=1
+        <if test="mouthTime != null">
+            AND date_format(create_time, '%Y-%m') = date_format(#{mouthTime}, '%Y-%m')
+        </if>
+        <if test="dayTime != null">
+            AND date_format(create_time, '%Y-%m-%d') = date_format(#{dayTime}, '%Y-%m-%d')
+        </if>
+        <if test="status != null">
+            AND status &gt;= #{status,jdbcType=INTEGER}
+        </if>
+        <if test="groupName != null">
+            AND eg.group_name LIKE CONCAT('%',#{groupName},'%')
+        </if>
+        <if test="storeId != null">
+            AND e.store_id=#{storeId,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <!--通过客户id获取订单信息-->
+    <select id="selectByCusId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `order`
+        where cus_id = #{cusId,jdbcType=INTEGER}
+    </select>
+
+    <select id="saleOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        r.id orderId,
+        r.order_num orderNum,
+        r.`status` orderStatus,
+        r.amount amount,
+        r.deposit deposit,
+        r.margin,
+        date_format(r.create_time, '%Y-%m-%d %H:%i:%S') createTime,
+        r.use_name useName,
+        r.use_iphone usePhone,
+        r.number number,
+        r.car_id carId,
+        r.matching_car_id matchingCarId,
+        r.sale_price salePrice,
+        r.delivery_date deliveryDate,
+        c.`name` cusName,
+        c.phone cusPhone,
+        e.full_name employeeName,
+        e.phone_num employeePhone,
+        v.`name` vehicleName,
+        cb.`name` brandName,
+        g.standard_price standardPrice,
+        g.decorations_in_id decorationsInAd,
+        g.decorations_in_name decorationsInName,
+        g.decorations_out_id decorationsOutId,
+        g.decorations_out_name decorationsOutName,
+        g.vin,
+        g.`year` yearGap,
+        g.engine_num engineNum,
+        g.vehicle_id vehicleId,
+        f.`name` familyName
+        FROM
+        `order` r
+        LEFT JOIN employee e ON r.create_id = e.id
+        LEFT JOIN customer c on r.cus_id = c.id
+        LEFT JOIN car_good_info g on r.car_id = g.id
+        LEFT JOIN car_brand cb on g.brand_id = cb.id
+        LEFT JOIN car_family f on g.family_id = f.id
+        LEFT JOIN car_vehicle_conf v on g.vehicle_id = v.id
+        WHERE r.create_id = #{employeeId}
+        <if test="orderNum != null">
+            and r.order_num LIKE #{orderNum}
+        </if>
+        <if test="cusName != null">
+            and c.`name` LIKE CONCAT('%',#{cusName},'%')
+        </if>
+        <if test="cusPhone != null">
+            and c.phone = #{cusPhone}
+        </if>
+        <if test="orderStatus != null">
+            and r.`status` = #{orderStatus}
+        </if>
+        <if test="vin != null">
+            and g.vin = #{vin}
+        </if>
+        <if test="familyId != null">
+            and g.family_id = #{familyId}
+        </if>
+        <if test="deliveryDate != null">
+            and DATE_FORMAT(r.delivery_date,'%Y-%m-%d') = #{deliveryDate}
+        </if>
+        <if test="yearGap != null">
+            and g.`year` = #{yearGap}
+        </if>
+        <if test="createTime != null">
+            AND DATE_FORMAT(r.create_time,'%Y-%m-%d') = #{createTime}
+        </if>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="storeOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        r.id orderId,
+        r.order_num orderNum,
+        r.`status` orderStatus,
+        r.amount amount,
+        r.deposit deposit,
+        r.margin,
+        date_format(r.create_time, '%Y-%m-%d %H:%i:%S') createTime,
+        r.car_id carId,
+        r.matching_car_id matchingCarId,
+        r.use_name useName,
+        r.use_iphone usePhone,
+        r.number number,
+        r.sale_price salePrice,
+        r.delivery_date deliveryDate,
+        r.order_type orderType,
+        c.`name` cusName,
+        c.phone cusPhone,
+        e.full_name employeeName,
+        e.phone_num employeePhone,
+        v.`name` vehicleName,
+        cb.`name` brandName,
+        g.standard_price standardPrice,
+        g.decorations_in_id decorationsInId,
+        g.decorations_in_name decorationsInName,
+        g.decorations_out_id decorationsOutId,
+        g.decorations_out_name decorationsOutName,
+        g.interest_free_day interestFreeDay,
+        g.purchase_day purchaseDay,
+        g.vin,
+        g.`year` yearGap,
+        g.engine_num engineNum,
+        g.vehicle_id vehicleId,
+        f.`name` familyName
+        FROM
+        `order` r
+        LEFT JOIN employee e ON r.create_id = e.id
+        LEFT JOIN customer c ON r.cus_id = c.id
+        LEFT JOIN car_good_info g ON r.car_id = g.id
+        LEFT JOIN car_brand cb on g.brand_id = cb.id
+        LEFT JOIN car_family f ON g.family_id = f.id
+        LEFT JOIN car_vehicle_conf v ON g.vehicle_id = v.id
+        WHERE e.store_id = #{storeId}
+        <if test="orderNum != null">
+            and r.order_num LIKE #{orderNum}
+        </if>
+        <if test="familyId != null">
+            and g.family_id = #{familyId}
+        </if>
+        <if test="vehicleId != null">
+            and g.vehicle_id = #{vehicleId}
+        </if>
+        <if test="carStatus != null">
+            and r.car_status = #{carStatus}
+        </if>
+        <if test="cusName != null">
+            and c.`name` LIKE CONCAT('%',#{cusName},'%')
+        </if>
+        <if test="cusPhone != null">
+            and c.phone = #{cusPhone}
+        </if>
+        <if test="employeeId != null">
+            and r.create_id = #{employeeId}
+        </if>
+        <if test="orderStatus != null">
+            and r.`status` in ${orderStatus}
+        </if>
+        <if test="vin != null">
+            and g.vin = #{vin}
+        </if>
+        <if test="familyId != null">
+            and g.family_id = #{familyId}
+        </if>
+        <if test="deliveryDate != null">
+            and DATE_FORMAT(r.delivery_date,'%Y-%m-%d') = #{deliveryDate}
+        </if>
+        <if test="yearGap != null">
+            and g.`year` = #{yearGap}
+        </if>
+        <if test="createTime != null">
+            AND DATE_FORMAT(r.create_time,'%Y-%m-%d') = #{createTime}
+        </if>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="orderDetail" resultType="java.util.Map">
+        SELECT
+            r.id orderId,
+            r.order_num orderNum,
+            r.`status` orderStatus,
+            r.car_price_status carPriceStatus,
+            r.boutique_price_status boutiquePriceStatus,
+            r.car_status carStatus,r.boutique_status boutiqueStatus,
+            r.insurer_status insurerStatus,r.extension_status extensionStatus,
+            r.finance_status financeStatus,r.other_status otherStatus,
+            r.amount amount,
+            r.deposit deposit,
+            r.margin,
+            date_format(r.create_time,'%Y-%m-%d') createTime,
+            r.use_name useName,
+            r.use_iphone usePhone,
+            r.use_type useType,
+			date_format(r.done_time,'%Y-%m-%d') doneTime,
+            r.`number` number,
+            r.sale_price salePrice,
+            r.car_id carId,
+            r.matching_car_id matchingCarId,
+            r.delivery_date deliveryDate,
+            c.`name` cusName,
+            c.phone cusPhone,
+            e.full_name employeeName,
+            e.phone_num employeePhone,
+            v.`name` vehicleName,
+            cb. NAME brandName,
+            g.standard_price standardPrice,
+            g.include_boutique_price includeBoutiquePrice,
+            g.decorations_in_id decorationsInAd,
+            g.decorations_in_name decorationsInName,
+            g.decorations_out_id decorationsOutId,
+            g.decorations_out_name decorationsOutName,
+            g.optional_package_status optionalPackageStatus,
+            g.vin,
+            g.`year` yearGap,
+            g.engine_num engineName,
+            g.family_id familyId,
+            g.vehicle_id vehicleId,
+            g.car_supply_status carSupplyStatus,
+            f.`name` familyName
+        FROM
+            `order` r
+        LEFT JOIN employee e ON r.create_id = e.id
+        LEFT JOIN order_extension ex ON ex.order_id = r.id
+        LEFT JOIN customer c ON r.cus_id = c.id
+        LEFT JOIN car_good_info g ON r.car_id = g.id
+        LEFT JOIN car_brand cb ON g.brand_id = cb.id
+        LEFT JOIN car_family f ON g.family_id = f.id
+        LEFT JOIN car_vehicle_conf v ON g.vehicle_id = v.id
+        LEFT JOIN boutique_retail re ON re.order_id = r.id
+        LEFT JOIN order_service se ON se.order_id = r.id
+        WHERE r.id = #{orderId} limit 1
+  </select>
+    <update id="equipmentCar" parameterType="java.util.Map">
+        UPDATE `order` r
+        SET
+        r.car_status = #{carStatus},
+        <if test="carId != null">
+            r.car_id = #{carId},
+        </if>
+        r.matching_car_id = #{matchCarId},
+        r.equipment_time = now()
+        WHERE r.id = #{orderId}
+    </update>
+
+    <select id="financeOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        r.id orderId,
+        r.order_num orderNum,
+        r.`status` orderStatus,
+        r.amount amount,
+        r.deposit deposit,
+        date_format(r.create_time,'%Y-%m-%d %H:%i:%S') createTime,
+        r.car_id carId,
+        r.matching_car_id matchingCarId,
+        r.use_name useName,
+        r.use_iphone usePhone,
+        r.number number,
+        r.sale_price salePrice,
+        r.delivery_date deliveryDate,
+        r.order_type orderType,
+        c.`name` cusName,
+        c.phone cusPhone,
+        e.full_name employeeName,
+        e.phone_num employeePhone,
+        v.`name` vehicleName,
+        cb.`name` brandName,
+        g.vin,
+        g.vehicle_id vehicleId,
+        f.`name` familyName,
+        ic.picture_url pictureUrl,
+        (SELECT SUM(pt.amount) FROM receipt pt WHERE pt.order_id = r.id) alreadyPaid
+        FROM
+        `order` r
+        LEFT JOIN employee e ON r.create_id = e.id
+        LEFT JOIN customer c ON r.cus_id = c.id
+        LEFT JOIN car_good_info g ON r.matching_car_id = g.id
+        LEFT JOIN car_brand cb ON g.brand_id = cb.id
+        LEFT JOIN car_family f ON g.family_id = f.id
+        LEFT JOIN car_vehicle_conf v ON g.vehicle_id = v.id
+        LEFT JOIN order_invoice ic ON ic.order_id = r.id
+        WHERE
+        e.store_id = #{storeId}
+        <if test="orderNum != null">
+            and r.order_num LIKE #{orderNum}
+        </if>
+        <if test="cusName != null">
+            and c.`name` LIKE CONCAT('%',#{cusName},'%')
+        </if>
+        <if test="cusPhone != null">
+            and c.phone = #{cusPhone}
+        </if>
+        <if test="employeeId != null">
+            r.create_id = #{employeeId}
+        </if>
+        <if test="orderStatus != null">
+            and r.`status` in ${orderStatus}
+        </if>
+        <if test="vin != null">
+            and g.vin = #{vin}
+        </if>
+        ORDER BY r.create_time DESC
+    </select>
+    <select id="selectOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT o.id,o.order_num orderNum,o.cus_id cusId,o.cus_name cusName,o.cus_iphone cusIphone,
+        o.delivery_date deliveryDate,o.status orderStatus,o.car_status carStatus,o.car_price_status carPriceStatus,
+        o.boutique_status boutiqueStatus,o.insurer_status insurerStatus,o.extension_status extensionStatus,
+        o.finance_status financeStatus,o.other_status otherStatus,o.create_time createTime,
+        c.create_time as cusCreateTime,g.vin,t.next_date as nextDate,
+        g.vehicle_id vehicleId,CONCAT(cb.name,f.name,v.name) as salesdesc
+        FROM `order` o
+        LEFT JOIN employee e ON e.id = o.create_id
+        LEFT JOIN customer c ON c.id = o.cus_id
+        LEFT JOIN car_good_info g on g.id = o.car_id
+        LEFT JOIN car_brand cb ON g.brand_id = cb.id
+        LEFT JOIN car_family f ON g.family_id = f.id
+        LEFT JOIN car_vehicle_conf v ON g.vehicle_id = v.id
+        LEFT JOIN task_follow_up t on t.order_id = o.id
+        where 1=1
+        <if test="storeId != null">
+            AND e.store_id = #{storeId}
+        </if>
+        <if test="orderId != null">
+            AND o.id = #{orderId}
+        </if>
+        <if test="employeeId != null">
+            AND e.id = #{employeeId}
+        </if>
+        <if test="taskType != null">
+            AND t.task_type = #{taskType}
+        </if>
+    </select>
+
+    <select id="orderOperation" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        r.id orderId,
+        r.order_num orderNum,
+        r.order_type orderType,
+        r.deposit deposit,
+        date_format(r.done_time, '%Y-%m-%d %H:%i:%S') doneTime,
+        r.`status` orderStatus,
+        date_format(cal.sale_approval_time, '%Y-%m-%d %H:%i:%S') effectTime,
+        (
+        SELECT
+        TIMESTAMPDIFF(
+        DAY,
+        cal.sale_approval_time,
+        r.done_time
+        )
+        ) orderDays,
+        cu.origin cusOrigin,
+        ee.full_name employeeName,
+        date_format(cu.create_time, '%Y-%m-%d %H:%i:%S') cusCreateTime,
+        (
+        SELECT
+        TIMESTAMPDIFF(
+        DAY,
+        r.create_time,
+        cu.create_time
+        )
+        ) cusConversionDays,
+        cu.`name` cusName,
+        r.sale_price carPrice,
+        r.amount orderAmount,
+        (
+        SELECT
+        TIMESTAMPDIFF(
+        DAY,
+        NOW(),
+        (
+        SELECT
+        eq.create_time
+        FROM
+        equipment eq
+        WHERE
+        eq.order_id = r.id
+        ORDER BY
+        eq.create_time DESC
+        LIMIT 1
+        )
+        )
+        ) inventoryDays,
+        r.delivery_date estimateDeliveryDate,
+        date_format(del.create_time, '%Y-%m-%d %H:%i:%S') deliveryDate,
+        info.vin vin,
+        info. YEAR yearGap,
+        info.fund_property fundProperty,
+        info.engine_name engineName,
+        info.decorations_out_name decorationsOutName,
+        info.decorations_in_name decorationsInName,
+        info.engine_num engineNum,
+        info.key_num keyNum,
+        info.certification_num certificationNum,
+        info.import_num importNum,
+        info.warranty_num warrantyNum,
+        info.inspection_num inspectionNum,
+        info.standard_price standardPrice,
+        info.purchase_price purchasePrice,
+        info.purchase_price_pio purchasePricePio,
+        info.freight_charge freightCharge,
+        info.include_boutique_price includeBoutiquePrice,
+        date_format(info.purchase_date, '%Y-%m-%d %H:%i:%S') purchaseDate,
+        date_format(info.produce_date, '%Y-%m-%d %H:%i:%S') produceDate,
+        date_format(info.offline_date, '%Y-%m-%d %H:%i:%S') offlineDate,
+        date_format(info.interest_free_day, '%Y-%m-%d %H:%i:%S') interestFreeDay,
+        info.optional_package_status optionalPackageStatus,
+        info.guaranty_status guarantyStatus,
+        info.finance_company_name carFinanceCompanyName,
+        date_format(info.in_storage_date, '%Y-%m-%d %H:%i:%S') inStorageDate,
+        date_format(info.out_storage_date, '%Y-%m-%d %H:%i:%S') outStorageDate,
+        house.`name` wareHouse,
+        info.storage_id storageId,
+        info.car_supply_status carSupplyStatus,
+        info.factory_report_status factoryReportStatus,
+        info.virtual_record_status virtualRecordStatus,
+        info.deceive_report_status deceiveReportStatus,
+        info.new_boutique_status newBoutiqueStatus,
+        date_format(info.sell_date, '%Y-%m-%d %H:%i:%S') sellDate,
+        info.forecast_profit forecastProfit,
+        info.count_profit countProfit,
+        info.hot_status hotStatus,
+        info.forward_car_status forwardCarStatus,
+        date_format(info.first_dms_date, '%Y-%m-%d %H:%i:%S') firstDmsDate,
+        date_format(info.real_dms_date, '%Y-%m-%d %H:%i:%S') realDmsDate,
+        date_format(info.create_date, '%Y-%m-%d %H:%i:%S') createDate,
+        date_format(info.update_date, '%Y-%m-%d %H:%i:%S') updateDate,
+        info.two_dimensional_code twoDimensionalCode,
+        info.plan_allow_price planAllowPrice,
+        info.entire_purchase_price entirePurchasePrice,
+        info.nation_guide_price nationGuidePrice,
+        info.cost_price costPrice,
+        info.produce_day produceDay,
+        info.arrive_day arriveDay,
+        info.purchase_day purchaseDay,
+        info.interest_accrual_day interestAccrualDay,
+        info.in_storage_day inStorageDay,
+        info.interest_price interestPrice,
+        info.residue_repayment_day residueRepaymentDay,
+        date_format(info.full_pay_date, '%Y-%m-%d %H:%i:%S') fullPayDate,
+        info.storage_status storageStatus,
+        info.dispose_status disposeStatus,
+        info.order_status carOrderStatus,
+        info.brand_name brandName,
+        info.family_name familyName,
+        info.vehicle_name vehicleName,
+        info.car_check_id carCheckId,
+        info.car_check_status carCheckStatus,
+        (
+        SELECT
+        TIMESTAMPDIFF(
+        DAY,
+        r.create_time,
+        del.create_time
+        )
+        ) orderConversionDays,
+        fcon.`name` orderFinanceCompanyName,
+        fin.loan_amount loanAmount,
+        (
+        SELECT
+        CONVERT (
+        fin.loan_amount / r.sale_price,
+        DECIMAL
+        )
+        ) loanRatio,
+        fin.charge loanCharge,
+        (SELECT
+        CONVERT (
+        fin.charge / fin.loan_amount,
+        DECIMAL
+        )) loanChargeRate,
+        fin.mortgage_charge mortgageCharge
+        FROM
+        `order` r
+        LEFT JOIN employee ee ON r.create_id = ee.id
+        LEFT JOIN approval_order cal ON r.id = cal.order_id
+        LEFT JOIN customer cu ON r.cus_id = cu.id
+        LEFT JOIN car_good_info info ON r.car_id = info.id
+        LEFT JOIN deliver_car del ON r.id = del.order_id
+        LEFT JOIN car_warehouse house ON info.warehouse_id = house.id
+        LEFT JOIN order_set_meal meal ON r.id = meal.order_id
+        LEFT JOIN order_finance fin ON r.id = fin.order_id
+        LEFT JOIN finance_company fcon ON fin.finance_id = fcon.id
+        WHERE
+        ee.store_id = #{storeId}
+        <if test="beginTime != null">
+            AND del.create_time &gt; #{beginTime}
+        </if>
+        <if test="endTime !=null">
+            AND del.create_time &lt; #{endTime}
+        </if>
+        <if test="employeeId != null">
+            AND ee.id = #{employeeId}
+        </if>
+        <if test="orderStatus != null">
+            AND r.`status` in ${orderStatus}
+        </if>
+        <if test="type != null">
+            AND r.if_equipment = 1 AND info.storage_status = 2
+        </if>
+    </select>
+    <select id="saleManList" parameterType="java.lang.Integer" resultType="com.unicdata.entity.system.Employee">
+        SELECT
+             e.id ,e.full_name fullName,e.phone_num phoneNum,e.department_desc departmentDesc
+        FROM
+            `order` r
+        LEFT JOIN employee e ON r.create_id = e.id
+        WHERE
+            e.store_id = #{storeId}
+        GROUP BY
+            e.id
+    </select>
+    <!-- 查看洗车是否属于订单 wp -->
+    <select id="carOrderWash" parameterType="integer" resultType="java.util.Map">
+        SELECT
+        cus_id,
+        cus_name
+        FROM
+        `order`
+        <if test="_parameter !=null">
+            WHERE car_id =#{_parameter}
+        </if>
+        ORDER BY create_time limit 1
+    </select>
+    <!--通过条件获取订单信息-->
+    <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `order`
+        where 1=1
+        <if test="orderNum != null and orderNum != ''">
+            AND order_num = #{orderNum}
+        </if>
+        <if test="carId != null">
+            AND car_id = #{carId}
+        </if>
+        <if test="excludeStatus != null">
+            AND `status` != #{excludeStatus}
+        </if>
+        limit 1
+    </select>
+
+    <select id="selectByMacthCarId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `order` WHERE matching_car_id = #{matchCarId}
+    </select>
+
+    <select id="orderCirculation" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+            o.order_num orderNum,
+            o.cus_name cusName,
+            o.cus_iphone cusIphone,
+            o.use_name useName,
+            o.use_iphone useIphone,
+            o.card_type cardType,
+            o.number,
+            o.amount orderAmount,
+            o.delivery_date deliveryDate,
+            o.create_time createTime,
+            c.create_time deliverTime,
+            g.vin,
+            g.brand_name brandName,
+            g.family_name familyName,
+            g.vehicle_name vehicleName,
+            g.`year` yearGap,
+            g.engine_num engineNum,
+            g.optional_package_status optionalPackageStatus,
+            g.decorations_in_name decorationsInName,
+            g.decorations_out_name decorationsOutName
+        FROM
+            `order` o
+        LEFT JOIN car_good_info g ON o.matching_car_id = g.id
+        LEFT JOIN deliver_car c ON o.id = c.order_id
+        WHERE
+            o.id = #{orderId}
+    </select>
+
+    <select id="receivablesByOrderId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+            info.standard_price standardPrice,
+            o.sale_price salePrice,
+            i.invoice_price invoicePrice,
+            o.deposit,
+            e.sum_price extensionPrice,
+            f.bond,
+            f.charge,
+            f.down_payment downPayment,
+            f.loan_amount loanAmount,
+            f.mortgage_charge mortgageCharge,
+            meal.sum_meal_price sumMealPrice
+        FROM
+            `order` o
+        LEFT JOIN order_finance f ON o.id = f.order_id
+        LEFT JOIN order_invoice i ON o.id = i.order_id
+        LEFT JOIN order_extension e ON o.id = e.order_id
+        LEFT JOIN car_good_info info ON o.matching_car_id = info.id
+        LEFT JOIN order_set_meal meal ON meal.order_id = o.id
+        AND meal.type = 1
+        WHERE
+            o.id = #{orderId}
+    </select>
+
+    <select id="getOrdersByCusAndDate" resultType="com.unicdata.entity.order.Order">
+        SELECT
+        *
+        FROM
+        `order`
+        WHERE
+        `status` &gt;= 2
+        <if test="cusId != null">
+            AND cus_id = #{cusId}
+        </if>
+        <if test="date != null and date != ''">
+            AND DATE_FORMAT(#{date}, '%Y-%m-%d') = DATE_FORMAT(create_time, '%Y-%m-%d')
+        </if>
+    </select>
+</mapper>

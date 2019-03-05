@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.product.FinanceRangYearMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.product.FinanceRangYear">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="range_id" jdbcType="INTEGER" property="rangeId" />
+    <result column="year_id" jdbcType="INTEGER" property="yearId" />
+    <result column="loan_ratio" jdbcType="DECIMAL" property="loanRatio" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, range_id, year_id, loan_ratio
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.product.FinanceRangYearExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from finance_rang_year
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from finance_rang_year
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from finance_rang_year
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.product.FinanceRangYear">
+    insert into finance_rang_year (id, range_id, year_id, 
+      loan_ratio)
+    values (#{id,jdbcType=INTEGER}, #{rangeId,jdbcType=INTEGER}, #{yearId,jdbcType=INTEGER}, 
+      #{loanRatio,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.product.FinanceRangYear">
+    insert into finance_rang_year
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rangeId != null">
+        range_id,
+      </if>
+      <if test="yearId != null">
+        year_id,
+      </if>
+      <if test="loanRatio != null">
+        loan_ratio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rangeId != null">
+        #{rangeId,jdbcType=INTEGER},
+      </if>
+      <if test="yearId != null">
+        #{yearId,jdbcType=INTEGER},
+      </if>
+      <if test="loanRatio != null">
+        #{loanRatio,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.product.FinanceRangYear">
+    update finance_rang_year
+    <set>
+      <if test="rangeId != null">
+        range_id = #{rangeId,jdbcType=INTEGER},
+      </if>
+      <if test="yearId != null">
+        year_id = #{yearId,jdbcType=INTEGER},
+      </if>
+      <if test="loanRatio != null">
+        loan_ratio = #{loanRatio,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.product.FinanceRangYear">
+    update finance_rang_year
+    set range_id = #{rangeId,jdbcType=INTEGER},
+      year_id = #{yearId,jdbcType=INTEGER},
+      loan_ratio = #{loanRatio,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteByRangeIds">
+    DELETE FROM finance_rang_year
+    WHERE range_id IN
+    <foreach collection="list" open="(" close=")" separator="," item="id" index="index">
+      #{id}
+    </foreach>
+  </delete>
+
+  <select id = "selectById" resultType="com.unicdata.entity.product.FinanceRangYear" parameterType="java.lang.Integer">
+    SELECT fly.year,fry.year_id yearId,loan_ratio loanRatio FROM finance_loan_year fly LEFT JOIN finance_rang_year fry
+    ON fly.id = fry.year_id WHERE fry.range_id = #{rangeId,jdbcType=INTEGER} ORDER BY fly.year ASC
+  </select>
+</mapper>

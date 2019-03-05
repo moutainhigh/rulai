@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueInformationMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueInformation">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="classify" jdbcType="VARCHAR" property="classify"/>
+        <result column="classify_id" jdbcType="INTEGER" property="classifyId"/>
+        <result column="car_classify_id" jdbcType="VARCHAR" property="carClassifyId"/>
+        <result column="brand_id" jdbcType="INTEGER" property="brandId"/>
+        <result column="company" jdbcType="VARCHAR" property="company"/>
+        <result column="construction_node" jdbcType="INTEGER" property="constructionNode"/>
+        <result column="supplier_id" jdbcType="INTEGER" property="supplierId"/>
+        <result column="tax_price" jdbcType="DECIMAL" property="taxPrice"/>
+        <result column="tax_cost" jdbcType="DECIMAL" property="taxCost"/>
+        <result column="coefficient" jdbcType="DECIMAL" property="coefficient"/>
+        <result column="unitprice" jdbcType="DECIMAL" property="unitprice"/>
+        <result column="workinghours" jdbcType="DOUBLE" property="workinghours"/>
+        <result column="labor_cost" jdbcType="DOUBLE" property="laborCost"/>
+        <result column="expect_workinghours" jdbcType="DOUBLE" property="expectWorkinghours"/>
+        <result column="safety_stock" jdbcType="INTEGER" property="safetyStock"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="picture" jdbcType="VARCHAR" property="picture"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="is_shelf" jdbcType="INTEGER" property="isShelf"/>
+        <result column="sale_type" jdbcType="VARCHAR" property="saleType"/>
+        <result column="last_push_time" jdbcType="TIMESTAMP" property="lastPushTime"/>
+        <result column="caution_date" jdbcType="VARCHAR" property="cautionDate"/>
+        <result column="store_id" jdbcType="INTEGER" property="storeId"/>
+        <result column="type_live" jdbcType="INTEGER" property="typeLive"/>
+        <result column="original_code" jdbcType="VARCHAR" property="originalCode"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.unicdata.entity.boutique.BoutiqueInformation">
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, code, name, warehouse_id, position_id, classify, classify_id, car_classify_id, 
+    brand_id, company, construction_node, supplier_id, tax_price, tax_cost, coefficient, 
+    unitprice, workinghours, labor_cost, expect_workinghours, safety_stock, stock, picture, 
+    status, is_shelf, sale_type, last_push_time, caution_date, store_id, type_live, original_code, 
+    version, timestamp
+  </sql>
+    <sql id="Blob_Column_List">
+    remark
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.unicdata.entity.boutique.BoutiqueInformationExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from boutique_information
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueInformationExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from boutique_information
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from boutique_information
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+    insert into boutique_information (id, code, name, 
+      warehouse_id, position_id, classify, 
+      classify_id, car_classify_id, brand_id, 
+      company, construction_node, supplier_id, 
+      tax_price, tax_cost, coefficient, 
+      unitprice, workinghours, labor_cost, 
+      expect_workinghours, safety_stock, stock, 
+      picture, status, is_shelf, 
+      sale_type, last_push_time, caution_date, 
+      store_id, type_live, original_code, 
+      version, timestamp, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{warehouseId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{classify,jdbcType=VARCHAR}, 
+      #{classifyId,jdbcType=INTEGER}, #{carClassifyId,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, 
+      #{company,jdbcType=VARCHAR}, #{constructionNode,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, 
+      #{taxPrice,jdbcType=DECIMAL}, #{taxCost,jdbcType=DECIMAL}, #{coefficient,jdbcType=DECIMAL}, 
+      #{unitprice,jdbcType=DECIMAL}, #{workinghours,jdbcType=DOUBLE}, #{laborCost,jdbcType=DOUBLE}, 
+      #{expectWorkinghours,jdbcType=DOUBLE}, #{safetyStock,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER}, 
+      #{picture,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{isShelf,jdbcType=INTEGER}, 
+      #{saleType,jdbcType=VARCHAR}, #{lastPushTime,jdbcType=TIMESTAMP}, #{cautionDate,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}, #{originalCode,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{timestamp,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+        insert into boutique_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="positionId != null">
+                position_id,
+            </if>
+            <if test="classify != null">
+                classify,
+            </if>
+            <if test="classifyId != null">
+                classify_id,
+            </if>
+            <if test="carClassifyId != null">
+                car_classify_id,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="constructionNode != null">
+                construction_node,
+            </if>
+            <if test="supplierId != null">
+                supplier_id,
+            </if>
+            <if test="taxPrice != null">
+                tax_price,
+            </if>
+            <if test="taxCost != null">
+                tax_cost,
+            </if>
+            <if test="coefficient != null">
+                coefficient,
+            </if>
+            <if test="unitprice != null">
+                unitprice,
+            </if>
+            <if test="workinghours != null">
+                workinghours,
+            </if>
+            <if test="laborCost != null">
+                labor_cost,
+            </if>
+            <if test="expectWorkinghours != null">
+                expect_workinghours,
+            </if>
+            <if test="safetyStock != null">
+                safety_stock,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isShelf != null">
+                is_shelf,
+            </if>
+            <if test="saleType != null">
+                sale_type,
+            </if>
+            <if test="lastPushTime != null">
+                last_push_time,
+            </if>
+            <if test="cautionDate != null">
+                caution_date,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="typeLive != null">
+                type_live,
+            </if>
+            <if test="originalCode != null">
+                original_code,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="timestamp != null">
+                timestamp,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="positionId != null">
+                #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="classify != null">
+                #{classify,jdbcType=VARCHAR},
+            </if>
+            <if test="classifyId != null">
+                #{classifyId,jdbcType=INTEGER},
+            </if>
+            <if test="carClassifyId != null">
+                #{carClassifyId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="constructionNode != null">
+                #{constructionNode,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null">
+                #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="taxPrice != null">
+                #{taxPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="taxCost != null">
+                #{taxCost,jdbcType=DECIMAL},
+            </if>
+            <if test="coefficient != null">
+                #{coefficient,jdbcType=DECIMAL},
+            </if>
+            <if test="unitprice != null">
+                #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="workinghours != null">
+                #{workinghours,jdbcType=DOUBLE},
+            </if>
+            <if test="laborCost != null">
+                #{laborCost,jdbcType=DOUBLE},
+            </if>
+            <if test="expectWorkinghours != null">
+                #{expectWorkinghours,jdbcType=DOUBLE},
+            </if>
+            <if test="safetyStock != null">
+                #{safetyStock,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isShelf != null">
+                #{isShelf,jdbcType=INTEGER},
+            </if>
+            <if test="saleType != null">
+                #{saleType,jdbcType=VARCHAR},
+            </if>
+            <if test="lastPushTime != null">
+                #{lastPushTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cautionDate != null">
+                #{cautionDate,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="typeLive != null">
+                #{typeLive,jdbcType=INTEGER},
+            </if>
+            <if test="originalCode != null">
+                #{originalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="timestamp != null">
+                #{timestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+        update boutique_information
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="classify != null">
+                classify = #{classify,jdbcType=VARCHAR},
+            </if>
+            <if test="classifyId != null">
+                classify_id = #{classifyId,jdbcType=INTEGER},
+            </if>
+            <if test="carClassifyId != null">
+                car_classify_id = #{carClassifyId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="constructionNode != null">
+                construction_node = #{constructionNode,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null">
+                supplier_id = #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="taxPrice != null">
+                tax_price = #{taxPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="taxCost != null">
+                tax_cost = #{taxCost,jdbcType=DECIMAL},
+            </if>
+            <if test="coefficient != null">
+                coefficient = #{coefficient,jdbcType=DECIMAL},
+            </if>
+            <if test="unitprice != null">
+                unitprice = #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="workinghours != null">
+                workinghours = #{workinghours,jdbcType=DOUBLE},
+            </if>
+            <if test="laborCost != null">
+                labor_cost = #{laborCost,jdbcType=DOUBLE},
+            </if>
+            <if test="expectWorkinghours != null">
+                expect_workinghours = #{expectWorkinghours,jdbcType=DOUBLE},
+            </if>
+            <if test="safetyStock != null">
+                safety_stock = #{safetyStock,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isShelf != null">
+                is_shelf = #{isShelf,jdbcType=INTEGER},
+            </if>
+            <if test="saleType != null">
+                sale_type = #{saleType,jdbcType=VARCHAR},
+            </if>
+            <if test="lastPushTime != null">
+                last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cautionDate != null">
+                caution_date = #{cautionDate,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=INTEGER},
+            </if>
+            <if test="typeLive != null">
+                type_live = #{typeLive,jdbcType=INTEGER},
+            </if>
+            <if test="originalCode != null">
+                original_code = #{originalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="timestamp != null">
+                timestamp = #{timestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+    update boutique_information
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      position_id = #{positionId,jdbcType=INTEGER},
+      classify = #{classify,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=INTEGER},
+      car_classify_id = #{carClassifyId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      construction_node = #{constructionNode,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      tax_price = #{taxPrice,jdbcType=DECIMAL},
+      tax_cost = #{taxCost,jdbcType=DECIMAL},
+      coefficient = #{coefficient,jdbcType=DECIMAL},
+      unitprice = #{unitprice,jdbcType=DECIMAL},
+      workinghours = #{workinghours,jdbcType=DOUBLE},
+      labor_cost = #{laborCost,jdbcType=DOUBLE},
+      expect_workinghours = #{expectWorkinghours,jdbcType=DOUBLE},
+      safety_stock = #{safetyStock,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      is_shelf = #{isShelf,jdbcType=INTEGER},
+      sale_type = #{saleType,jdbcType=VARCHAR},
+      last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      caution_date = #{cautionDate,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      original_code = #{originalCode,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+    update boutique_information
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      position_id = #{positionId,jdbcType=INTEGER},
+      classify = #{classify,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=INTEGER},
+      car_classify_id = #{carClassifyId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      construction_node = #{constructionNode,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      tax_price = #{taxPrice,jdbcType=DECIMAL},
+      tax_cost = #{taxCost,jdbcType=DECIMAL},
+      coefficient = #{coefficient,jdbcType=DECIMAL},
+      unitprice = #{unitprice,jdbcType=DECIMAL},
+      workinghours = #{workinghours,jdbcType=DOUBLE},
+      labor_cost = #{laborCost,jdbcType=DOUBLE},
+      expect_workinghours = #{expectWorkinghours,jdbcType=DOUBLE},
+      safety_stock = #{safetyStock,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      is_shelf = #{isShelf,jdbcType=INTEGER},
+      sale_type = #{saleType,jdbcType=VARCHAR},
+      last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      caution_date = #{cautionDate,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      original_code = #{originalCode,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getBoutiquesByWarehouseId" resultType="java.util.Map">
+        SELECT
+        bi.id boutiqueId,bi.code,bi.name,bi.tax_price taxCost,bi.stock,bw.`name`
+        warehouseName,bwp.name warehousePositionName,bi.car_classify_id familyIds
+        FROM
+        boutique_information bi
+        LEFT JOIN boutique_warehouse bw ON bi.warehouse_id = bw.id
+        LEFT JOIN boutique_warehouse_position bwp ON bi.position_id = bwp.id
+        where bi.type_live = 1 AND bw.type_live = 1 AND bwp.type_live = 1 AND bi.warehouse_id IN
+        <foreach collection="warehouseIds" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <update id="deleteById" parameterType="java.lang.Integer">
+  	UPDATE boutique_information set type_live = 0 WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <resultMap type="com.unicdata.entity.boutique.BoutiqueInformation" id="SelectResultMap" extends="BaseResultMap">
+        <result column="warehouse" jdbcType="VARCHAR" property="warehouse"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="carClassify" jdbcType="VARCHAR" property="carClassify"/>
+        <result column="brand" jdbcType="VARCHAR" property="brand"/>
+        <result column="supplier" jdbcType="VARCHAR" property="supplier"/>
+        <result column="isHost" jdbcType="VARCHAR" property="isHost"/>
+
+    </resultMap>
+
+    <select id="selectBoutiqueInfoByCondition" parameterType="com.unicdata.condition.BoutiqueInfoCondition"
+            resultMap="SelectResultMap">
+        SELECT
+        a.id AS id, a.code AS code, a.name AS name, a.warehouse_id AS warehouse_id, a.position_id AS position_id,
+        a.classify AS classify, a.classify_id AS classify_id, a.car_classify_id AS car_classify_id,
+        a.brand_id AS brand_id, a.company AS company, a.construction_node AS construction_node, a.supplier_id AS
+        supplier_id, a.tax_price AS tax_price, a.tax_cost AS tax_cost, a.coefficient AS coefficient,
+        a.unitprice AS unitprice, a.workinghours AS workinghours, a.labor_cost AS labor_cost ,a.expect_workinghours AS
+        expect_workinghours, a.safety_stock AS safety_stock, a.stock AS stock,
+        a.picture AS picture, a.remark AS remark, a.status AS status, a.is_shelf AS is_shelf, a.sale_type AS sale_type,
+        a.last_push_time AS last_push_time, a.caution_date AS caution_date, a.store_id AS store_id, a.type_live AS
+        type_live, a.original_code AS original_code, a.version AS version, a.timestamp AS timestamp,
+        b.name AS warehouse,
+        c.name AS position,
+        d.name AS brand,
+        e.name AS supplier,
+        e.is_host AS isHost
+
+        from boutique_information a
+        LEFT JOIN boutique_warehouse b ON a.warehouse_id = b.id AND b.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_warehouse_position c ON a.position_id = c.id AND c.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_brand d ON a.brand_id = d.id AND d.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_supplier e ON a.supplier_id = e.id AND e.store_id = #{storeId,jdbcType=INTEGER}
+
+        WHERE a.type_live = 1 AND a.store_id = #{storeId,jdbcType=INTEGER}
+        <if test="id != null and id != ''">
+            AND a.id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="code != null and code != ''">
+            AND a.code like CONCAT('%',#{code,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="supplierId != null and supplierId != 0">
+            AND a.supplier_id = #{supplierId,jdbcType=INTEGER}
+        </if>
+        <if test="warehouseId != null and warehouseId != 0">
+            AND a.warehouse_id = #{warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="positionId != null and positionId != 0">
+            AND a.position_id = #{positionId,jdbcType=INTEGER}
+        </if>
+        <if test="saleType != null and saleType != ''">
+            AND a.sale_type = #{saleType,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+
+    <select id="selectBoutiqueInfoDetailById" parameterType="java.lang.Integer" resultMap="SelectResultMap">
+    SELECT 
+  	a.id AS id, a.code AS code, a.name AS name, a.warehouse_id AS warehouse_id, a.position_id AS position_id, a.classify AS classify, a.classify_id AS classify_id, a.car_classify_id AS car_classify_id, 
+    a.brand_id AS brand_id, a.company AS company, a.construction_node AS construction_node, a.supplier_id AS supplier_id, a.tax_price AS tax_price, a.tax_cost AS tax_cost, a.coefficient AS coefficient, 
+    a.unitprice AS unitprice, a.workinghours AS workinghours, a.labor_cost AS labor_cost, a.expect_workinghours AS expect_workinghours,a.safety_stock AS safety_stock, a.stock AS stock, a.picture AS picture,a.remark AS remark,  a.status AS status, a.is_shelf AS is_shelf, a.sale_type AS sale_type, 
+    a.last_push_time AS last_push_time, a.caution_date AS caution_date, a.store_id AS store_id, a.type_live AS type_live , a.original_code AS original_code, a.version AS version, a.timestamp AS timestamp,
+    b.name AS warehouse,
+  	c.name AS position,
+  	d.name AS brand,
+   	e.name AS supplier,
+   	e.is_host AS  isHost 
+ 
+    from boutique_information a
+    LEFT JOIN boutique_warehouse b ON a.warehouse_id = b.id 
+    LEFT JOIN boutique_warehouse_position c ON a.position_id = c.id 
+    LEFT JOIN boutique_brand d ON a.brand_id = d.id 
+    LEFT JOIN boutique_supplier e ON a.supplier_id = e.id 
+ 
+  	WHERE a.id = #{id,jdbcType=INTEGER}
+   </select>
+
+
+    <select id="selectBoutiqueInfoById" resultMap="ResultMapWithBLOBs">
+        SELECT<include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        FROM boutique_information WHERE type_live = 1 AND
+        id = #{id,jdbcType=INTEGER} AND
+        store_id = #{storeId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectBoutiqueInfoAll" resultMap="ResultMapWithBLOBs">
+        SELECT<include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        FROM boutique_information WHERE type_live = 1 AND
+        store_id = #{storeId,jdbcType=INTEGER}
+    </select>
+
+    <update id="uppdateStock" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+  	<![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       update boutique_information set 
+       stock = #{stock,jdbcType=INTEGER}, 
+       tax_price = #{taxPrice,jdbcType=DECIMAL},
+       tax_cost = #{taxCost,jdbcType=DECIMAL},
+       unitprice = #{unitprice,jdbcType=DECIMAL},
+       sale_type = #{saleType,jdbcType=VARCHAR}, 
+       last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+       version = version + 1 
+       where 
+       id =#{id,jdbcType=INTEGER} 
+       and 
+       version = #{version,jdbcType=INTEGER}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ]]>
+  </update>
+
+    <update id="updateBoutiqueStatus" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+  	UPDATE boutique_information SET 
+  	status = #{status,jdbcType=INTEGER}
+  	WHERE id =#{id,jdbcType=INTEGER}
+  </update>
+
+    <!--精品库存-->
+    <update id="beginOutbound">
+    	<![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+
+    		UPDATE boutique_information 
+			SET stock= stock - #{stock,jdbcType=INTEGER},
+			 tax_cost= #{taxCost,jdbcType=DECIMAL},
+			 version = version + 1
+			WHERE
+				id = #{id,jdbcType=INTEGER}
+			AND (stock - #{stock,jdbcType=INTEGER}) > 0
+    		AND version = #{version,jdbcType=INTEGER}
+    		
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ]]>
+
+    </update>
+
+    <update id="updateStock" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+        <![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+
+       update boutique_information set
+       stock = #{stock,jdbcType=INTEGER},
+       tax_cost = #{taxCost,jdbcType=DECIMAL},
+       version = version + 1
+       where
+       id =#{id,jdbcType=INTEGER}
+       and
+       version = #{version,jdbcType=INTEGER}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ]]>
+    </update>
+
+    <select id="selectBoutiqueStockByStoreId" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        i.`name` AS iName,
+        i.unitprice,
+        bs.`name` AS bsName,
+        bb.`name` AS bbName,
+        i.safety_stock,
+        i.stock,
+        i.picture,
+        bw.`name` AS bwName,
+        wp.`name` AS wpName,
+        TO_DAYS(now()) - TO_DAYS(IF(i.last_push_time IS NULL,now(),i.last_push_time))  AS stayDate,
+        i.caution_date
+        FROM
+        boutique_information i
+        LEFT JOIN boutique_supplier bs ON i.supplier_id = bs.id
+        LEFT JOIN boutique_brand bb ON i.brand_id = bb.id
+        LEFT JOIN boutique_warehouse bw ON i.warehouse_id = bw.id
+        LEFT JOIN boutique_warehouse_position wp ON i.position_id = wp.id
+        WHERE
+        i.type_live = 1
+        AND bw.type_live = 1
+        AND wp.type_live = 1
+        <!--供应商id-->
+        <if test="boutiqueSupplierId!=null">
+            AND bs.id = #{boutiqueSupplierId,jdbcType=INTEGER}
+        </if>
+        <!--仓库id-->
+        <if test="boutiqueWarehouseId != null">
+            AND bw.id = #{boutiqueWarehouseId,jdbcType=INTEGER}
+        </if>
+        <!--查询开始时间-->
+        <if test="stratTime != null">
+            AND date_format(i.last_push_time, '%Y-%m-%d') &gt;= date_format(#{stratTime}, '%Y-%m-%d')
+        </if>
+        <!--查询结束时间-->
+        <if test="endTime != null">
+            AND date_format(i.last_push_time, '%Y-%m-%d') &lt;= date_format(#{endTime}, '%Y-%m-%d')
+        </if>
+        <!--是否上下架-->
+        <if test="status != null">
+            AND i.status = #{status,jdbcType=INTEGER}
+        </if>
+        <!--精品名称搜索-->
+        <if test="name != null and name !=''">
+            AND i.`name` LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="storeId!=null">
+            AND i.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="bl==0">
+            AND i.stock &lt;= i.safety_stock
+        </if>
+        <if test="bl==1">
+            AND i.caution_date &lt;= (TO_DAYS(now()) - TO_DAYS(IF(i.last_push_time IS NULL,now(),i.last_push_time)))
+        </if>
+        <if test="stayDate != null">
+            AND i.caution_date &lt;= (TO_DAYS(now()) - TO_DAYS(IF(i.last_push_time IS NULL,now(),i.last_push_time)))
+        </if>
+    </select>
+
+    <select id="selectBoutiqueStockByStoreIdPage" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        i.code AS code,
+        i.`name` AS iName,
+        i.unitprice,
+        bs.`name` AS bsName,
+        bb.`name` AS bbName,
+        i.safety_stock,
+        i.stock,
+        bw.`name` AS bwName,
+        wp.`name` AS wpName,
+        TO_DAYS(now()) - TO_DAYS(IF(i.last_push_time IS NULL,now(),i.last_push_time)) AS stayDate,
+        i.caution_date
+        FROM
+        boutique_information i
+        LEFT JOIN boutique_supplier bs ON i.supplier_id = bs.id
+        LEFT JOIN boutique_brand bb ON i.brand_id = bb.id
+        LEFT JOIN boutique_warehouse bw ON i.warehouse_id = bw.id
+        LEFT JOIN boutique_warehouse_position wp ON i.position_id = wp.id
+        WHERE
+        i.type_live = 1
+        AND bw.type_live = 1
+        AND wp.type_live = 1
+        <if test="storeId!=null">
+            AND i.store_id = #{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="bl==0">
+            AND i.stock &lt;= i.safety_stock
+        </if>
+        <if test="bl==1">
+            AND i.stock &gt; i.safety_stock
+        </if>
+        <if test="stayDate != null">
+            AND i.caution_date &lt;= (TO_DAYS(now()) - TO_DAYS(IF(i.last_push_time IS NULL,now(),i.last_push_time)))
+        </if>
+
+    </select>
+
+    <update id="updateWareHouseAndStock" parameterType="com.unicdata.entity.boutique.BoutiqueInformation">
+    <![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+       UPDATE boutique_information SET
+       tax_cost = #{taxCost,jdbcType=DECIMAL},
+       warehouse_id = #{warehouseId,jdbcType=INTEGER},
+       position_id = #{positionId,jdbcType=INTEGER},
+       stock = #{stock,jdbcType=INTEGER},
+       version = version + 1
+       WHERE
+       id =#{id,jdbcType=INTEGER}
+       AND
+       version = #{version,jdbcType=INTEGER}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ]]>
+    	
+    </update>
+
+    <select id="selectBoutiqueInfoListByCondition" parameterType="com.unicdata.condition.BoutiqueInfoCondition"
+            resultMap="SelectResultMap">
+        SELECT
+        a.id AS id, a.code AS code, a.name AS name, a.warehouse_id AS warehouse_id, a.position_id AS position_id,
+        a.classify AS classify, a.classify_id AS classify_id, a.car_classify_id AS car_classify_id,
+        a.brand_id AS brand_id, a.company AS company, a.construction_node AS construction_node, a.supplier_id AS
+        supplier_id, a.tax_price AS tax_price, a.tax_cost AS tax_cost, a.coefficient AS coefficient,
+        a.unitprice AS unitprice, a.workinghours AS workinghours, a.labor_cost AS labor_cost, a.expect_workinghours AS
+        expect_workinghours ,a.safety_stock AS safety_stock, a.stock AS stock,
+        a.picture AS picture, a.status AS status, a.is_shelf AS is_shelf, a.sale_type AS sale_type,
+        a.last_push_time AS last_push_time, a.caution_date AS caution_date, a.store_id AS store_id, a.type_live AS
+        type_live , a.original_code AS original_code , a.version AS version, a.timestamp AS timestamp,
+        b.name AS warehouse,
+        c.name AS position,
+        d.name AS brand,
+        e.name AS supplier,
+        e.is_host AS isHost
+
+        FROM boutique_information a
+        LEFT JOIN boutique_warehouse b ON a.warehouse_id = b.id AND b.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_warehouse_position c ON a.position_id = c.id AND c.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_brand d ON a.brand_id = d.id AND d.store_id = #{storeId,jdbcType=INTEGER}
+        LEFT JOIN boutique_supplier e ON a.supplier_id = e.id AND e.store_id = #{storeId,jdbcType=INTEGER}
+
+        WHERE a.type_live = 1 AND a.store_id = #{storeId,jdbcType=INTEGER}
+        <if test="code != null and code != ''">
+            AND a.code like CONCAT('%',#{code,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="supplierId != null and supplierId != 0">
+            AND a.supplier_id = #{supplierId,jdbcType=INTEGER}
+        </if>
+        <if test="warehouseId != null and warehouseId != 0">
+            AND a.warehouse_id = #{warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="positionId != null and positionId != 0">
+            AND a.position_id = #{positionId,jdbcType=INTEGER}
+        </if>
+
+    </select>
+
+    <select id="selectCountUseByClassifyId" resultType="java.lang.Integer">
+    	SELECT COUNT(1) FROM boutique_information 
+    	WHERE 
+    	classify_id = #{classifyId,jdbcType=INTEGER} 
+    	AND store_id = #{storeId,jdbcType=INTEGER}
+    	AND type_live = 1
+    </select>
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO boutique_information (id, code, name,
+        warehouse_id, position_id, classify,
+        classify_id, car_classify_id, brand_id,
+        company, construction_node, supplier_id,
+        tax_price, tax_cost, coefficient,
+        unitprice, workinghours, labor_cost,
+        expect_workinghours, safety_stock, stock,
+        picture, status, is_shelf,
+        sale_type, last_push_time, caution_date,
+        store_id, type_live, original_code,
+        version, timestamp, remark
+        )
+        VALUES
+        <foreach collection="list" item="info" index="index" separator=",">
+            (null, #{info.code,jdbcType=VARCHAR}, #{info.name,jdbcType=VARCHAR},
+            #{info.warehouseId,jdbcType=INTEGER}, #{info.positionId,jdbcType=INTEGER},
+            #{info.classify,jdbcType=VARCHAR},
+            #{info.classifyId,jdbcType=INTEGER}, #{info.carClassifyId,jdbcType=VARCHAR},
+            #{info.brandId,jdbcType=INTEGER},
+            #{info.company,jdbcType=VARCHAR}, #{info.constructionNode,jdbcType=INTEGER},
+            #{info.supplierId,jdbcType=INTEGER},
+            #{info.taxPrice,jdbcType=DECIMAL}, #{info.taxCost,jdbcType=DECIMAL}, #{info.coefficient,jdbcType=DECIMAL},
+            #{info.unitprice,jdbcType=DECIMAL}, #{info.workinghours,jdbcType=DOUBLE}, #{info.laborCost,jdbcType=DOUBLE},
+            #{info.expectWorkinghours,jdbcType=DOUBLE}, #{info.safetyStock,jdbcType=INTEGER},
+            #{info.stock,jdbcType=INTEGER},
+            #{info.picture,jdbcType=VARCHAR}, #{info.status,jdbcType=INTEGER}, #{info.isShelf,jdbcType=INTEGER},
+            #{info.saleType,jdbcType=VARCHAR}, #{info.lastPushTime,jdbcType=TIMESTAMP},
+            #{info.cautionDate,jdbcType=VARCHAR},
+            #{info.storeId,jdbcType=INTEGER}, #{info.typeLive,jdbcType=INTEGER}, #{info.originalCode,jdbcType=VARCHAR},
+            #{info.version,jdbcType=INTEGER}, #{info.timestamp,jdbcType=TIMESTAMP}, #{info.remark,jdbcType=LONGVARCHAR}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

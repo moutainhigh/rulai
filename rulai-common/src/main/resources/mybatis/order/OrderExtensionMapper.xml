@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.order.OrderExtensionMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.order.OrderExtension">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="extension_id" jdbcType="INTEGER" property="extensionId" />
+    <result column="sum_price" jdbcType="DECIMAL" property="sumPrice" />
+    <result column="donation_amount" jdbcType="DECIMAL" property="donationAmount" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="margin" jdbcType="DECIMAL" property="margin" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="is_gift" jdbcType="TINYINT" property="isGift" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="deadline" jdbcType="DATE" property="deadline" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, extension_id, sum_price,donation_amount,total_amount,margin, remarks, is_gift, create_time, state, deadline, 
+    number
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.order.OrderExtensionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_extension
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_extension
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_extension
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.order.OrderExtension">
+    insert into order_extension (id, order_id, extension_id, 
+      sum_price,donation_amount,total_amount,margin, remarks, is_gift, 
+      create_time, state, deadline, 
+      number)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{extensionId,jdbcType=INTEGER}, 
+      #{sumPrice,jdbcType=DECIMAL},#{donationAmount,jdbcType=DECIMAL},#{totalAmount,jdbcType=DECIMAL},
+      #{margin,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR}, #{isGift,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{deadline,jdbcType=DATE}, 
+      #{number,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.order.OrderExtension">
+    insert into order_extension
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="extensionId != null">
+        extension_id,
+      </if>
+      <if test="sumPrice != null">
+        sum_price,
+      </if>
+      <if test="donationAmount != null">
+        donation_amount,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="margin != null">
+        margin,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isGift != null">
+        is_gift,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="extensionId != null">
+        #{extensionId,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="donationAmount != null">
+        #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="margin != null">
+        #{margin,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isGift != null">
+        #{isGift,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.order.OrderExtension">
+    update order_extension
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="extensionId != null">
+        extension_id = #{extensionId,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        sum_price = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="donationAmount != null">
+        donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="margin != null">
+        margin = #{margin,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isGift != null">
+        is_gift = #{isGift,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.order.OrderExtension">
+    update order_extension
+    set order_id = #{orderId,jdbcType=INTEGER},
+      extension_id = #{extensionId,jdbcType=INTEGER},
+      sum_price = #{sumPrice,jdbcType=DECIMAL},
+      margin = #{margin,jdbcType=DECIMAL},
+      donation_amount = #{donationAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      is_gift = #{isGift,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=DATE},
+      number = #{number,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByOrderId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT
+    oe.id,
+    oe.extension_id extensionId,
+    oe.total_amount totalAmount,
+    ei.`name` as insuranceName,
+    ie.`name` as companyName,
+    ie.price
+    from order_extension oe
+    LEFT JOIN insurance_extension ie ON oe.extension_id =ie.id
+    LEFT JOIN extension_insurance_company ei ON ei.id=ie.extension_id
+    WHERE oe.order_id=#{orderId,jdbcType=INTEGER}
+  </select>
+
+    <select id="getOrderExtension" resultType="java.util.Map">
+    SELECT
+    e.id extensionOrderId,
+    i.`name` companyName,
+    x.`name` extensionName,
+    e.is_gift isGift,
+    e.remarks,
+    e.state,
+    e.sum_price sumPrice,
+    e.donation_amount donationAmount,
+    e.total_amount totalAmount,
+    e.margin,
+    x.price extensionPrice
+    FROM
+    order_extension e
+    LEFT JOIN insurance_extension x ON e.extension_id = x.id
+    LEFT JOIN extension_insurance_company i ON x.extension_id = i.id
+    WHERE
+    e.order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectListByParams" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        oe.id,
+        o.order_num orderNum,
+        oe.number insuranceNum,
+        oe.state extensionState,
+        ie.name extensionName,
+        oe.deadline,
+        o.cus_name cusName,
+        o.cus_iphone cusPhone,
+        o.use_name useName,
+        o.use_iphone usePhone,
+        cvc. NAME vehicleName,
+        cvc.extend_warranty_year extendWarrantyYear,
+        cvc.extend_warranty_mile extendWarrantyMile,
+        cgi.vin,
+        o. STATUS orderState,
+        e.full_name employeeName,
+        cf.name familyName
+        FROM
+        order_extension oe
+        LEFT JOIN insurance_extension ie ON oe.extension_id = ie.id
+        LEFT JOIN `order` o ON oe.order_id = o.id
+        LEFT JOIN employee e ON o.create_id = e.id
+        LEFT JOIN car_good_info cgi ON o.car_id = cgi.id
+        LEFT JOIN car_family cf ON cgi.family_id = cf.id
+        LEFT JOIN car_vehicle_conf cvc ON cgi.vehicle_id = cvc.id
+        WHERE
+        o.`status` IN(3,4,9)
+        <if test="storeId != null and storeId != ''">
+            AND e.store_id = #{storeId}
+        </if>
+        <if test="insuranceNum != null and insuranceNum != ''">
+            AND oe.number LIKE CONCAT('%',#{insuranceNum},'%')
+        </if>
+        <if test="insuranceState != null">
+            AND oe.state LIKE CONCAT('%',#{insuranceState},'%')
+        </if>
+        <if test="cusName != null and cusName != ''">
+            AND o.cus_name LIKE CONCAT('%',#{cusName},'%')
+        </if>
+        <if test="cusPhone != null and cusPhone != ''">
+            AND o.cus_iphone LIKE CONCAT('%',#{cusPhone},'%')
+        </if>
+        <if test="vin != null and vin != ''">
+            AND cgi.vin LIKE CONCAT('%',#{vin},'%')
+        </if>
+        <if test="orderNum != null and orderNum != ''">
+            AND o.order_num LIKE CONCAT('%',#{orderNum},'%')
+        </if>
+        <if test="orderState != null">
+            AND o.status LIKE CONCAT('%',#{orderState},'%')
+        </if>
+        <if test="beginTime != null and beginTime !=''">
+            AND oe.deadline &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            AND oe.deadline &lt; #{endTime}
+        </if>
+        ORDER BY oe.create_time DESC
+    </select>
+    <delete id="deleteByOrderId" parameterType="java.lang.Integer">
+    	delete from order_extension
+   	 where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <select id="getOrderExtensionByOrderId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_extension
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+</mapper>

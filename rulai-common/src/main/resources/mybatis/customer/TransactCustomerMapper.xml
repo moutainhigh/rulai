@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.customer.TransactCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.TransactCustomer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="duty_name" property="dutyName" jdbcType="VARCHAR" />
+    <result column="cause" property="cause" jdbcType="VARCHAR" />
+    <result column="license_plate" property="licensePlate" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="data_status" property="dataStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, phone_num, duty_name, cause, license_plate, group_id, store_id, create_date, 
+    data_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from transact_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transact_customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.customer.TransactCustomer" >
+    insert into transact_customer (id, name, phone_num, 
+      duty_name, cause, license_plate, 
+      group_id, store_id, create_date, 
+      data_status)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{dutyName,jdbcType=VARCHAR}, #{cause,jdbcType=VARCHAR}, #{licensePlate,jdbcType=VARCHAR}, 
+      #{groupId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{dataStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.customer.TransactCustomer" >
+    insert into transact_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="dutyName != null" >
+        duty_name,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+      <if test="licensePlate != null" >
+        license_plate,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="dataStatus != null" >
+        data_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyName != null" >
+        #{dutyName,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlate != null" >
+        #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.TransactCustomer" >
+    update transact_customer
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyName != null" >
+        duty_name = #{dutyName,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePlate != null" >
+        license_plate = #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        data_status = #{dataStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.TransactCustomer" >
+    update transact_customer
+    set name = #{name,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      duty_name = #{dutyName,jdbcType=VARCHAR},
+      cause = #{cause,jdbcType=VARCHAR},
+      license_plate = #{licensePlate,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 办事人员列表 wp-->
+  <select id="selectTransactCustomer" parameterType="java.util.Map" resultType="java.util.Map">
+  	 select 
+      id, 
+      name, 
+      phone_num, 
+      duty_name, 
+      cause, 
+      license_plate, 
+      group_id, 
+      store_id, 
+      DATE_FORMAT(create_date,'%H:%i') create_date,
+      data_status
+      from transact_customer 
+      where data_status = 1
+     <if test="name != null and name !=''">
+    	AND name like CONCAT('%',#{name},'%') 
+    	or phone_num like CONCAT('%',#{name},'%') 
+    	or duty_name like CONCAT('%',#{name},'%') 
+     </if>
+      <if test="createDate != null" >
+       AND DATE_FORMAT(create_date,'%Y-%m-%d')=DATE_FORMAT(#{createDate},'%Y-%m-%d')
+      </if>
+     <if test="storeId !=null and storeId !=''">
+        AND store_id =#{storeId}
+     </if>
+  </select>
+  
+</mapper>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiquePushWarehouseDetailMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiquePushWarehouseDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="push_id" jdbcType="INTEGER" property="pushId" />
+    <result column="boutique_id" jdbcType="INTEGER" property="boutiqueId" />
+    <result column="boutique_code" jdbcType="VARCHAR" property="boutiqueCode" />
+    <result column="boutique_name" jdbcType="VARCHAR" property="boutiqueName" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="tax_unit_price" jdbcType="DECIMAL" property="taxUnitPrice" />
+    <result column="tax_cost" jdbcType="DECIMAL" property="taxCost" />
+    <result column="sales_cost" jdbcType="DECIMAL" property="salesCost" />
+    <result column="sales_type" jdbcType="VARCHAR" property="salesType" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, push_id, boutique_id, boutique_code, boutique_name, stock, tax_unit_price, tax_cost, 
+    sales_cost, sales_type, store_id, timestamp, type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiquePushWarehouseDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_push_warehouse_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_push_warehouse_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_push_warehouse_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiquePushWarehouseDetail">
+    insert into boutique_push_warehouse_detail (id, push_id, boutique_id, 
+      boutique_code, boutique_name, stock, 
+      tax_unit_price, tax_cost, sales_cost, 
+      sales_type, store_id, timestamp, 
+      type_live)
+    values (#{id,jdbcType=INTEGER}, #{pushId,jdbcType=INTEGER}, #{boutiqueId,jdbcType=INTEGER}, 
+      #{boutiqueCode,jdbcType=VARCHAR}, #{boutiqueName,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, 
+      #{taxUnitPrice,jdbcType=DECIMAL}, #{taxCost,jdbcType=DECIMAL}, #{salesCost,jdbcType=DECIMAL}, 
+      #{salesType,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{timestamp,jdbcType=TIMESTAMP}, 
+      #{typeLive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiquePushWarehouseDetail">
+    insert into boutique_push_warehouse_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pushId != null">
+        push_id,
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id,
+      </if>
+      <if test="boutiqueCode != null">
+        boutique_code,
+      </if>
+      <if test="boutiqueName != null">
+        boutique_name,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="taxUnitPrice != null">
+        tax_unit_price,
+      </if>
+      <if test="taxCost != null">
+        tax_cost,
+      </if>
+      <if test="salesCost != null">
+        sales_cost,
+      </if>
+      <if test="salesType != null">
+        sales_type,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pushId != null">
+        #{pushId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueCode != null">
+        #{boutiqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="boutiqueName != null">
+        #{boutiqueName,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="taxUnitPrice != null">
+        #{taxUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="taxCost != null">
+        #{taxCost,jdbcType=DECIMAL},
+      </if>
+      <if test="salesCost != null">
+        #{salesCost,jdbcType=DECIMAL},
+      </if>
+      <if test="salesType != null">
+        #{salesType,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiquePushWarehouseDetail">
+    update boutique_push_warehouse_detail
+    <set>
+      <if test="pushId != null">
+        push_id = #{pushId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueCode != null">
+        boutique_code = #{boutiqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="boutiqueName != null">
+        boutique_name = #{boutiqueName,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="taxUnitPrice != null">
+        tax_unit_price = #{taxUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="taxCost != null">
+        tax_cost = #{taxCost,jdbcType=DECIMAL},
+      </if>
+      <if test="salesCost != null">
+        sales_cost = #{salesCost,jdbcType=DECIMAL},
+      </if>
+      <if test="salesType != null">
+        sales_type = #{salesType,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiquePushWarehouseDetail">
+    update boutique_push_warehouse_detail
+    set push_id = #{pushId,jdbcType=INTEGER},
+      boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      boutique_code = #{boutiqueCode,jdbcType=VARCHAR},
+      boutique_name = #{boutiqueName,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      tax_unit_price = #{taxUnitPrice,jdbcType=DECIMAL},
+      tax_cost = #{taxCost,jdbcType=DECIMAL},
+      sales_cost = #{salesCost,jdbcType=DECIMAL},
+      sales_type = #{salesType,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectPushWarehouseById" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_push_warehouse_detail 
+  	WHERE store_id = #{storeId,jdbcType=INTEGER}
+  	<if test="id != null and id != 0">
+  		AND push_id = #{id,jdbcType=INTEGER}
+  	</if>
+  </select>
+  
+</mapper>

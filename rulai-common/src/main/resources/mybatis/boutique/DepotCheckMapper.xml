@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.DepotCheckMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.DepotCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="check_name" jdbcType="VARCHAR" property="checkName" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="warehouse_ids" jdbcType="VARCHAR" property="warehouseIds" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="checker" jdbcType="VARCHAR" property="checker" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="gain" jdbcType="DECIMAL" property="gain" />
+    <result column="loss" jdbcType="DECIMAL" property="loss" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="adjusted" jdbcType="BIT" property="adjusted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, check_name, check_time, warehouse_ids, state, checker, remark, gain, 
+    loss, store_id, adjusted
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.DepotCheckExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from depot_check
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from depot_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from depot_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.DepotCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into depot_check (id, number, check_name, 
+      check_time, warehouse_ids, state, 
+      checker, remark, gain, 
+      loss, store_id, adjusted
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{checkName,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP}, #{warehouseIds,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{checker,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{gain,jdbcType=DECIMAL}, 
+      #{loss,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, #{adjusted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.DepotCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into depot_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="checkName != null">
+        check_name,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="warehouseIds != null">
+        warehouse_ids,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="checker != null">
+        checker,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="gain != null">
+        gain,
+      </if>
+      <if test="loss != null">
+        loss,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="adjusted != null">
+        adjusted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="checkName != null">
+        #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseIds != null">
+        #{warehouseIds,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="checker != null">
+        #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gain != null">
+        #{gain,jdbcType=DECIMAL},
+      </if>
+      <if test="loss != null">
+        #{loss,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="adjusted != null">
+        #{adjusted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.DepotCheck">
+    update depot_check
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="checkName != null">
+        check_name = #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouseIds != null">
+        warehouse_ids = #{warehouseIds,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="checker != null">
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gain != null">
+        gain = #{gain,jdbcType=DECIMAL},
+      </if>
+      <if test="loss != null">
+        loss = #{loss,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="adjusted != null">
+        adjusted = #{adjusted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.DepotCheck">
+    update depot_check
+    set number = #{number,jdbcType=VARCHAR},
+      check_name = #{checkName,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      warehouse_ids = #{warehouseIds,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      checker = #{checker,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      gain = #{gain,jdbcType=DECIMAL},
+      loss = #{loss,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=INTEGER},
+      adjusted = #{adjusted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCheckByNumber" parameterType="java.lang.String" resultType="com.unicdata.entity.boutique.DepotCheck">
+    select * from depot_check where number = #{number,jdbcType=VARCHAR} and state = 0
+  </select>
+
+  <select id="selectListByParams" resultType="java.util.Map">
+    select id,number,check_name checkName,DATE_FORMAT(check_time,'%Y-%m-%d %H:%i') checkTime,
+    warehouse_ids warehouseIds,state,checker,remark
+    from
+    depot_check
+    where 1 = 1
+    <if test="storeId != null">
+      AND store_id = #{storeId,jdbcType=INTEGER}
+    </if>
+    <if test="number != null and number !=''">
+      AND number LIKE CONCAT('%',#{number},'%')
+    </if>
+    <if test="beginTime != null and beginTime !=''">
+      AND check_time &gt;= #{beginTime}
+    </if>
+    <if test="endTime != null and endTime !=''">
+      AND check_time &lt; #{endTime}
+    </if>
+    <if test="warehouseIds != null and warehouseIds!=''">
+      AND warehouse_ids = #{warehouseIds}
+    </if>
+    <if test="state != null">
+      AND state = #{state}
+    </if>
+    ORDER BY id DESC
+  </select>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.car.CarOutstorgeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarOutstorgeRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_id" property="carId" jdbcType="INTEGER" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="outstore_time" property="outstoreTime" jdbcType="TIMESTAMP" />
+    <result column="outstore_type" property="outstoreType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_id, operator_id, outstore_time, outstore_type, status, store_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_outstorge_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_outstorge_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarOutstorgeRecord" >
+    insert into car_outstorge_record (id, car_id, operator_id, 
+      outstore_time, outstore_type, status, 
+      store_id)
+    values (#{id,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER}, 
+      #{outstoreTime,jdbcType=TIMESTAMP}, #{outstoreType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{storeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarOutstorgeRecord" >
+    insert into car_outstorge_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="outstoreTime != null" >
+        outstore_time,
+      </if>
+      <if test="outstoreType != null" >
+        outstore_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="outstoreTime != null" >
+        #{outstoreTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outstoreType != null" >
+        #{outstoreType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarOutstorgeRecord" >
+    update car_outstorge_record
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="outstoreTime != null" >
+        outstore_time = #{outstoreTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outstoreType != null" >
+        outstore_type = #{outstoreType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarOutstorgeRecord" >
+    update car_outstorge_record
+    set car_id = #{carId,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      outstore_time = #{outstoreTime,jdbcType=TIMESTAMP},
+      outstore_type = #{outstoreType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

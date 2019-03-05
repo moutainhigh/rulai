@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.customer.TestDriveMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.TestDrive">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cus_id" jdbcType="INTEGER" property="cusId"/>
+        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+        <result column="salesman_id" jdbcType="INTEGER" property="salesmanId"/>
+        <result column="drive_time" jdbcType="INTEGER" property="driveTime"/>
+        <result column="purpose" jdbcType="VARCHAR" property="purpose"/>
+        <result column="drive_mileage" jdbcType="INTEGER" property="driveMileage"/>
+        <result column="end_mileage" jdbcType="INTEGER" property="endMileage"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="drivers_license" jdbcType="VARCHAR" property="driversLicense"/>
+        <result column="agreement" jdbcType="VARCHAR" property="agreement"/>
+        <result column="vehicle_id" jdbcType="INTEGER" property="vehicleId"/>
+        <result column="vehicle_name" jdbcType="VARCHAR" property="vehicleName"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="perfect_state" jdbcType="TINYINT" property="perfectState"/>
+        <result column="test_car_id" jdbcType="INTEGER" property="testCarId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, cus_id, employee_id, salesman_id, drive_time, purpose, drive_mileage, end_mileage, 
+    create_time, status, drivers_license, agreement, vehicle_id, vehicle_name, end_time, 
+    perfect_state, test_car_id
+  </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.customer.TestDriveExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from test_drive
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from test_drive
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_drive
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.customer.TestDrive">
+    insert into test_drive (id, cus_id, employee_id, 
+      salesman_id, drive_time, purpose, 
+      drive_mileage, end_mileage, create_time, 
+      status, drivers_license, agreement, 
+      vehicle_id, vehicle_name, end_time, 
+      perfect_state, test_car_id)
+    values (#{id,jdbcType=INTEGER}, #{cusId,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, 
+      #{salesmanId,jdbcType=INTEGER}, #{driveTime,jdbcType=INTEGER}, #{purpose,jdbcType=VARCHAR}, 
+      #{driveMileage,jdbcType=INTEGER}, #{endMileage,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{driversLicense,jdbcType=VARCHAR}, #{agreement,jdbcType=VARCHAR}, 
+      #{vehicleId,jdbcType=INTEGER}, #{vehicleName,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{perfectState,jdbcType=TINYINT}, #{testCarId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.customer.TestDrive" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into test_drive
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cusId != null">
+                cus_id,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="salesmanId != null">
+                salesman_id,
+            </if>
+            <if test="driveTime != null">
+                drive_time,
+            </if>
+            <if test="purpose != null">
+                purpose,
+            </if>
+            <if test="driveMileage != null">
+                drive_mileage,
+            </if>
+            <if test="endMileage != null">
+                end_mileage,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="driversLicense != null">
+                drivers_license,
+            </if>
+            <if test="agreement != null">
+                agreement,
+            </if>
+            <if test="vehicleId != null">
+                vehicle_id,
+            </if>
+            <if test="vehicleName != null">
+                vehicle_name,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="perfectState != null">
+                perfect_state,
+            </if>
+            <if test="testCarId != null">
+                test_car_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="cusId != null">
+                #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="salesmanId != null">
+                #{salesmanId,jdbcType=INTEGER},
+            </if>
+            <if test="driveTime != null">
+                #{driveTime,jdbcType=INTEGER},
+            </if>
+            <if test="purpose != null">
+                #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="driveMileage != null">
+                #{driveMileage,jdbcType=INTEGER},
+            </if>
+            <if test="endMileage != null">
+                #{endMileage,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="driversLicense != null">
+                #{driversLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="agreement != null">
+                #{agreement,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleId != null">
+                #{vehicleId,jdbcType=INTEGER},
+            </if>
+            <if test="vehicleName != null">
+                #{vehicleName,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="perfectState != null">
+                #{perfectState,jdbcType=TINYINT},
+            </if>
+            <if test="testCarId != null">
+                #{testCarId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.TestDrive">
+        update test_drive
+        <set>
+            <if test="cusId != null">
+                cus_id = #{cusId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="salesmanId != null">
+                salesman_id = #{salesmanId,jdbcType=INTEGER},
+            </if>
+            <if test="driveTime != null">
+                drive_time = #{driveTime,jdbcType=INTEGER},
+            </if>
+            <if test="purpose != null">
+                purpose = #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="driveMileage != null">
+                drive_mileage = #{driveMileage,jdbcType=INTEGER},
+            </if>
+            <if test="endMileage != null">
+                end_mileage = #{endMileage,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="driversLicense != null">
+                drivers_license = #{driversLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="agreement != null">
+                agreement = #{agreement,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleId != null">
+                vehicle_id = #{vehicleId,jdbcType=INTEGER},
+            </if>
+            <if test="vehicleName != null">
+                vehicle_name = #{vehicleName,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="perfectState != null">
+                perfect_state = #{perfectState,jdbcType=TINYINT},
+            </if>
+            <if test="testCarId != null">
+                test_car_id = #{testCarId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.TestDrive">
+    update test_drive
+    set cus_id = #{cusId,jdbcType=INTEGER},
+      employee_id = #{employeeId,jdbcType=INTEGER},
+      salesman_id = #{salesmanId,jdbcType=INTEGER},
+      drive_time = #{driveTime,jdbcType=INTEGER},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      drive_mileage = #{driveMileage,jdbcType=INTEGER},
+      end_mileage = #{endMileage,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      drivers_license = #{driversLicense,jdbcType=VARCHAR},
+      agreement = #{agreement,jdbcType=VARCHAR},
+      vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      vehicle_name = #{vehicleName,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      perfect_state = #{perfectState,jdbcType=TINYINT},
+      test_car_id = #{testCarId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getCurrentMothTestDrive" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        IFNULL(COUNT(1),0)
+        FROM
+        test_drive td LEFT JOIN employee e ON td.employee_id = e.id
+        WHERE
+        DATE_FORMAT(create_time, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
+        <if test="employeeId != null">
+            AND td.employee_id = #{employeeId}
+        </if>
+        <if test="storeId != null">
+            AND e.store_id = #{storeId}
+        </if>
+    </select>
+
+    <!--通过客户id获取试驾信息-->
+    <select id="selectByCusId" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        td.id,
+        cf.`name` as carFamilyName,
+        td.drive_mileage,
+        td.end_mileage,
+        e.full_name,
+        td.create_time,
+        td.end_time,
+        CONCAT(
+        IFNULL(DATE_FORMAT(td.create_time, '%H:%i'),DATE_FORMAT(now(), '%H:%i')),
+        '~',
+        IFNULL(DATE_FORMAT(td.end_time, '%H:%i'),'')
+        ) AS drive_time,
+        td.perfect_state as perfectState
+        FROM
+        test_drive td
+        LEFT JOIN employee e ON td.employee_id = e.id
+        LEFT JOIN car_family cf ON cf.id = td.vehicle_id
+        where 1=1
+        <if test="cusId != null">
+            AND td.cus_id = #{cusId,jdbcType=INTEGER}
+        </if>
+        <if test="storeId != null">
+            AND e.store_id=#{storeId}
+        </if>
+    </select>
+
+    <select id="getTestDrivesByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM test_drive
+        where cus_id = #{cusId,jdbcType=INTEGER}
+        <if test="status != null">
+            AND status=#{status}
+        </if>
+        <if test="perfectState != null">
+            AND perfect_state=#{perfectState}
+        </if>
+    </select>
+    <!-- 根据cusid和employeeID查试驾ID  wp-->
+    <select id="selectTestDriveId" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT id FROM test_drive
+	WHERE cus_id=#{cusid}
+	ORDER BY create_time  DESC LIMIT 1
+    </select>
+    <select id="getTestDriveListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM test_drive
+        where cus_id = #{cusId,jdbcType=INTEGER}
+        <if test="status != null">
+            AND status=#{status}
+        </if>
+        <if test="perfectState != null">
+            AND perfect_state=#{perfectState}
+        </if>
+    </select>
+
+    <!--通过车辆id获取试驾记录-->
+    <select id="selectByCarId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+        DATE_FORMAT(td.create_time,'%Y-%m-%d %H:%i:%s')begineTime,
+        DATE_FORMAT(td.end_time,'%Y-%m-%d %H:%i:%s')endTime,
+        e.full_name as salesmanName,
+        c.name as cusName,
+        c.phone as cusPhone,
+        td.drive_mileage as begineMile,
+        td.end_mileage as endMile
+        FROM
+        test_drive td
+        LEFT JOIN employee e ON td.salesman_id = e.id
+        LEFT JOIN customer c ON td.cus_id = c.id
+        WHERE
+        td.status = 2
+        <if test="_parameter != null">
+            AND td.test_car_id = #{testCarId,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

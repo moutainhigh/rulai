@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueClassifyMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueClassify">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="classify" jdbcType="VARCHAR" property="classify" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="have_son" jdbcType="INTEGER" property="haveSon" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="classify_use" jdbcType="INTEGER" property="classifyUse" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, classify, level, have_son, parent_id, store_id, code, classify_use, type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueClassifyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_classify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_classify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_classify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueClassify">
+    insert into boutique_classify (id, classify, level, 
+      have_son, parent_id, store_id, 
+      code, classify_use, type_live
+      )
+    values (#{id,jdbcType=INTEGER}, #{classify,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{haveSon,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{code,jdbcType=VARCHAR}, #{classifyUse,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueClassify">
+    insert into boutique_classify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classify != null">
+        classify,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="haveSon != null">
+        have_son,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="classifyUse != null">
+        classify_use,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classify != null">
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="haveSon != null">
+        #{haveSon,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyUse != null">
+        #{classifyUse,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueClassify">
+    update boutique_classify
+    <set>
+      <if test="classify != null">
+        classify = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="haveSon != null">
+        have_son = #{haveSon,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyUse != null">
+        classify_use = #{classifyUse,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueClassify">
+    update boutique_classify
+    set classify = #{classify,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      have_son = #{haveSon,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      classify_use = #{classifyUse,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <update id="updateParent" parameterType="INTEGER">
+  	update boutique_classify
+    set 
+    have_son = 1
+    where id = #{parentId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectBoutiqueClassifyAll" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_classify where store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectBoutiqueClassifyAllType" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_classify where  store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+ 
+  <update id="deleteById" parameterType="java.lang.Integer">
+  	UPDATE boutique_classify SET type_live = 0 WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectBoutiqueClassifyByLevel" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_classify where type_live = 1 
+  	<if test="level != null">
+  		AND level = #{level,jdbcType=INTEGER}
+  	</if>
+  	<if test="parentId != null">
+  		AND parent_id = #{parentId,jdbcType=INTEGER}
+  	</if>
+  </select>
+  
+  <select id="selectSonClassifyLiveByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_classify where type_live = 1 
+  	<if test="parentId != null">
+  		AND parent_id = #{parentId,jdbcType=INTEGER}
+  	</if>
+  </select>
+  
+  <update id="updateClassifyUse" parameterType="java.lang.Integer">
+  	UPDATE boutique_classify SET classify_use = 1
+  	WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateClassifyNotUse" parameterType="java.lang.Integer">
+  	UPDATE boutique_classify SET classify_use = 0
+  	WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectClassifyByCode" resultMap="BaseResultMap">
+	  SELECT <include refid="Base_Column_List"/>
+		FROM boutique_classify
+		WHERE store_id = #{storeId,jdbcType=INTEGER}
+      	AND code = #{code,jdbcType=VARCHAR}
+      	AND classify = #{classify,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectCountByLevelAndCode4Add" resultType="java.lang.Integer">
+  	SELECT COUNT(1) FROM boutique_classify
+  	WHERE code = #{code,jdbcType=VARCHAR} AND 
+		  level = #{level,jdbcType=INTEGER} AND
+		  store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectCountByLevelAndCode4Update" resultType="java.lang.Integer">
+  	SELECT COUNT(1) FROM boutique_classify
+  	WHERE code = #{code,jdbcType=VARCHAR} AND 
+		  level = #{level,jdbcType=INTEGER} AND
+		  store_id = #{storeId,jdbcType=INTEGER} AND
+		  id != #{id,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiquePackageMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiquePackage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="salve_value" jdbcType="DECIMAL" property="salveValue" />
+    <result column="car_ids" jdbcType="VARCHAR" property="carIds" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="include_num" jdbcType="INTEGER" property="includeNum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="time_stamp" jdbcType="TIMESTAMP" property="timeStamp" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, salve_value, car_ids, picture, include_num, status, store_id, time_stamp, 
+    type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiquePackageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiquePackage">
+    insert into boutique_package (id, name, salve_value, 
+      car_ids, picture, include_num, 
+      status, store_id, time_stamp, 
+      type_live)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{salveValue,jdbcType=DECIMAL}, 
+      #{carIds,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{includeNum,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{timeStamp,jdbcType=TIMESTAMP}, 
+      #{typeLive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiquePackage">
+    insert into boutique_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="salveValue != null">
+        salve_value,
+      </if>
+      <if test="carIds != null">
+        car_ids,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="includeNum != null">
+        include_num,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salveValue != null">
+        #{salveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="carIds != null">
+        #{carIds,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="includeNum != null">
+        #{includeNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiquePackage">
+    update boutique_package
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salveValue != null">
+        salve_value = #{salveValue,jdbcType=DECIMAL},
+      </if>
+      <if test="carIds != null">
+        car_ids = #{carIds,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="includeNum != null">
+        include_num = #{includeNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiquePackage">
+    update boutique_package
+    set name = #{name,jdbcType=VARCHAR},
+      salve_value = #{salveValue,jdbcType=DECIMAL},
+      car_ids = #{carIds,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      include_num = #{includeNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id"
+   parameterType="com.unicdata.entity.boutique.BoutiquePackage">
+    insert into boutique_package (id, name, salve_value, 
+      car_ids, picture, include_num, 
+      status, store_id, time_stamp, 
+      type_live)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{salveValue,jdbcType=DECIMAL}, 
+      #{carIds,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{includeNum,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{timeStamp,jdbcType=TIMESTAMP}, 
+      #{typeLive,jdbcType=INTEGER})
+  </insert>
+  
+  <select id="selectPackageByCondition" parameterType="com.unicdata.condition.BoutiquePackageCondition" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_package WHERE type_live = 1 AND  store_id = #{storeId,jdbcType=INTEGER}
+  	<if test="name != null and name != ''">
+  		AND name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
+  	</if>
+  	ORDER BY time_stamp DESC
+  </select>
+  
+  <update id="updatePackageInfoDrop" parameterType="java.lang.Integer">
+  	UPDATE boutique_package SET status = #{status,jdbcType=INTEGER}
+  	WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectPackageByMap" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT id,name,salve_value salveValue,include_num includeNum,picture
+  	FROM boutique_package 
+  	WHERE type_live = 1 AND status = 1 AND  store_id = #{storeId,jdbcType=INTEGER}
+  	AND id IN (SELECT pack_id FROM boutique_package_car WHERE car_id = #{familyId})
+  	<if test="name != null and name != ''">
+  		AND name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
+  	</if>
+  </select>
+</mapper>

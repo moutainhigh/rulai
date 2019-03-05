@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.model.ModelMapper">
+	<resultMap id="BaseResultMap" type="com.unicdata.entity.model.Model">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+		<result column="name_ch" jdbcType="VARCHAR" property="nameCh" />
+		<result column="belong_id" jdbcType="INTEGER" property="belongId" />
+		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="order_num" jdbcType="INTEGER" property="orderNum" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name_en, name_ch, belong_id, create_date, update_date, status,
+		order_num
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from model
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from model
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.unicdata.entity.model.Model">
+		insert into model (id, name_en, name_ch,
+		belong_id, create_date, update_date,
+		status, order_num)
+		values (#{id,jdbcType=INTEGER}, #{nameEn,jdbcType=VARCHAR},
+		#{nameCh,jdbcType=VARCHAR},
+		#{belongId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=INTEGER}, #{orderNum,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.unicdata.entity.model.Model">
+		insert into model
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="nameEn != null">
+				name_en,
+			</if>
+			<if test="nameCh != null">
+				name_ch,
+			</if>
+			<if test="belongId != null">
+				belong_id,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="orderNum != null">
+				order_num,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="nameEn != null">
+				#{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="nameCh != null">
+				#{nameCh,jdbcType=VARCHAR},
+			</if>
+			<if test="belongId != null">
+				#{belongId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderNum != null">
+				#{orderNum,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.model.Model">
+		update model
+		<set>
+			<if test="nameEn != null">
+				name_en = #{nameEn,jdbcType=VARCHAR},
+			</if>
+			<if test="nameCh != null">
+				name_ch = #{nameCh,jdbcType=VARCHAR},
+			</if>
+			<if test="belongId != null">
+				belong_id = #{belongId,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderNum != null">
+				order_num = #{orderNum,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.unicdata.entity.model.Model">
+		update model
+		set name_en = #{nameEn,jdbcType=VARCHAR},
+		name_ch = #{nameCh,jdbcType=VARCHAR},
+		belong_id = #{belongId,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date = #{updateDate,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=INTEGER},
+		order_num = #{orderNum,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getListByBelong" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from model
+		where belong_id = #{belongId,jdbcType=INTEGER}
+		and status = 1
+	</select>
+</mapper>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueOutboundDetailMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueOutboundDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="outbound_id" jdbcType="INTEGER" property="outboundId" />
+    <result column="boutique_order_id" jdbcType="INTEGER" property="boutiqueOrderId" />
+    <result column="boutique_construction" jdbcType="INTEGER" property="boutiqueConstruction" />
+    <result column="boutique_id" jdbcType="INTEGER" property="boutiqueId" />
+    <result column="numer" jdbcType="INTEGER" property="numer" />
+    <result column="picker_id" jdbcType="INTEGER" property="pickerId" />
+    <result column="outbound_date" jdbcType="TIMESTAMP" property="outboundDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="time_stamp" jdbcType="TIMESTAMP" property="timeStamp" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, outbound_id, boutique_order_id, boutique_construction, boutique_id, numer, picker_id, 
+    outbound_date, status, time_stamp, type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_outbound_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_outbound_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_outbound_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundDetail">
+    insert into boutique_outbound_detail (id, outbound_id, boutique_order_id, 
+      boutique_construction, boutique_id, numer, 
+      picker_id, outbound_date, status, 
+      time_stamp, type_live)
+    values (#{id,jdbcType=INTEGER}, #{outboundId,jdbcType=INTEGER}, #{boutiqueOrderId,jdbcType=INTEGER}, 
+      #{boutiqueConstruction,jdbcType=INTEGER}, #{boutiqueId,jdbcType=INTEGER}, #{numer,jdbcType=INTEGER}, 
+      #{pickerId,jdbcType=INTEGER}, #{outboundDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{timeStamp,jdbcType=TIMESTAMP}, #{typeLive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundDetail">
+    insert into boutique_outbound_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="outboundId != null">
+        outbound_id,
+      </if>
+      <if test="boutiqueOrderId != null">
+        boutique_order_id,
+      </if>
+      <if test="boutiqueConstruction != null">
+        boutique_construction,
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id,
+      </if>
+      <if test="numer != null">
+        numer,
+      </if>
+      <if test="picker_id != null">
+        picker_id,
+      </if>
+      <if test="outboundDate != null">
+        outbound_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="outboundId != null">
+        #{outboundId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueOrderId != null">
+        #{boutiqueOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueConstruction != null">
+        #{boutiqueConstruction,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="numer != null">
+        #{numer,jdbcType=INTEGER},
+      </if>
+      <if test="picker_id != null">
+        #{pickerId,jdbcType=INTEGER},
+      </if>
+      <if test="outboundDate != null">
+        #{outboundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundDetail">
+    update boutique_outbound_detail
+    <set>
+      <if test="outboundId != null">
+        outbound_id = #{outboundId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueOrderId != null">
+        boutique_order_id = #{boutiqueOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueConstruction != null">
+        boutique_construction = #{boutiqueConstruction,jdbcType=INTEGER},
+      </if>
+      <if test="boutiqueId != null">
+        boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      </if>
+      <if test="numer != null">
+        numer = #{numer,jdbcType=INTEGER},
+      </if>
+      <if test="picker_id != null">
+        picker_id = #{pickerId,jdbcType=INTEGER},
+      </if>
+      <if test="outboundDate != null">
+        outbound_date = #{outboundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundDetail">
+    update boutique_outbound_detail
+    set outbound_id = #{outboundId,jdbcType=INTEGER},
+      boutique_order_id = #{boutiqueOrderId,jdbcType=INTEGER},
+      boutique_construction = #{boutiqueConstruction,jdbcType=INTEGER},
+      boutique_id = #{boutiqueId,jdbcType=INTEGER},
+      numer = #{numer,jdbcType=INTEGER},
+      picker_id = #{pickerId,jdbcType=INTEGER},
+      outbound_date = #{outboundDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap id="OutboundDetailMap" type="com.unicdata.entity.boutique.BoutiqueOutboundDetail" extends="BaseResultMap">
+  	    <result column="code" jdbcType="INTEGER" property="code" />
+  	    <result column="name" jdbcType="INTEGER" property="name" />
+  	    <result column="warehouse" jdbcType="INTEGER" property="warehouse" />
+  	    <result column="position" jdbcType="INTEGER" property="position" />
+  	    <result column="tax_price" jdbcType="INTEGER" property="taxPrice" />
+  	    <result column="tax_cost" jdbcType="INTEGER" property="taxCost" />
+  	    <result column="unitprice" jdbcType="INTEGER" property="unitprice" />
+  	    <result column="is_host" jdbcType="INTEGER" property="isHost" />
+  </resultMap>
+  
+  <select id="detialPickingByOutboundId" parameterType="java.lang.Integer"	resultMap="OutboundDetailMap">
+  	SELECT 
+  	a.id AS id,
+  	a.picker_id AS picker_id,
+  	a.boutique_id AS boutique_id,
+  	a.outbound_date AS outbound_date,  	
+  	a.numer AS numer,
+  	a.boutique_construction AS boutique_construction,
+  	a.status AS status,
+  	b.code AS code,
+  	b.name AS name,
+  	d.name AS warehouse,
+  	e.name AS position,
+  	b.tax_price AS tax_price,
+  	tax_price*numer AS tax_cost,
+  	b.unitprice AS unitprice,
+  	c.is_host AS is_host
+  	FROM boutique_outbound_detail a
+  	LEFT JOIN boutique_information b ON a.boutique_id = b.id
+  	LEFT JOIN boutique_supplier c ON b.supplier_id = c.id
+  	LEFT JOIN boutique_warehouse d ON b.warehouse_id = d.id
+  	LEFT JOIN boutique_warehouse_position e ON b.position_id = e.id
+  	WHERE a.outbound_id = #{outboundId,jdbcType=INTEGER}
+  </select>
+  
+  <update id="updateStatus">
+  	UPDATE boutique_outbound_detail SET status = 1 
+  	WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectCountOutbound" parameterType="java.lang.Integer" resultType="java.util.Map">
+  	SELECT COUNT(0) allOut , 
+  	COUNT(if(`status` = 1 ,true,null)) isOut  FROM
+  	boutique_outbound_detail 
+  	WHERE outbound_id = #{outboundId,jdbcType=INTEGER} 
+
+  </select>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into boutique_outbound_detail (id, outbound_id, boutique_order_id, 
+      boutique_construction, boutique_id, numer, 
+      picker_id, outbound_date, status, 
+      time_stamp, type_live)
+    values 
+    <foreach collection="list" item="info" index="index" separator=",">
+   	    (#{info.id,jdbcType=INTEGER}, #{info.outboundId,jdbcType=INTEGER}, #{info.boutiqueOrderId,jdbcType=INTEGER}, 
+	      #{info.boutiqueConstruction,jdbcType=INTEGER}, #{info.boutiqueId,jdbcType=INTEGER}, #{info.numer,jdbcType=INTEGER}, 
+	      #{info.pickerId,jdbcType=INTEGER}, #{info.outboundDate,jdbcType=TIMESTAMP}, #{info.status,jdbcType=INTEGER}, 
+	      #{info.timeStamp,jdbcType=TIMESTAMP}, #{info.typeLive,jdbcType=INTEGER}) 
+   	</foreach>
+  </insert>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.customer.EntranceGuardRemindMapper" >
+   <resultMap id="BaseResultMap" type="com.unicdata.entity.customer.EntranceGuardRemind" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_plate_number" property="carPlateNumber" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="arrive_type" property="arriveType" jdbcType="INTEGER" />
+    <result column="cus_id" property="cusId" jdbcType="INTEGER" />
+    <result column="do_status" property="doStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.unicdata.entity.customer.EntranceGuardRemind" extends="BaseResultMap" >
+    <result column="car_plate_photo" property="carPlatePhoto" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_plate_number, create_time, status, store_id, arrive_type, cus_id, do_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    car_plate_photo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from entrance_guard_remind
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from entrance_guard_remind
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.customer.EntranceGuardRemind" >
+    insert into entrance_guard_remind (id, car_plate_number, create_time, 
+      status, store_id, arrive_type, 
+      cus_id, do_status, car_plate_photo
+      )
+    values (#{id,jdbcType=INTEGER}, #{carPlateNumber,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{arriveType,jdbcType=INTEGER}, 
+      #{cusId,jdbcType=INTEGER}, #{doStatus,jdbcType=INTEGER}, #{carPlatePhoto,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.customer.EntranceGuardRemind" >
+    insert into entrance_guard_remind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carPlateNumber != null" >
+        car_plate_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="arriveType != null" >
+        arrive_type,
+      </if>
+      <if test="cusId != null" >
+        cus_id,
+      </if>
+      <if test="doStatus != null" >
+        do_status,
+      </if>
+      <if test="carPlatePhoto != null" >
+        car_plate_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carPlateNumber != null" >
+        #{carPlateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveType != null" >
+        #{arriveType,jdbcType=INTEGER},
+      </if>
+      <if test="cusId != null" >
+        #{cusId,jdbcType=INTEGER},
+      </if>
+      <if test="doStatus != null" >
+        #{doStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carPlatePhoto != null" >
+        #{carPlatePhoto,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.customer.EntranceGuardRemind" >
+    update entrance_guard_remind
+    <set >
+      <if test="carPlateNumber != null" >
+        car_plate_number = #{carPlateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveType != null" >
+        arrive_type = #{arriveType,jdbcType=INTEGER},
+      </if>
+      <if test="cusId != null" >
+        cus_id = #{cusId,jdbcType=INTEGER},
+      </if>
+      <if test="doStatus != null" >
+        do_status = #{doStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carPlatePhoto != null" >
+        car_plate_photo = #{carPlatePhoto,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unicdata.entity.customer.EntranceGuardRemind" >
+    update entrance_guard_remind
+    set car_plate_number = #{carPlateNumber,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      arrive_type = #{arriveType,jdbcType=INTEGER},
+      cus_id = #{cusId,jdbcType=INTEGER},
+      do_status = #{doStatus,jdbcType=INTEGER},
+      car_plate_photo = #{carPlatePhoto,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.customer.EntranceGuardRemind" >
+    update entrance_guard_remind
+    set car_plate_number = #{carPlateNumber,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      arrive_type = #{arriveType,jdbcType=INTEGER},
+      cus_id = #{cusId,jdbcType=INTEGER},
+      do_status = #{doStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 门禁信息 wp -->
+  <select id="selectDoorRemindMes" parameterType="java.util.Map" resultType="java.util.Map">
+  SELECT 
+	egr.cus_id,
+	egr.car_plate_number,
+	egr.id,
+	egr.do_status,
+	e.id eid,
+	e.full_name
+	FROM 
+	entrance_guard_remind egr
+	LEFT JOIN customer c 
+	ON c.id=egr.cus_id
+	LEFT JOIN passenger_flow pf
+	ON
+	pf.id = c.passenger_id
+	LEFT JOIN employee e
+	ON e.id=pf.employee_id
+	WHERE egr.create_time=DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	AND egr.do_status=1
+  	AND egr.arrive_type=2
+  </select>
+</mapper>

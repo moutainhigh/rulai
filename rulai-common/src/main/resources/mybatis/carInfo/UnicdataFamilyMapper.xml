@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.carInfo.UnicdataFamilyMapper">
+    <resultMap id="BaseResultMap" type="com.unicdata.entity.carInfo.UnicdataFamily">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="family_id" jdbcType="INTEGER" property="familyId"/>
+        <result column="family_name" jdbcType="VARCHAR" property="familyName"/>
+        <result column="family_alias" jdbcType="VARCHAR" property="familyAlias"/>
+        <result column="brand_id" jdbcType="INTEGER" property="brandId"/>
+        <result column="factory_id" jdbcType="INTEGER" property="factoryId"/>
+        <result column="picture" jdbcType="VARCHAR" property="picture"/>
+        <result column="vehicle_type" jdbcType="TINYINT" property="vehicleType"/>
+        <result column="vehicle_type_ext" jdbcType="TINYINT" property="vehicleTypeExt"/>
+        <result column="vehicle_type_grade" jdbcType="TINYINT" property="vehicleTypeGrade"/>
+        <result column="rank" jdbcType="TINYINT" property="rank"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, family_id, family_name, family_alias, brand_id, factory_id, picture, vehicle_type, 
+    vehicle_type_ext, vehicle_type_grade, rank, status
+  </sql>
+    <select id="selectByExample" parameterType="com.unicdata.entity.carInfo.UnicdataFamilyExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from unicdata_family
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from unicdata_family
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from unicdata_family
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unicdata.entity.carInfo.UnicdataFamily">
+    insert into unicdata_family (id, family_id, family_name, 
+      family_alias, brand_id, factory_id, 
+      picture, vehicle_type, vehicle_type_ext, 
+      vehicle_type_grade, rank, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{familyId,jdbcType=INTEGER}, #{familyName,jdbcType=VARCHAR}, 
+      #{familyAlias,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, #{factoryId,jdbcType=INTEGER}, 
+      #{picture,jdbcType=VARCHAR}, #{vehicleType,jdbcType=TINYINT}, #{vehicleTypeExt,jdbcType=TINYINT}, 
+      #{vehicleTypeGrade,jdbcType=TINYINT}, #{rank,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.unicdata.entity.carInfo.UnicdataFamily">
+        insert into unicdata_family
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="familyId != null">
+                family_id,
+            </if>
+            <if test="familyName != null">
+                family_name,
+            </if>
+            <if test="familyAlias != null">
+                family_alias,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="factoryId != null">
+                factory_id,
+            </if>
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="vehicleType != null">
+                vehicle_type,
+            </if>
+            <if test="vehicleTypeExt != null">
+                vehicle_type_ext,
+            </if>
+            <if test="vehicleTypeGrade != null">
+                vehicle_type_grade,
+            </if>
+            <if test="rank != null">
+                rank,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="familyId != null">
+                #{familyId,jdbcType=INTEGER},
+            </if>
+            <if test="familyName != null">
+                #{familyName,jdbcType=VARCHAR},
+            </if>
+            <if test="familyAlias != null">
+                #{familyAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="factoryId != null">
+                #{factoryId,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleType != null">
+                #{vehicleType,jdbcType=TINYINT},
+            </if>
+            <if test="vehicleTypeExt != null">
+                #{vehicleTypeExt,jdbcType=TINYINT},
+            </if>
+            <if test="vehicleTypeGrade != null">
+                #{vehicleTypeGrade,jdbcType=TINYINT},
+            </if>
+            <if test="rank != null">
+                #{rank,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.carInfo.UnicdataFamily">
+        update unicdata_family
+        <set>
+            <if test="familyId != null">
+                family_id = #{familyId,jdbcType=INTEGER},
+            </if>
+            <if test="familyName != null">
+                family_name = #{familyName,jdbcType=VARCHAR},
+            </if>
+            <if test="familyAlias != null">
+                family_alias = #{familyAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="factoryId != null">
+                factory_id = #{factoryId,jdbcType=INTEGER},
+            </if>
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleType != null">
+                vehicle_type = #{vehicleType,jdbcType=TINYINT},
+            </if>
+            <if test="vehicleTypeExt != null">
+                vehicle_type_ext = #{vehicleTypeExt,jdbcType=TINYINT},
+            </if>
+            <if test="vehicleTypeGrade != null">
+                vehicle_type_grade = #{vehicleTypeGrade,jdbcType=TINYINT},
+            </if>
+            <if test="rank != null">
+                rank = #{rank,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.carInfo.UnicdataFamily">
+    update unicdata_family
+    set family_id = #{familyId,jdbcType=INTEGER},
+      family_name = #{familyName,jdbcType=VARCHAR},
+      family_alias = #{familyAlias,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      factory_id = #{factoryId,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      vehicle_type = #{vehicleType,jdbcType=TINYINT},
+      vehicle_type_ext = #{vehicleTypeExt,jdbcType=TINYINT},
+      vehicle_type_grade = #{vehicleTypeGrade,jdbcType=TINYINT},
+      rank = #{rank,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByFamilyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from unicdata_family
+        where family_id = #{familyId,jdbcType=INTEGER}
+    </select>
+    <select id="selectBFNameByFamilyId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT concat(ub.brand_name,uf.family_name) as name FROM  unicdata_family uf
+    LEFT JOIN unicdata_brand ub ON uf.brand_id=ub.brand_id AND  ub.`status`=1
+    where uf.`status`=1  AND  uf.family_id = #{familyId,jdbcType=INTEGER}
+  </select>
+</mapper>

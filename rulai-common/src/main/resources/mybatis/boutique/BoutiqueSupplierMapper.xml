@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueSupplierMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueSupplier">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fine_brand_ids" jdbcType="VARCHAR" property="fineBrandIds" />
+    <result column="is_host" jdbcType="INTEGER" property="isHost" />
+    <result column="company_tel" jdbcType="VARCHAR" property="companyTel" />
+    <result column="contacts_one" jdbcType="VARCHAR" property="contactsOne" />
+    <result column="contacts_one_phone" jdbcType="VARCHAR" property="contactsOnePhone" />
+    <result column="contacts_two" jdbcType="VARCHAR" property="contactsTwo" />
+    <result column="contacts_two_phone" jdbcType="VARCHAR" property="contactsTwoPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+    <result column="time_stamp" jdbcType="TIMESTAMP" property="timeStamp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, fine_brand_ids, is_host, company_tel, contacts_one, contacts_one_phone, 
+    contacts_two, contacts_two_phone, address, store_id, type_live, time_stamp
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueSupplierExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_supplier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_supplier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueSupplier">
+    insert into boutique_supplier (id, name, fine_brand_ids, 
+      is_host, company_tel, contacts_one, 
+      contacts_one_phone, contacts_two, contacts_two_phone, 
+      address, store_id, type_live, 
+      time_stamp)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{fineBrandIds,jdbcType=VARCHAR}, 
+      #{isHost,jdbcType=INTEGER}, #{companyTel,jdbcType=VARCHAR}, #{contactsOne,jdbcType=VARCHAR}, 
+      #{contactsOnePhone,jdbcType=VARCHAR}, #{contactsTwo,jdbcType=VARCHAR}, #{contactsTwoPhone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}, 
+      #{timeStamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueSupplier">
+    insert into boutique_supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fineBrandIds != null">
+        fine_brand_ids,
+      </if>
+      <if test="isHost != null">
+        is_host,
+      </if>
+      <if test="companyTel != null">
+        company_tel,
+      </if>
+      <if test="contactsOne != null">
+        contacts_one,
+      </if>
+      <if test="contactsOnePhone != null">
+        contacts_one_phone,
+      </if>
+      <if test="contactsTwo != null">
+        contacts_two,
+      </if>
+      <if test="contactsTwoPhone != null">
+        contacts_two_phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fineBrandIds != null">
+        #{fineBrandIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isHost != null">
+        #{isHost,jdbcType=INTEGER},
+      </if>
+      <if test="companyTel != null">
+        #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsOne != null">
+        #{contactsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsOnePhone != null">
+        #{contactsOnePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsTwo != null">
+        #{contactsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsTwoPhone != null">
+        #{contactsTwoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueSupplier">
+    update boutique_supplier
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fineBrandIds != null">
+        fine_brand_ids = #{fineBrandIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isHost != null">
+        is_host = #{isHost,jdbcType=INTEGER},
+      </if>
+      <if test="companyTel != null">
+        company_tel = #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsOne != null">
+        contacts_one = #{contactsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsOnePhone != null">
+        contacts_one_phone = #{contactsOnePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsTwo != null">
+        contacts_two = #{contactsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsTwoPhone != null">
+        contacts_two_phone = #{contactsTwoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueSupplier">
+    update boutique_supplier
+    set name = #{name,jdbcType=VARCHAR},
+      fine_brand_ids = #{fineBrandIds,jdbcType=VARCHAR},
+      is_host = #{isHost,jdbcType=INTEGER},
+      company_tel = #{companyTel,jdbcType=VARCHAR},
+      contacts_one = #{contactsOne,jdbcType=VARCHAR},
+      contacts_one_phone = #{contactsOnePhone,jdbcType=VARCHAR},
+      contacts_two = #{contactsTwo,jdbcType=VARCHAR},
+      contacts_two_phone = #{contactsTwoPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=INTEGER},
+      type_live = #{typeLive,jdbcType=INTEGER},
+      time_stamp = #{timeStamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap type="com.unicdata.entity.boutique.BoutiqueSupplier" id="SelectBaseResultMap" extends="BaseResultMap">
+  	    <result column="fine_brand_name" jdbcType="INTEGER" property="fineBrandName" />
+  	
+  </resultMap>
+  
+  <select id="selectSupplier" parameterType="java.util.Map" resultMap="SelectBaseResultMap">
+  	SELECT 
+	a.id AS id, a.name AS name, a.fine_brand_ids AS fine_brand_ids, a.is_host AS is_host, a.company_tel AS company_tel, a.contacts_one AS contacts_one, a.contacts_one_phone AS contacts_one_phone,
+    a.contacts_two AS contacts_two, a.contacts_two_phone AS contacts_two_phone, a.address AS address, a.store_id AS store_id, a.type_live AS type_live, a.time_stamp AS time_stamp,
+	b.name AS fine_brand_name
+	
+  	FROM boutique_supplier a 
+  	LEFT JOIN boutique_brand b ON a.fine_brand_ids = b.id
+  	WHERE a.type_live = 1 AND a.store_id = #{storeId,jdbcType=INTEGER}
+  	<if test="name != null and name != ''">
+  		AND a.name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+  	</if>
+  </select>  
+  
+  <update id="deleteSupplier" parameterType="java.lang.Integer">
+  	UPDATE boutique_supplier SET type_live = 0 WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectAllSupplier" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+   	SELECT <include refid="Base_Column_List"/>
+  	FROM boutique_supplier  where store_id = #{storeId,jdbcType=INTEGER}
+   </select>
+  
+  <insert id="insertUseGeneratedKeys"  useGeneratedKeys="true" keyProperty="id">
+  	insert into boutique_supplier (id, name, fine_brand_ids, 
+      is_host, company_tel, contacts_one, 
+      contacts_one_phone, contacts_two, contacts_two_phone, 
+      address, store_id, type_live, 
+      time_stamp)
+    values (null, #{name,jdbcType=VARCHAR}, #{fineBrandIds,jdbcType=VARCHAR}, 
+      #{isHost,jdbcType=INTEGER}, #{companyTel,jdbcType=VARCHAR}, #{contactsOne,jdbcType=VARCHAR}, 
+      #{contactsOnePhone,jdbcType=VARCHAR}, #{contactsTwo,jdbcType=VARCHAR}, #{contactsTwoPhone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, #{typeLive,jdbcType=INTEGER}, 
+      #{timeStamp,jdbcType=TIMESTAMP})  	
+  	
+  </insert>
+  
+</mapper>

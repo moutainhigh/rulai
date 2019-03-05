@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueOutboundMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueOutbound">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="install_id" jdbcType="INTEGER" property="installId" />
+    <result column="salve_no" jdbcType="VARCHAR" property="salveNo" />
+    <result column="boutique_no" jdbcType="VARCHAR" property="boutiqueNo" />
+    <result column="vin" jdbcType="VARCHAR" property="vin" />
+    <result column="vehicle_id" jdbcType="INTEGER" property="vehicleId" />
+    <result column="employee_name" jdbcType="VARCHAR" property="employeeName" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="time_stamp" jdbcType="TIMESTAMP" property="timeStamp" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, install_id, salve_no, boutique_no, vin, vehicle_id, employee_name, customer_name, 
+    apply_date, status, type, store_id, time_stamp, type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueOutboundExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_outbound
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_outbound
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_outbound
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueOutbound">
+    insert into boutique_outbound (id, install_id, salve_no, 
+      boutique_no, vin, vehicle_id, 
+      employee_name, customer_name, apply_date, 
+      status, type, store_id, 
+      time_stamp, type_live)
+    values (#{id,jdbcType=INTEGER}, #{installId,jdbcType=INTEGER}, #{salveNo,jdbcType=VARCHAR}, 
+      #{boutiqueNo,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, #{vehicleId,jdbcType=INTEGER}, 
+      #{employeeName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{timeStamp,jdbcType=TIMESTAMP}, #{typeLive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueOutbound">
+    insert into boutique_outbound
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="installId != null">
+        install_id,
+      </if>
+      <if test="salveNo != null">
+        salve_no,
+      </if>
+      <if test="boutiqueNo != null">
+        boutique_no,
+      </if>
+      <if test="vin != null">
+        vin,
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="applyDate != null">
+        apply_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="installId != null">
+        #{installId,jdbcType=INTEGER},
+      </if>
+      <if test="salveNo != null">
+        #{salveNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boutiqueNo != null">
+        #{boutiqueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueOutbound">
+    update boutique_outbound
+    <set>
+      <if test="installId != null">
+        install_id = #{installId,jdbcType=INTEGER},
+      </if>
+      <if test="salveNo != null">
+        salve_no = #{salveNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boutiqueNo != null">
+        boutique_no = #{boutiqueNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null">
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueOutbound">
+    update boutique_outbound
+    set install_id = #{installId,jdbcType=INTEGER},
+      salve_no = #{salveNo,jdbcType=VARCHAR},
+      boutique_no = #{boutiqueNo,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      employee_name = #{employeeName,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap id="DetailBaseResultMap" extends="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueOutbound">
+      <result column="vehicle" jdbcType="VARCHAR" property="vehicle" />
+  </resultMap>
+  
+  <select id="selectOutboundByCondition" resultMap="DetailBaseResultMap" parameterType="com.unicdata.condition.OutboundCondition">
+  	SELECT 
+  	a.id AS id,a.install_id AS install_id, a.salve_no AS salve_no, a.boutique_no AS boutique_no, a.vin AS vin, a.vehicle_id AS vehicle_id, a.employee_name AS employee_name,
+  	a.customer_name AS customer_name, a.apply_date AS apply_date, 
+    a.status AS status, a.type AS type, a.store_id AS store_id, a.time_stamp AS time_stamp, a.type_live AS type_live,
+    b.name AS vehicle
+  	FROM boutique_outbound a 
+  	LEFT JOIN car_vehicle_conf b ON a.vehicle_id = b.id
+  	WHERE a.type_live = 1 AND a.store_id = #{storeId,jdbcType=INTEGER}
+  	<if test="type != null ">
+  		AND a.type = #{type,jdbcType=INTEGER}
+  	</if>
+  	<if test="salveNo != null and salveNo != ''">
+  		AND a.salve_no = #{salveNo,jdbcType=VARCHAR}
+  	</if>
+  	<if test="employeeName != null and employeeName != ''">
+  		AND a.employee_name like CONCAT('%', #{employeeName,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="customerName != null and customerName != ''">
+  		AND a.customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="boutiqueNo != null and boutiqueNo != ''">
+  		AND a.boutique_no = #{boutiqueNo,jdbcType=VARCHAR}
+  	</if>
+  	<if test="status != null">
+  		AND a.status = #{status,jdbcType=INTEGER}
+  	</if>
+  	ORDER BY apply_date DESC
+  	
+  </select>
+  
+  <select id="outboundPickingById" resultMap="DetailBaseResultMap" parameterType="java.lang.Integer">
+    SELECT 
+	  	a.id AS id,a.install_id AS install_id, a.salve_no AS salve_no, a.boutique_no AS boutique_no, a.vin AS vin, a.vehicle_id AS vehicle_id, a.employee_name AS employee_name,
+	  	a.customer_name AS customer_name, a.apply_date AS apply_date, 
+	    a.status AS status, a.type AS type, a.store_id AS store_id, a.time_stamp AS time_stamp, a.type_live AS type_live,
+	    b.name AS vehicle
+  	FROM boutique_outbound a 
+  	LEFT JOIN car_vehicle_conf b ON a.vehicle_id = b.id
+  	WHERE a.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <insert id="insertUseGeneratedKeys"  useGeneratedKeys="true" keyProperty="id">
+    insert into boutique_outbound (id, install_id, salve_no, 
+      boutique_no, vin, vehicle_id, 
+      employee_name, customer_name, apply_date, 
+      status, type, store_id, 
+      time_stamp, type_live)
+    values (#{id,jdbcType=INTEGER}, #{installId,jdbcType=INTEGER}, #{salveNo,jdbcType=VARCHAR}, 
+      #{boutiqueNo,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, #{vehicleId,jdbcType=INTEGER}, 
+      #{employeeName,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{timeStamp,jdbcType=TIMESTAMP}, #{typeLive,jdbcType=INTEGER})	
+  
+  </insert>
+</mapper>

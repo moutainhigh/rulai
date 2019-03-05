@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.car.CarWarehouseChangeMapper">
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarWarehouseChange">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="distributor_store_id" jdbcType="INTEGER" property="distributorStoreId" />
+    <result column="car_good_id" jdbcType="INTEGER" property="carGoodId" />
+    <result column="change_application_id" jdbcType="INTEGER" property="changeApplicationId" />
+    <result column="before_warehouse_id" jdbcType="INTEGER" property="beforeWarehouseId" />
+    <result column="after_warehouse_id" jdbcType="INTEGER" property="afterWarehouseId" />
+    <result column="before_storage_id" jdbcType="INTEGER" property="beforeStorageId" />
+    <result column="after_storage_id" jdbcType="INTEGER" property="afterStorageId" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distributor_store_id, car_good_id, change_application_id, before_warehouse_id, 
+    after_warehouse_id, before_storage_id, after_storage_id, operator_id, create_date, 
+    update_date, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_warehouse_change
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car_warehouse_change
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarWarehouseChange">
+    insert into car_warehouse_change (id, distributor_store_id, car_good_id, 
+      change_application_id, before_warehouse_id, 
+      after_warehouse_id, before_storage_id, after_storage_id, 
+      operator_id, create_date, update_date, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{distributorStoreId,jdbcType=INTEGER}, #{carGoodId,jdbcType=INTEGER}, 
+      #{changeApplicationId,jdbcType=INTEGER}, #{beforeWarehouseId,jdbcType=INTEGER}, 
+      #{afterWarehouseId,jdbcType=INTEGER}, #{beforeStorageId,jdbcType=INTEGER}, #{afterStorageId,jdbcType=INTEGER}, 
+      #{operatorId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarWarehouseChange">
+    insert into car_warehouse_change
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distributorStoreId != null">
+        distributor_store_id,
+      </if>
+      <if test="carGoodId != null">
+        car_good_id,
+      </if>
+      <if test="changeApplicationId != null">
+        change_application_id,
+      </if>
+      <if test="beforeWarehouseId != null">
+        before_warehouse_id,
+      </if>
+      <if test="afterWarehouseId != null">
+        after_warehouse_id,
+      </if>
+      <if test="beforeStorageId != null">
+        before_storage_id,
+      </if>
+      <if test="afterStorageId != null">
+        after_storage_id,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributorStoreId != null">
+        #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="carGoodId != null">
+        #{carGoodId,jdbcType=INTEGER},
+      </if>
+      <if test="changeApplicationId != null">
+        #{changeApplicationId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeWarehouseId != null">
+        #{beforeWarehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="afterWarehouseId != null">
+        #{afterWarehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeStorageId != null">
+        #{beforeStorageId,jdbcType=INTEGER},
+      </if>
+      <if test="afterStorageId != null">
+        #{afterStorageId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarWarehouseChange">
+    update car_warehouse_change
+    <set>
+      <if test="distributorStoreId != null">
+        distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      </if>
+      <if test="carGoodId != null">
+        car_good_id = #{carGoodId,jdbcType=INTEGER},
+      </if>
+      <if test="changeApplicationId != null">
+        change_application_id = #{changeApplicationId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeWarehouseId != null">
+        before_warehouse_id = #{beforeWarehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="afterWarehouseId != null">
+        after_warehouse_id = #{afterWarehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeStorageId != null">
+        before_storage_id = #{beforeStorageId,jdbcType=INTEGER},
+      </if>
+      <if test="afterStorageId != null">
+        after_storage_id = #{afterStorageId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarWarehouseChange">
+    update car_warehouse_change
+    set distributor_store_id = #{distributorStoreId,jdbcType=INTEGER},
+      car_good_id = #{carGoodId,jdbcType=INTEGER},
+      change_application_id = #{changeApplicationId,jdbcType=INTEGER},
+      before_warehouse_id = #{beforeWarehouseId,jdbcType=INTEGER},
+      after_warehouse_id = #{afterWarehouseId,jdbcType=INTEGER},
+      before_storage_id = #{beforeStorageId,jdbcType=INTEGER},
+      after_storage_id = #{afterStorageId,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

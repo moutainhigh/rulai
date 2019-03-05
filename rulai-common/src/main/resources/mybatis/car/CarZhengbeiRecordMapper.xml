@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unicdata.dao.car.CarZhengbeiRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.unicdata.entity.car.CarZhengbeiRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_id" property="carId" jdbcType="INTEGER" />
+    <result column="detect_status" property="detectStatus" jdbcType="INTEGER" />
+    <result column="expect_start_time" property="expectStartTime" jdbcType="TIMESTAMP" />
+    <result column="expect_end_time" property="expectEndTime" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="work_page" property="workPage" jdbcType="VARCHAR" />
+    <result column="expect_time" property="expectTime" jdbcType="TIMESTAMP" />
+    <result column="zhengbei_type" property="zhengbeiType" jdbcType="INTEGER" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_id, detect_status, expect_start_time, expect_end_time, store_id, create_time, 
+    update_time, work_page, expect_time, zhengbei_type, vin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_zhengbei_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_zhengbei_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.car.CarZhengbeiRecord" >
+    insert into car_zhengbei_record (id, car_id, detect_status, 
+      expect_start_time, expect_end_time, store_id, 
+      create_time, update_time, work_page, 
+      expect_time, zhengbei_type, vin
+      )
+    values (#{id,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER}, #{detectStatus,jdbcType=INTEGER}, 
+      #{expectStartTime,jdbcType=TIMESTAMP}, #{expectEndTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{workPage,jdbcType=VARCHAR}, 
+      #{expectTime,jdbcType=TIMESTAMP}, #{zhengbeiType,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.car.CarZhengbeiRecord" >
+    insert into car_zhengbei_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="detectStatus != null" >
+        detect_status,
+      </if>
+      <if test="expectStartTime != null" >
+        expect_start_time,
+      </if>
+      <if test="expectEndTime != null" >
+        expect_end_time,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="workPage != null" >
+        work_page,
+      </if>
+      <if test="expectTime != null" >
+        expect_time,
+      </if>
+      <if test="zhengbeiType != null" >
+        zhengbei_type,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="detectStatus != null" >
+        #{detectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="expectStartTime != null" >
+        #{expectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectEndTime != null" >
+        #{expectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workPage != null" >
+        #{workPage,jdbcType=VARCHAR},
+      </if>
+      <if test="expectTime != null" >
+        #{expectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhengbeiType != null" >
+        #{zhengbeiType,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.car.CarZhengbeiRecord" >
+    update car_zhengbei_record
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="detectStatus != null" >
+        detect_status = #{detectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="expectStartTime != null" >
+        expect_start_time = #{expectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectEndTime != null" >
+        expect_end_time = #{expectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workPage != null" >
+        work_page = #{workPage,jdbcType=VARCHAR},
+      </if>
+      <if test="expectTime != null" >
+        expect_time = #{expectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhengbeiType != null" >
+        zhengbei_type = #{zhengbeiType,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.car.CarZhengbeiRecord" >
+    update car_zhengbei_record
+    set car_id = #{carId,jdbcType=INTEGER},
+      detect_status = #{detectStatus,jdbcType=INTEGER},
+      expect_start_time = #{expectStartTime,jdbcType=TIMESTAMP},
+      expect_end_time = #{expectEndTime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      work_page = #{workPage,jdbcType=VARCHAR},
+      expect_time = #{expectTime,jdbcType=TIMESTAMP},
+      zhengbei_type = #{zhengbeiType,jdbcType=INTEGER},
+      vin = #{vin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 整备提醒列 wp -->
+  <select id="detectionCarList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		c.id,
+		c.distributor_store_id,
+		c.family_id,
+		c.vehicle_id,
+		c.brand_id,
+		c.vin,
+		c.engine_num,
+		c.storage_status,
+		c.warehouse_id,
+		c.storage_id,
+		c.decorations_out_id,
+		c.decorations_out_name,
+		c.decorations_in_id,
+		c.decorations_in_name,
+		c.new_boutique_status,
+		c.optional_package_status,
+		cvc.`name` AS chexing_name,
+		cf.`name` AS chexi_name,
+		czr.id zhengbei_id,
+		czr.zhengbei_type,
+		DATE_FORMAT(czr.expect_start_time,'%Y-%m-%d %H:%i') expect_start_time,
+		DATE_FORMAT(czr.expect_end_time,'%Y-%m-%d %H:%i') expect_end_time,
+		CONCAT(DATE_FORMAT(czr.expect_start_time,'%Y-%m-%d %H:%i'),'-',DATE_FORMAT(czr.expect_end_time,'%H:%i')) weixiu_time,
+		czr.detect_status,
+		czr.work_page,	
+		c.dispose_status,
+		cb.`name` AS pingpai_name
+		FROM car_zhengbei_record czr
+		LEFT JOIN car_good_info c 
+		ON c.id=czr.car_id
+		LEFT JOIN car_vehicle_conf cvc ON c.vehicle_id=cvc.id
+		LEFT JOIN car_family cf ON cf.id=cvc.family_id
+		LEFT JOIN car_brand cb ON cb.id=cf.brand_id
+		WHERE c.distributor_store_id=cf.distributor_store_id=cb.distributor_store_id=cvc.distributor_store_id
+		<if test="storeId != null">
+		AND czr.store_id=#{storeId}
+		</if>
+		ORDER BY c.update_date DESC
+  </select>
+  <update id="updateZhengbeiInfo" parameterType="com.unicdata.entity.car.CarZhengbeiRecord">
+  	 update car_zhengbei_record
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="detectStatus != null" >
+        detect_status = #{detectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="expectStartTime != null" >
+        expect_start_time = #{expectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectEndTime != null" >
+        expect_end_time = #{expectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workPage != null" >
+        work_page = #{workPage,jdbcType=VARCHAR},
+      </if>
+      <if test="expectTime != null" >
+        expect_time = #{expectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhengbeiType != null" >
+        zhengbei_type = #{zhengbeiType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where car_id = #{carId}
+    order by update_time desc limit 1
+  </update>
+  <!-- 暂收待整备状态 wp -->
+  <select id="zanshouZhengbeiStatus" parameterType="java.util.Map" resultType="java.util.Map">
+ 	 SELECT 
+		c.id,
+		czr.id zhengbeiId,
+		c.car_order_id,
+		c.storage_status,
+		czr.detect_status
+		FROM
+		car_good_info c
+		LEFT JOIN
+		car_zhengbei_record czr
+		ON c.id =czr.car_id
+		WHERE c.id=#{carId}
+		AND czr.zhengbei_type=1
+		ORDER BY czr.update_time LIMIT 1
+  </select>
+</mapper>

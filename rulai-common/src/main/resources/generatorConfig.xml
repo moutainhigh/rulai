@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+			location="E:\MVNrepository\mysql\mysql-connector-java\5.1.43\mysql-connector-java-5.1.43.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection
+				connectionURL="jdbc:mysql://192.168.1.191:3306/rulai?characterEncoding=UTF-8"
+				driverClass="com.mysql.jdbc.Driver" password="919191" userId="root"/>
+		<!-- model存放目录 -->
+		<javaModelGenerator targetPackage="com.unicdata.entity.order" targetProject="E:\ideaWork\rulai\rulai-common\src\main\java"/>
+		<!-- mapper xml存放目录 -->
+		<sqlMapGenerator targetPackage="mybatis.order" targetProject="E:\ideaWork\rulai\rulai-common\src\main\resources"/>
+		<!-- 生成DAO的类文件以及配置文件 -->
+		<javaClientGenerator targetPackage="com.unicdata.dao.order" targetProject="E:\ideaWork\rulai\rulai-common\src\main\java" type="XMLMAPPER"/>
+		<!-- 配置不生成Exmaple文件 -->
+
+		<table tableName="order_invoice" domainObjectName="OrderInvoice" enableInsert="true"
+		enableSelectByExample="false" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableCountByExample="false">
+		</table>
+
+			<!--<table tableName="month_plan_detail" domainObjectName="MonthPlanDetail" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="car_good_info" domainObjectName="CarGoodInfo" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+		<!--<table tableName="distributor" domainObjectName="Distributor" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="distributor_store_info" domainObjectName="DistributorStoreInfo" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+
+		<!--<table tableName="employee_group" domainObjectName="EmployeeGroup" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+
+		<table tableName="employee" domainObjectName="Employee" enableInsert="true"
+		enableSelectByExample="true" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableCountByExample="false">
+		</table>
+
+
+		<!--<table tableName="employee_role" domainObjectName="EmployeeRole" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+
+		<!--<table tableName="role" domainObjectName="Role" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="role_permission" domainObjectName="RolePermission" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="permissions" domainObjectName="Permissions" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="commerce_system" domainObjectName="Commercesystem" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="rebate_project" domainObjectName="RebateProject" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="rebate_car" domainObjectName="RebateCar" enableInsert="true"-->
+			   <!--enableSelectByExample="true" enableUpdateByExample="false"-->
+			   <!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<table tableName="proofreader_list" domainObjectName="ProofreaderList" enableInsert="true"
+		enableSelectByExample="true" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableCountByExample="false">
+		</table>
+
+		<table tableName="arrive_bill_list" domainObjectName="ArriveBillList" enableInsert="true"
+		enableSelectByExample="true" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableCountByExample="false">
+		</table>
+
+		<!--<table tableName="list_exception" domainObjectName="ListException" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+		<!--<table tableName="plan_extraction" domainObjectName="PlanExtraction" enableInsert="true"-->
+		<!--enableSelectByExample="true" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+		<!--<table tableName="plan_extraction_rebate" domainObjectName="PlanExtractionRebate" enableInsert="true"-->
+			   <!--enableSelectByExample="true" enableUpdateByExample="false"-->
+			   <!--enableDeleteByExample="false" enableCountByExample="false">-->
+		<!--</table>-->
+
+
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicdata.dao.boutique.BoutiqueTargetMapper">
+   <resultMap id="BaseResultMap" type="com.unicdata.entity.boutique.BoutiqueTarget">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="employee_group_id" jdbcType="INTEGER" property="employeeGroupId" />
+    <result column="project" jdbcType="VARCHAR" property="project" />
+    <result column="income_play" jdbcType="DECIMAL" property="incomePlay" />
+    <result column="profit_play" jdbcType="DECIMAL" property="profitPlay" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="source" jdbcType="INTEGER" property="source" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="type_live" jdbcType="INTEGER" property="typeLive" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, employee_group_id, project, income_play, profit_play, store_id, source, date, 
+    type_live
+  </sql>
+  <select id="selectByExample" parameterType="com.unicdata.entity.boutique.BoutiqueTargetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boutique_target
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boutique_target
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boutique_target
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unicdata.entity.boutique.BoutiqueTarget">
+    insert into boutique_target (id, employee_group_id, project, 
+      income_play, profit_play, store_id, 
+      source, date, type_live
+      )
+    values (#{id,jdbcType=INTEGER}, #{employeeGroupId,jdbcType=INTEGER}, #{project,jdbcType=VARCHAR}, 
+      #{incomePlay,jdbcType=DECIMAL}, #{profitPlay,jdbcType=DECIMAL}, #{storeId,jdbcType=INTEGER}, 
+      #{source,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{typeLive,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unicdata.entity.boutique.BoutiqueTarget">
+    insert into boutique_target
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="employeeGroupId != null">
+        employee_group_id,
+      </if>
+      <if test="project != null">
+        project,
+      </if>
+      <if test="incomePlay != null">
+        income_play,
+      </if>
+      <if test="profitPlay != null">
+        profit_play,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="typeLive != null">
+        type_live,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeGroupId != null">
+        #{employeeGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="project != null">
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePlay != null">
+        #{incomePlay,jdbcType=DECIMAL},
+      </if>
+      <if test="profitPlay != null">
+        #{profitPlay,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        #{typeLive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unicdata.entity.boutique.BoutiqueTarget">
+    update boutique_target
+    <set>
+      <if test="employeeGroupId != null">
+        employee_group_id = #{employeeGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="project != null">
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePlay != null">
+        income_play = #{incomePlay,jdbcType=DECIMAL},
+      </if>
+      <if test="profitPlay != null">
+        profit_play = #{profitPlay,jdbcType=DECIMAL},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeLive != null">
+        type_live = #{typeLive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unicdata.entity.boutique.BoutiqueTarget">
+    update boutique_target
+    set employee_group_id = #{employeeGroupId,jdbcType=INTEGER},
+      project = #{project,jdbcType=VARCHAR},
+      income_play = #{incomePlay,jdbcType=DECIMAL},
+      profit_play = #{profitPlay,jdbcType=DECIMAL},
+      store_id = #{storeId,jdbcType=INTEGER},
+      source = #{source,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      type_live = #{typeLive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectBoutiqueTargetSum" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        eg.id,
+        eg.group_name,
+        bt.income_play,
+        bt.profit_play,
+        date_format(bt.date, '%m') AS mouth
+        FROM
+        boutique_target bt
+        LEFT JOIN employee_group eg ON bt.employee_group_id = eg.id
+        WHERE bt.type_live = 1
+        <if test="date != null">
+            AND date_format(bt.date, '%Y') = date_format(#{date,jdbcType=TIMESTAMP}, '%Y')
+        </if>
+        <if test="storeId != null">
+            AND bt.store_id = #{storeId}
+        </if>
+        <if test="">
+        	AND bt.source = #{source,jdbcType=INTEGER}
+        </if>
+        
+        ORDER BY mouth ASC
+    </select>
+    
+    <!--通过storeID获取 -->
+    <select id="getBoutiqueTargetByStoreId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM
+        boutique_target bt
+        WHERE 1=1
+        <if test="date != null">
+            AND date_format(bt.date,'%Y-%m') = date_format(#{date}, '%Y-%m')
+        </if>
+        <if test="storeId != null">
+            AND bt.store_id=#{storeId,jdbcType=INTEGER}
+        </if>
+        <if test="employeeGroupId != null">
+            AND bt.employee_group_id=#{employeeGroupId,jdbcType=INTEGER}
+        </if>
+    </select>
+    
+    <select id="selectTargetByYear" resultMap="BaseResultMap">
+    	SELECT 
+        <include refid="Base_Column_List"/>
+        FROM
+        boutique_target  bt
+        WHERE type_live = 1 AND  store_id = #{storeId,jdbcType=INTEGER}
+        AND date_format(bt.date,'%Y') =#{year,jdbcType=VARCHAR}
+    </select>
+    
+    <insert id="insertBatch" parameterType="java.util.List">
+    INSERT INTO boutique_target (id, employee_group_id, project, 
+      income_play, profit_play, store_id, 
+      source, date, type_live
+      )
+   	VALUES 
+	   	<foreach collection="list" item="info" index="index" separator=",">
+	     (null, #{info.employeeGroupId,jdbcType=INTEGER}, #{info.project,jdbcType=VARCHAR}, 
+	      #{info.incomePlay,jdbcType=DECIMAL}, #{info.profitPlay,jdbcType=DECIMAL}, #{info.storeId,jdbcType=INTEGER}, 
+	      #{info.source,jdbcType=INTEGER}, #{info.date,jdbcType=TIMESTAMP}, #{info.typeLive,jdbcType=INTEGER}
+	      )
+	  	</foreach>
+    </insert>
+    
+    <update id="updateBatch">
+    	UPDATE boutique_target 
+    	SET income_play = 
+    	<foreach collection="list" item="info" index="index"
+            separator=" " open="case id" close="end">
+            when #{info.id} then
+            #{info.incomePlay}
+        </foreach>
+    	,profit_play = 
+    	<foreach collection="list" item="info" index="index"
+            separator=" " open="case id" close="end">
+            when #{info.id} then
+            #{info.profitPlay}
+        </foreach>
+    	WHERE id IN
+        <foreach collection="list" item="info" index="index" 
+            separator="," open="(" close=")">
+            #{info.id}
+        </foreach>
+    </update>
+    
+    <update id="deleteTargetById" parameterType="java.lang.Integer">
+    	UPDATE boutique_target SET type_live = 0 
+    	WHERE id = #{id,jdbcType=INTEGER}
+    	
+    </update>
+    
+</mapper>
